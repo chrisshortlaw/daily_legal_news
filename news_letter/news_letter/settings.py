@@ -37,7 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-]
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -48,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SITE_ID = 1
 
 ROOT_URLCONF = 'news_letter.urls'
 
@@ -67,7 +73,25 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend',
+        'allauth.account.auth_backends.AuthenticationBackend',
+        ]
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 WSGI_APPLICATION = 'news_letter.wsgi.application'
+
+
+#ACCOUNT ACCESS CONFIGURATION
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+ACCOUNT_USERNAME_MIN_LENGTH = 5
+ACCOUNT_USERNAME_MAX_LENGTH = 15
+LOGIN_REDIRECT_URL = '/'
 
 
 # Database
@@ -79,6 +103,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+SOCIALACCOUNT_PROVIDERS = {
+        # Insert social account API access here
+        }
 
 
 # Password validation
