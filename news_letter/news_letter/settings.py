@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+from env import Config
+# from dotenv import load_dotenv
+# load_dotenv('./config.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4@tb&p+_ll^^fy3&chl03__ff%9839qknm6&(fdc6%su8hv4)#'
+SECRET_KEY = (Config.SECRET_KEY or 
+              'django-insecure-4@tb&p+_ll^^fy3&chl03__ff%9839qknm6&(fdc6%su8hv4)#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,7 +87,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 WSGI_APPLICATION = 'news_letter.wsgi.application'
 
 
-#ACCOUNT ACCESS CONFIGURATION
+# ACCOUNT ACCESS CONFIGURATION
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -96,11 +100,17 @@ LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# Configuration imported from untracked config file
+# TODO: Change to environment variables for production & deployment
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': Config.DB_NAME,
+        'USER': Config.DB_USER,
+        'PASSWORD': Config.DB_PASSWORD,
+        'HOST': Config.DB_HOST,
+        'PORT': Config.DB_PORT
     }
 }
 
