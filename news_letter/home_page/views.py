@@ -5,4 +5,4 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('This is a working index route')
+    return render(request=request, template_name='home_page/index.htmldjango')

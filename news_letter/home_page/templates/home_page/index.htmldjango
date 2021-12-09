@@ -1,0 +1,12 @@
+{% extends 'base.htmldjango' %}
+
+{% block page_header%}
+  <div class='hero img-fluid' style='background: #fffff9 url("/static/img.url") center / cover no-repeat scroll;'>
+    <h1 class='display-1'>Index Page</h1>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <h2>THis is a test site.</h2>
+
+{% endblock %}

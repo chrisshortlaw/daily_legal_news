@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 from env import Config
+import os
 # from dotenv import load_dotenv
 # load_dotenv('./config.env')
 
@@ -64,7 +65,11 @@ ROOT_URLCONF = 'news_letter.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+                 os.path.join(BASE_DIR, 'news_letter',  'templates'),
+                 os.path.join(BASE_DIR, 'templates', 'allauth'),
+                 os.path.join(BASE_DIR, 'home_page', 'templates')
+                ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
