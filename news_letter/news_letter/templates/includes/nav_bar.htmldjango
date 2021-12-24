@@ -1,0 +1,13 @@
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="nabarDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropDown">
+      <li><a class="dropdown-item" href="#">Link</a></li>
+      <li><a class="dropdown-item" href="#">Link</a></li>
+      <li><a class="dropdown-item" href="#">Link</a></li>
+    </ul>
+  </li>
