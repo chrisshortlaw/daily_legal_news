@@ -1,22 +1,35 @@
 {% extends 'base.htmldjango' %}
 {% load static %}
 
+{% block page_header %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2 class="display-2 text-center">Products</h2>
+      <hr>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
 {% block content %}
 <section class="section-padding">
-  <h2>Products</h2>
-  <div class='container'>
-    <div class="row">
+  <div class="container">
+    <div class="row justify-content-center">
       {% for item in Product %}
         <div class="col">
-          <div class="card" style="width: 18rem;">
-            <img src="../media/pexels-taffy-buoniconti-6815654.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">{{ item.name }}</h5>
-              <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
-              <p class="card-text">{{ item.description }}</p>
-              <p><b>Price: €{{ item.price }}</b></p>
-              <p><em>Rating: {{ item.rating }}</em></p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div class="container">
+            <div class="card">
+              <img src="http://34.149.174.166/pexels-taffy-buoniconti-6815654.jpg" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
+                <p class="card-text">{{ item.description }}</p>
+                <p><b>Price: €{{ item.price }}</b></p>
+                <p><em>Rating: {{ item.rating }}</em></p>
+                <a href={% url 'product_page' item.name %} class="btn btn-primary">Details Page</a>
+              </div>
             </div>
           </div>
         </div>
