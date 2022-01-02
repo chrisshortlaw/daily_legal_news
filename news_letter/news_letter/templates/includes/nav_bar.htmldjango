@@ -6,7 +6,7 @@
       Dropdown
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropDown">
-      <li><a class="dropdown-item" href="#">Link</a></li>
+      <li><a class="dropdown-item" href={% url 'products' %}>Products</a></li>
       <li><a class="dropdown-item" href="#">Link</a></li>
       <li><a class="dropdown-item" href="#">Link</a></li>
     </ul>
