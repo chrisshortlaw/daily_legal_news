@@ -14,3 +14,12 @@ def all_products(request):
             }
 
     return render(request, 'products/product.htmldjango', context)
+
+
+def product_page(request, product_name):
+
+    product = Product.objects.get(name=str(product_name))
+
+    context = {"Product": product}
+
+    return render(request, 'products/product_page.htmldjango', context)
