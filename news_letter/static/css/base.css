@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Armata&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Milonga&family=Raleway:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
 
 .body-font {
-    font-family: 'Raleway', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 .main-header {
@@ -29,6 +29,7 @@
   font-size: 3.5em;
   font-weight: 500;
 }
+
 /* General */
 
 html {
@@ -41,7 +42,6 @@ html {
   padding-left: 1rem;
   padding-right: 1rem;
 }
-
 
 /* Home Page */
 
@@ -61,7 +61,6 @@ html {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
- /* height: 10vh; */
 }
 
 .text-with-button p{
@@ -78,15 +77,8 @@ html {
   margin-top: 10%;
 }
 
-/* .intro-image {
-  max-width: 80%;
-  max-height: 15%;
-
-} */
-
 .image-container {
   max-height: 250px;
-
 }
 
 .intro-image {
@@ -100,6 +92,7 @@ html {
   background-color: #EE5A58;
   background-size: cover;
 }
+
 .carousel-container {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
@@ -129,8 +122,6 @@ html {
   padding: 5% 5%;
 }
 
-
-
 /* ---------------------------------------------------------------------------- FOOTER ------------------ */
 
 .footer{
@@ -155,3 +146,76 @@ html {
 .col-divider {
  border-right: 3px solid white; 
 }
+
+/* --------------------------------------------- PRODUCT-PAGE ----------------------------------- */
+
+.product-showcase {
+  max-height: 880px;
+}
+
+input[type=number] {
+  border-top: 0rem none;
+  border-left: 0rem none;
+  border-right: 0rem none;
+  width: 100%;
+  height: 2rem;
+  border-bottom: .1rem solid;
+  margin-bottom: 1rem;
+}
+
+.product-page-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.product-image {
+  /* width: 100%;
+  max-height: 40%; */
+  background-color: #4c5454;
+}
+
+.product-col-padding {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.product-page-price {
+  font-weight: 400;
+  color: #4c5454;
+}
+
+.add-to-cart {
+  width: 100%;
+  height: 3.5rem;
+  color: white;
+  background-color: #00A5CF;
+  border-radius: 45px;
+  padding: 1rem .5rem;
+  margin: 1rem 0rem;
+}
+
+.also-bought {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------------------------- LOGIN.HTML ------------------------ */
+
+.login-bg {
+  background-color: #00a5cf;
+  color: #FFFFFF;
+}
+
+.login-form {
+  margin-left: 1rem;
+  padding-left: 1rem;
+}
+
+/* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
+
+@media only screen and (max-width: 577px) {
+
+  .product-col-padding {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+};
