@@ -100,8 +100,8 @@ ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 5
 ACCOUNT_USERNAME_MAX_LENGTH = 15
-LOGIN_REDIRECT_URL = '/'
-
+LOGIN_URL = '/accounts/login/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
