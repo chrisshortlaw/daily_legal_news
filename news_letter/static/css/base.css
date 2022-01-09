@@ -13,6 +13,7 @@
   padding: 40px 20px;
 }
 
+
 .products h2,
 .about h2{
   font-family: 'Raleway', sans-serif;
@@ -43,7 +44,32 @@ html {
   padding-right: 1rem;
 }
 
-/* Home Page */
+/* --------------------------------------------------------------------------------- COLORS ------------------------------------------- */
+.modal-content.modal-blue-bg {
+  background-color: #0095AD;
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------------- NAV-BAR & MODALS --------------------------------- */
+
+#forgot-pass-modal h5.news-letter-modal-header {
+  font-family: 'Martel Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+label.news-letter-modal-body {
+  font-size: 1rem;
+}
+
+#id_email,
+#id_login,
+#id_password {
+  border: solid 2px #fff;
+  border-radius: 45px;
+}
+
+/* --------------------------------------------------------------------------------- HOME PAGE ---------------------------------------- */
 
 .text-block{
   background-color: rgb(243, 255, 255);
@@ -168,9 +194,9 @@ input[type=number] {
   font-weight: 500;
 }
 
-.product-image {
-  /* width: 100%;
-  max-height: 40%; */
+.product-image > img {
+  width: 100%;
+  max-height: 40%; 
   background-color: #4c5454;
 }
 

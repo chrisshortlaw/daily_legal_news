@@ -1,0 +1,59 @@
+{% comment "" %} Modal for Sign In {% endcomment %}
+<div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="signInModal" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-content modal-blue-bg">
+      <div class="modal-header blue-bg">
+        <h5 class="modal-title" id="sign-in-label">Sign In</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form class="login login-form" action= {% url 'account_login' %} method="POST">
+        <div class="modal-body blue-bg">
+            {% csrf_token %}
+            <div>
+              <label for="id_login" class="form-label text-center">Login:</label>
+              <input type="text" name="login" placeholder="Username or e-mail" autocomplete="email" required id="id_login" class="form-control">
+            </div>
+            <div>
+              <label for="id_password" class="form-label text-center">Password:</label>
+              <input type="password" name="password" placeholder="Password" autocomplete="current-password" required id="id_password" class="form-control">
+            </div>
+            <div>
+              <label for="id_remember" class="form-check-label">Remember Me:</label>
+              <input type="checkbox" name="remember" id="id_remember" class="form-check-input">
+            </div>
+            {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-target="#forgot-pass-modal" data-bs-toggle="modal">Forgot Password?</a>
+          <button type="submit" class='btn btn-light'>Sign In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% comment "" %} Modal for Forgot Password {% endcomment %}
+<div class='modal fade' id='forgot-pass-modal' tabindex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen-sm-down">
+    <div class="modal-content modal-blue-bg">
+      <div class="modal-header">
+        <h5 class="news-letter-modal-header" id="forgot-pass-modal-label">Forgot Your Password?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-target="#forgot-pass-modal" aria-label="Close"></button>
+      </div>
+      <form method="POST" action="{% url 'account_reset_password' %}" class="password_reset" method="POST">
+        <div class="modal-body">   
+            {% csrf_token %}
+            <label for="id_email" class="body-font news-letter-modal-body">E-mail:</label>
+            <input type="email" name="email" placeholder="E-mail address" autocomplete="email" required id="id_email" class="modal-input-field">
+        </div>
+        <div class="body-font modal-footer">
+          <button class="btn btn-secondary" data-bs-target="#sign-in-modal" data-bs-toggle="modal">Back to Sign In</button>
+          {% comment "" %}Change Password Form submit button is here{% endcomment %}
+          <button type="submit" class="btn btn-light">Change My Password</button>
+          {% comment "" %} End form here.{% endcomment %}
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
