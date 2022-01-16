@@ -13,10 +13,6 @@
           <div class="product-image">
             <img src='http://34.149.174.166/pexels-taffy-buoniconti-6815654.jpg' alt='...'>
           </div>
-        {% comment "" %}}<div class='product-image'>
-          <img src='http://34.149.174.166/pexels-taffy-buoniconti-6815654.jpg' alt='...'>
-        </div>
-        {% endcomment %}
         </div>
       </div>
       <div class="col-sm-6 align-self-center">
@@ -63,6 +59,7 @@
               </div>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
