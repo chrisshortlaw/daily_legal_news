@@ -1,18 +1,37 @@
 /* FONT FAMILY */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&family=Oswald:wght@200;300;400;500;600;700&family=Raleway:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Armata&family=Martel+Sans:wght@200;300;400;600;700;800;900&family=Milonga&family=Raleway:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'IBM Plex Sans', san-serif;
+}
+
 
 .body-font {
   font-family: 'Raleway', sans-serif;
 }
 
 .main-header {
-  font-family: 'Martel Sans', sans-serif;
-  font-size: 4rem;
-  text-transform: uppercase;
-  padding: 40px 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  text-transform: capitalize;
 }
 
+.card-title.top-article-title,
+.card-subtitle.top-article-author {
+  padding: 1.25rem 1.25rem;
+}
+
+.card-img-top {
+  max-height: 100%;
+  max-width: 90%;
+
+}
 
 .products h2,
 .about h2{
@@ -53,7 +72,7 @@ html {
 /* --------------------------------------------------------------------------------- NAV-BAR & MODALS --------------------------------- */
 
 #forgot-pass-modal h5.news-letter-modal-header {
-  font-family: 'Martel Sans', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -64,7 +83,9 @@ label.news-letter-modal-body {
 
 #id_email,
 #id_login,
-#id_password {
+#id_password,
+#signup_form input,
+.auth-form input{
   border: solid 2px #fff;
   border-radius: 45px;
 }
@@ -79,33 +100,198 @@ label.news-letter-modal-body {
   padding: 5vh 5vw;
 }
 
-.hero-lower{
-  padding: 5vh 5vw 5vh 5vw;
+.main-image-container {
+  padding: 2rem 2rem;
 }
+
+.main-image {
+  max-height: 100%;
+  min-height: 50%;
+  max-width: 100%;
+  background-color: white;
+  background-image: url('http://34.149.174.166/geert-pieters-0Z-r591z3DI-unsplash.jpg?project=sunny-passage-335520');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.card-body{
+  padding: 1rem 0rem;
+}
+
+.main-header-anchor{
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 3rem;
+  text-decoration: none;
+  color: black;
+  display: block;
+  position: relative;
+  padding: 0.2rem 0;
+  overflow: hidden;
+}
+
+.main-header-anchor:hover{
+  color: inherit;
+}
+
+.main-header-anchor::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 0.1rem;
+  background-color: black;
+  transition: opacity 300ms, transform 300ms;
+  opacity: 1;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.main-header-anchor:hover::after,
+.main-header-anchor:focus::after{
+    transform: translate3d(0,0,0);
+  }
+
+.main-header-author{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: grey;
+  display: block;
+  position: relative;
+  margin: 0.75rem 0rem;
+  padding: 0.2rem 0;
+  overflow: hidden;
+    }
+
+.main-header-author:hover{
+  text-decoration: underline;
+    }
+
+.top-article-anchor,
+.top-article-author{
+  color: inherit;
+  text-decoration: none;
+  }
+
+.top-article-anchor:hover{
+  color:inherit;
+  text-decoration: underline;
+    }
+
+.top-article-author:hover{
+  color: white;
+    }
+
+hr{
+  border-top: .5px dotted grey;
+    }
+
+    .top-article-card .card-body,
+    .top-article-card .card-title {
+      padding-top: 0rem;
+    }
+
+    .card-title.top-article-title,
+    .card-subtitle.top-article-author{
+      padding-left: 0rem;
+      padding-right: 0rem;
+    }
+    
+    .card-title.top-article-title{
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+
+    .card-subtitle.top-article-author{
+      font-family: 'Raleway', sans-serif;
+    }
+
+/* ----------------------------------------------------- HOME PAGE: LINKS TO SECTIONS ------------------------ */
+  .section-links-heading {
+    font-weight: 700;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    }
+
+  .links-to-sections{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    }
+
+  .link-block{
+    width: 50%;
+    color: grey;
+    background-color: #ffa5ff;
+    margin: 1rem 1rem 1rem 1rem;
+    padding: 1rem 1rem;
+
+    }
+
+  .link-block h3 {
+    margin-top: 66%;
+    padding: 1rem 1rem;
+    }
+
+  .link-block{
+    box-shadow: 
+      0 2.8px 2.2px rgb(0,0,0),
+      0 6.7px 5.3px rgb(0,0,0),
+      0 12.5px 10px rgb(0,0,0),
+      0 22.3px 17.9px rgb(0,0,0),
+      0 41.8px 33.4.px rgb(0,0,0),
+      0 100px 80px rgb(0,0,0); 
+    }
+
+    .link-block-grey {
+      background-color: #4c5454;
+      color: #FFFFFF;
+    }
+
+    .link-block-blue {
+      background-color: #0091AD;
+      color: #FFFFFF;
+    }
+
+    .link-block-red {
+      background-color: #F46966;
+      color: black;
+    }
+    .link-block-lightblue {
+      background-color: #E9F6FD;
+      color: #4c5454; 
+    }
+
+
 
 .text-with-button{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-}
+  }
 
 .text-with-button p{
   text-align: center;
-}
+  }
 
 .text-with-button button{
   max-width: 30%;
   align-self: center;
-}
+  }
 
 .welcome-text{
   text-align: center;
   margin-top: 10%;
-}
+  }
 
 .image-container {
   max-height: 250px;
-}
+  }
 
 .intro-image {
   max-height: 250px;
@@ -124,34 +310,39 @@ label.news-letter-modal-body {
   padding-bottom: 2.5rem;
 }
 
+.carousel-inner > .carousel-item > img {
+  width: 640px;
+  height: 360px;
+  }
+
 .about {
   background-color: #4c5454;
   background-size: cover;
   height: auto;
   width: auto;
-}
+  }
 
 .about-flex-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  }
 
 .about-header {
   color: #FFFFFF;
   padding-left: 2%;
-}
+  }
 
 .about-text {
   color: #FFFFFF;
   padding: 5% 5%;
-}
+  }
 
 /* ---------------------------------------------------------------------------- FOOTER ------------------ */
 
 .footer{
-  background-color: #00A5CF;
+  background-color: #EE5A58;
   background-size: cover;
 }
 
@@ -172,6 +363,54 @@ label.news-letter-modal-body {
 .col-divider {
  border-right: 3px solid white; 
 }
+
+
+/* --------------------------------------------- FORMS & FORM TEMPLATES ------------------------- */
+
+/* --------------------------------------------- GENERAL ---------------------------------------- */
+.input-field {
+  border: solid 1px, #ffffff;
+  border-radius: 45px;
+}
+
+.input-label,
+.auth-form>p{
+  font-family: 'Raleway', sans-serif;
+  color: #FFFFFF;
+}
+
+.auth-form p:last-of-type{
+  margin-bottom: 2.5rem;
+}
+
+
+.auth-form>button{
+  margin: 0 auto;
+  width: 66%;
+}
+
+/* --------------------------------------------- AUTH_BASE.HTML --------------------------------- */
+
+.form-container {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+}
+
+.form-container-child {
+  width: 80%;
+  height: 80%;
+  padding: 2rem 2rem;
+  background-color: #00a5cf;
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------- END OF FORM TEMPLATES -------------------------- */
 
 /* --------------------------------------------- PRODUCT-PAGE ----------------------------------- */
 
@@ -231,10 +470,83 @@ input[type=number] {
   color: #FFFFFF;
 }
 
-.login-form {
+.login-form,
+.signup,
+.auth-form {
   margin-left: 1rem;
   padding-left: 1rem;
 }
+
+
+/* --------------------------------------------- ARTICLES -------------------------------------- */
+
+
+
+/* --------------------------------------------- ARTICLE_PAGE ---------------------------------- */
+.article-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 3rem;
+}
+
+.article-title h2{
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+}
+
+.article-title p{
+  font-size: 1.5rem;
+  font-family: 'IBM PLex Sans', sans-serif;
+  font-weight: 300;
+
+}
+
+.author-profile {
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.profile-picture img {
+  max-height: 75px;
+  max-width: 75px;
+  border-radius: 50%;
+  margin-right: 3rem;
+
+}
+
+.sub-header-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sub-header{
+  padding: 1rem 3rem;
+}
+
+.sub-header h5 {
+  font-size: 2.25rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+}
+
+.article-container {
+  padding: 2rem 6rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.33rem;
+  }
+
 
 /* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
 
@@ -244,4 +556,25 @@ input[type=number] {
     margin-top: 3rem;
     margin-bottom: 3rem;
   }
-};
+
+  .form-container-child {
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0rem;
+  }
+  
+  .auth-form {
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+  }
+
+  .input-label,
+  .auth-form > p label{
+    display: block;
+  }
+
+  .auth-form>button{
+    margin: 0 auto;
+    width: 100%;
+  }
+}
