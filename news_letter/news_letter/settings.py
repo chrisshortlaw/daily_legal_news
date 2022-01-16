@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'home_page',
-    'products'
+    'products',
+    'article_page'
     ]
 
 MIDDLEWARE = [
@@ -68,7 +69,9 @@ TEMPLATES = [
         'DIRS': [
                  os.path.join(BASE_DIR, 'news_letter',  'templates'),
                  os.path.join(BASE_DIR, 'templates', 'allauth'),
-                 os.path.join(BASE_DIR, 'home_page', 'templates')
+                 os.path.join(BASE_DIR, 'home_page', 'templates'),
+                 os.path.join(BASE_DIR, 'products', 'templates'),
+                 os.path.join(BASE_DIR, 'article_page', 'templates')
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -102,6 +105,13 @@ ACCOUNT_USERNAME_MIN_LENGTH = 5
 ACCOUNT_USERNAME_MAX_LENGTH = 15
 LOGIN_URL = '/accounts/login/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+
+ACCOUNT_FORMS = {
+                 "login": "news_letter.forms.CustomLoginForm",
+                 "reset_password": "news_letter.forms.CustomResetPasswordForm"
+                 }
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
