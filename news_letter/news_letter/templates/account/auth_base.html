@@ -1,0 +1,16 @@
+{% extends "base.htmldjango" %}
+{% load static %}
+{% load i18n %}
+
+{% load account socialaccount %}
+
+
+{% block content %}
+<div class="form-container">
+  <div class="form-container-child">
+    {% block auth_form %}
+      
+    {% endblock %}
+  </div>
+</div>
+{% endblock %}

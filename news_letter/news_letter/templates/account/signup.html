@@ -1,0 +1,21 @@
+{% extends "account/auth_base.html" %}
+{% load static %}
+{% load i18n %}
+
+
+
+{% block auth_form %}
+  <h1 class="text-center">{% trans "Sign Up" %}</h1>
+
+  <p class="text-center form-text">{% blocktrans %}Already have an account? <a href="{{ login_url }}">Sign In</a>.{% endblocktrans %}</p>
+
+  <form class="auth-form" method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    {% if redirect_field_value %}
+    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+    {% endif %}
+    <button type="submit" class="btn btn-success">{% trans "Sign Up" %} </button>
+  </form>
+
+{% endblock %}
