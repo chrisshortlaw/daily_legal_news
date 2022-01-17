@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'home_page',
     'products',
-    'article_page'
+    'article_page',
+    'cart'
     ]
 
 MIDDLEWARE = [
@@ -71,7 +72,8 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'templates', 'allauth'),
                  os.path.join(BASE_DIR, 'home_page', 'templates'),
                  os.path.join(BASE_DIR, 'products', 'templates'),
-                 os.path.join(BASE_DIR, 'article_page', 'templates')
+                 os.path.join(BASE_DIR, 'article_page', 'templates'),
+                 os.path.join(BASE_DIR, 'cart', 'templates')
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -80,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.contexts.add_to_cart'
             ],
         },
     },
