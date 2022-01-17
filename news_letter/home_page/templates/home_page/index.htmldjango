@@ -11,7 +11,7 @@
             <img class="card-img-top" src="http://34.149.174.166/judgment-artwork.png" alt="vector image of scales of justice">
               
             <div class="card-body">
-              <a href="#" class="card-subtitle mb-2 text-muted main-header-author">{{ head_liner_article.head_liner_author_name }}</a>
+              <a href="{% url 'articles' %}?author={{ head_liner_article.head_liner_author_slug }}" class="card-subtitle mb-2 text-muted main-header-author">{{ head_liner_article.head_liner_author_name }}</a>
               <a href="#" class="main-header-anchor">{{ head_liner_article.head_liner_title }}</a>
               <p class="card-text"></p>
               <br>
