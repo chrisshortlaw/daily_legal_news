@@ -1,0 +1,20 @@
+{% extends 'base.htmldjango' %}
+
+{% block content %}
+<section class="section-padding">
+  <div class="cart-header">
+    <h2>My Cart</h2>
+  </div>
+  <div class="cart-content">
+    {% if cart %}
+      <div class="cart-item">
+        {{ cart.item }}
+      </div>
+    {% else %}
+      <div class="no-items">
+        You have no items in your cart.
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}
