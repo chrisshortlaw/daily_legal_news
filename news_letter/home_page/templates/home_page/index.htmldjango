@@ -1,197 +1,145 @@
 {% extends 'base.htmldjango' %}
 {% load static %}
 
-{% block page_header%}
-<section class="section-padding hero">
-  <div class="container">
-    <div class="row ">
-      <div class="col-md-1"></div>
-      <div class="col-12 col-md-7 ">
-          <div class="card border-light" style="max-width: 100%;">
+{% block content %}
+  <section class="section-padding hero">
+    <div class="container">
+      <div class="row ">
+        <div class="col-md-1"></div>
+        <div class="col-12 col-md-7 ">
+          <div class="card border-light head-line" style="max-width: 100%;">
             <img class="card-img-top" src="http://34.149.174.166/judgment-artwork.png" alt="vector image of scales of justice">
               
             <div class="card-body">
               <a href="{% url 'articles' %}?author={{ head_liner_article.head_liner_author_slug }}" class="card-subtitle mb-2 text-muted main-header-author">{{ head_liner_article.head_liner_author_name }}</a>
-              <a href="#" class="main-header-anchor">{{ head_liner_article.head_liner_title }}</a>
-              <p class="card-text"></p>
+              <p><a href={% url 'article_page' head_liner_article.head_liner_id %} class="main-header-anchor">{{ head_liner_article.head_liner_title }}</a></p>
               <br>
             </div>
           </div>
-          {% comment "" %}
-          <div class="container">
-            <img class="main-image img-fluid" src='http://34.149.174.166/geert-pieters-0Z-r591z3DI-unsplash.jpg?project=sunny-passage-335520' />
-            <h4>{{ head_liner_article.head_liner_title }}</h4>
-            <h2 class="main-header">
-              {{ head_liner_article.head_liner_author_name }}
-            </h2>
-          </div>
-          <div class="main-teaser">
-            <em>{{ Head_article.0.teaser }}</em>
-          </div>
-          {% endcomment %}
-      </div>
-      <div class="col-12 col-md-4 gx-4">
-        <div class="row top-article-row">
-          <div class="col-12 head-art-card">
-            <div class="card border-light top-article-card" style="min-height: 12%;" >
-              <div class="card-body">
-                <h3 class="card-title top-article-title">
-                 Latest 
-                </h3>
-                <hr>
+        </div>
+        <div class="col-12 col-md-4 gx-4">
+          <div class="row top-article-row">
+            <div class="col-12 head-art-card">
+              <div class="card border-light top-article-card" style="min-height: 12%;" >
+                <div class="card-body">
+                  <h3 class="card-title top-article-title">
+                  Latest 
+                  </h3>
+                  <hr>
+                </div>
+              </div>
+              <div class="card border-light top-article-card" style="min-height: 12%;" >
+                <div class="card-body">
+                  <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5><a>
+                  {% for author in top_articles.0.author  %}
+                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
+                  {% endfor %}
+                  <hr>
+                </div>
               </div>
             </div>
-            <div class="card border-light top-article-card" style="min-height: 12%;" >
-              <div class="card-body">
-                <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5><a>
-                {% for author in top_articles.0.author  %}
-                <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                {% endfor %}
-                <hr>
+            
+            <div class="col-12 head-art-card">
+              <div class="card border-light top-article-card" style="min-height: 12%;">
+                <div class="card-body">
+                  <a href="{% url 'article_page' top_articles.1.id %}" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.1.title }}</h5></a>
+                  {% for author in top_articles.1.author  %}
+                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
+                  {% endfor %}
+                  <hr>
+                </div>
               </div>
             </div>
-          </div>
-          
-          <div class="col-12 head-art-card">
-            <div class="card border-light top-article-card" style="min-height: 12%;">
-              <div class="card-body">
-                <a href="{% url 'article_page' top_articles.1.id %}" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.1.title }}</h5></a>
-                {% for author in top_articles.1.author  %}
-                <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                {% endfor %}
-                <hr>
-              </div>
-            </div>
-          </div>
 
-          <div class="col-12 head-art-card">
-            <div class="card border-light" style="min-height: 12%;">
-              <div class="card-body">
-              <a href="#" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
-                {% for author in top_articles.2.author  %}
-                <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                {% endfor %}
-                <hr>
+            <div class="col-12 head-art-card">
+              <div class="card border-light" style="min-height: 12%;">
+                <div class="card-body">
+                <a href="#" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
+                  {% for author in top_articles.2.author  %}
+                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
+                  {% endfor %}
+                  <hr>
+                </div>
               </div>
             </div>
-          </div>
 
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<section class="section-padding section-links">
-  <div class=" row">
-    <div class="col-md-1"></div>
-    <div class="col-12 col-md-10 gx-5">
-{% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
-      <h2 class="section-links-heading">Sections</h2>
-      <div class="links-to-sections">
-        <div class="link-block link-block-grey">
-          <h3>Block 1</h3>
-        </div>
-        <div class="link-block link-block-blue">
-          <h3>Block 2</h3>
-        </div>
-        <div class="link-block link-block-red">
-          <h3>Block 3</h3>
-        </div>
-        <div class="link-block link-block-lightblue">
-          <h3>Block 4</h3>
+  </section>
+  <section class="section-padding section-links">
+    <div class=" row">
+      <div class="col-md-1"></div>
+      <div class="col-12 col-md-10 gx-5">
+  {% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
+        <h2 class="section-links-heading">Sections</h2>
+        <div class="links-to-sections">
+          <div class="link-block link-block-grey">
+            <h3>Block 1</h3>
+          </div>
+          <div class="link-block link-block-blue">
+            <h3>Block 2</h3>
+          </div>
+          <div class="link-block link-block-red">
+            <h3>Block 3</h3>
+          </div>
+          <div class="link-block link-block-lightblue">
+            <h3>Block 4</h3>
+          </div>
         </div>
       </div>
     </div>
-
-</section>
+  </section>
 {% comment "" %}
-<section class="section-padding">
-  <div class='container hero-lower'>
-    <div class="row">
-      <div class="col">
-        <div class="text-with-button">
-          <p class="welcome-text">
-            <em>
-              {{art.0.body}}
-              This text will be a slugline - a 5 line or 50 word teaser for the article content
-            </em>
-          </p>
-          <button type="button" class="btn btn-dark read-more">Read More</button>
-        </div>
-      </div>
-      <div class="col">
-        <div class="image-container text-center">
-          <img class="intro-image rounded" src="http://34.149.174.166/pexels_cottonbro_man_with_binary.jpg" alt="image of man with binary code superimposed" min-width="200px" min-height="200px">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{% endcomment %} 
-
-{% endblock %}
-
-{% block content %}
-
   <section class='section-padding container article-container'>
     <div class="article-heading">
-      <h2 class="display-2">New Articles</h2>
+      <h2 >New Articles</h2>
     </div>
     <div class='row'>
-      <article class='col-6'>
+      <article class='col-md-6 col-12'>
         <h3>Article</h3>
         <p>{% lorem 2 p random %}</p>
       </article>
-      <article class='col'>
+
+      <article class='col-md-3 col-12'>
         <h3>Article</h3>
         <p>{% lorem 1 p random %}</p>
-
       </article>
-      <article class='col'>
-        <h3>Article</h3>
-        <p>{% lorem 1 p random %}</p>
 
-      </article>
     </div>
     <div class='row'>
-      <article class='col'>
-        <h3>Article</h3>
-        <p>{% lorem 2 p random %}</p>
-
-      </article>
-      <article class='col'>
-        <h3>Article</h3>
-        <p>{% lorem 2 p random %}</p>
-
-      </article>
-    </div>
-    <div class='row'>
-      <article class='col-7'>
+      <article class='col-md-7 col-12'>
         <h3>Article</h3>
         <p>{% lorem 2 p random %}</p>
       </article>
-      <article class='col-5'>
+      <article class='col-md-3 col-12'>
         <h3>Article</h3>
         <p>{% lorem 2 p random %}</p>
       </article>
     </div>
   </section>
+{% endcomment %}
 
+
+{% comment "" %}  
 <section class="section-padding products">
-  <div class="container carousel-container">
-    <h2 class="display-2">Products</h2>
-    {% include '../includes/product_carousel.htmldjango' %}
-  </div>
-</section>
+    <div class="container carousel-container">
+      <h2 class="display-2">Products</h2>
+      {% include '../includes/product_carousel.htmldjango' %}
+    </div>
+  </section>
+{% endcomment %}
 
-<section class="section-padding about">
-  <h2 class="about-header display-2">About</h2>
-  <div class="about-flex-container">
-    <br>
-    <p class='about-text text-center'>We are an democratically-run collective of accountants and professional who live in a commune that doubles as our office.<br>We can sell your website or help you invent a new religion. Whatever you prefer.</p>
-    <a type='button' class='btn btn-light' role='button' href="#">About Us</a>
-  </div>
-</section>
+
+  <section class="section-padding about">
+    <h2 class="about-header display-2">About</h2>
+    <div class="about-flex-container">
+      <br>
+      <p class='about-text text-center'>We are an democratically-run collective of accountants and professional who live in a commune that doubles as our office.<br>We can sell your website or help you invent a new religion. Whatever you prefer.</p>
+      <a type='button' class='btn btn-light' role='button' href="#">About Us</a>
+    </div>
+  </section>
 
 {% endblock %}
 {% block extrajs %}
