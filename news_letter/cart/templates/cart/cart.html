@@ -1,20 +1,60 @@
 {% extends 'base.htmldjango' %}
 
 {% block content %}
+<section class="bread-crumb-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-dark"><a href={% url 'index' %}>Home</a>
+      <li class="breadcrumb-item text-dark"><a href="{% url 'products' %}">Products</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Cart</li>
+    </ol>
+  </nav>
+</section>
+
 <section class="section-padding">
-  <div class="cart-header">
-    <h2>My Cart</h2>
-  </div>
-  <div class="cart-content">
-    {% if cart %}
-      <div class="cart-item">
-        {{ cart.item }}
+  <div class="container">
+    <div class="cart-header text-center">
+      <h2>My Cart</h2>
+    </div>
+    <div class="cart-content">
+      {% if cart_content %}
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Quantity</th>
+              <th scope="col">Product</th>
+              <th scope="col"></th>
+              <th scope="col">Unit Price</th>
+              <th scope="col">Sub-total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in cart_content %}
+            <tr>
+              <th scope="row">{{ item.quantity }}</th>
+              <td class="p-2 w-25">
+                <img class="img-fluid rounded" src="{{ item.product.image_url }}">
+              </td>
+              <td>{{ item.product.name }}</td>
+              <td>{{ item.product.price }}</td>
+              <td>{{ item.product.price }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        {% else %}
+        <div class="no-items">
+          You have no items in your cart.
+        </div>
+      {% endif %}
+      {% if total %}
+      <div class="cart-total-container">
+        <div class="cart-total">
+          <div>Total:</div><div class="cart-total-amt">€{{ total }}</div>
+        </div>
       </div>
-    {% else %}
-      <div class="no-items">
-        You have no items in your cart.
-      </div>
-    {% endif %}
+      {% endif %}
+    </div>
   </div>
 </section>
 {% endblock content %}
