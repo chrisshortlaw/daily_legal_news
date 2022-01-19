@@ -17,7 +17,8 @@ def index(request):
                           "head_liner_title": head_liner.title,
                           "head_liner_id": head_liner.id,
                           "head_liner_author_name": head_liner_author[0].name,
-                          "head_liner_author_id": head_liner_author[0].id}
+                          "head_liner_author_id": head_liner_author[0].id,
+                          "head_liner_author_slug": head_liner_author[0].slug}
     top_articles = []
     for article in head_articles[1:]:
         top_art_dict = {}
