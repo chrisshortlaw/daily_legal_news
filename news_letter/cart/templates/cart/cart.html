@@ -31,13 +31,30 @@
           <tbody>
             {% for item in cart_content %}
             <tr>
-              <th scope="row">{{ item.quantity }}</th>
+              <th scope="row" class="quantity-row">
+                <form class="modify-cart" action={% url 'modify_cart' item.product_id %} method="POST">
+                  {% csrf_token %}
+                  <label for="quantity"><em>Quantity</em></label>
+                  <input type="number" min=1 value={{ item.quantity }} id="id_quantity_{{ item.product_id }}" data-product_id="{{ item.product_id }}" name="quantity" max="20">
+                  <div class="button-container">
+                    <input class="btn update-cart" type="submit" value="Update Cart" role="button">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+                  <form class="remove-product" action= {% url 'remove_product' item.product_id %} method="POST">
+                    {% csrf_token %}
+                    <input class="btn remove_product" type="submit" value="Remove" role="button">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                  </form>
+                  </div>
+
+              </th>
+
               <td class="p-2 w-25">
                 <img class="img-fluid rounded" src="{{ item.product.image_url }}">
               </td>
               <td>{{ item.product.name }}</td>
               <td>{{ item.product.price }}</td>
-              <td>{{ item.product.price }}</td>
+              <td>{{ item.sub_total }}</td>
             </tr>
             {% endfor %}
           </tbody>
