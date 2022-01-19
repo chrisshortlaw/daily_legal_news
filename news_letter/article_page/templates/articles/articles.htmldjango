@@ -1,0 +1,44 @@
+{% extends 'base.htmldjango' %}
+{% load static %}
+
+{% block content %}
+<div class="articles-heading">
+  {% comment "Insert context here to respond to queries" %}{% endcomment %}
+  <h2>All Articles</h2>
+</div>
+
+<div class='container'>
+  <div class="article-card-container align-items-stretch">
+  {% comment "insert for loop and div row here" %}{% endcomment %}
+    {% for article in articles %}
+    {% comment "insert col-12 col-md-4 here" %}{% endcomment %}
+      <div class="card article-card">
+        {% comment "" %}    
+        <div class="card-body link-block-lightblue">
+            <blockquote class="blockquote">
+              {{ item.teaser }}
+            </blockquote>
+          </div>
+        {% endcomment %}
+        {% if article.image_url %}
+          <img src={{ article.image_url }} class="card-img-top" alt="">
+        {% else %}
+          <img src="http://34.149.174.166/judgment-artwork.png" class="card-image-top" alt="">
+        {% endif %}
+        <div class="card-body link-block-grey">
+          <h5 class="card-title"><a href= {% url 'article_page' article.id %} class='stretched-link article-card-title'>{{ article.title }}</a></h5>
+          {% for author in article.authors %}
+            <a class="article-card-author" href='{% url 'articles' %}?author={{ author.slug }}'><p class="card-subtitle">{{ author.name }}</p></a>
+          {% endfor %}
+        </div>
+      </div>
+    {% empty %}
+    <h3> Nothing!</h3>
+  {% endfor %}
+  {% comment "insert endfor here" %}{% endcomment %}
+  </div>
+</div>
+
+
+
+{% endblock  %}

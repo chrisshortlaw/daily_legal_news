@@ -1,0 +1,40 @@
+{% extends 'base.htmldjango' %}
+{% load static %}
+
+{% block content %}
+
+{% if Article %}
+<div class="article-title-container">
+  <div class="article-title">
+    <h2>{{ Article.title }}</h2>
+    <p>{{ Article.date }}</p>
+  </div>
+</div>
+
+<div class="author-profile">
+  {% if Authors %}
+    {% for author in Authors  %}
+    <div class="profile-picture">
+      {% if author.image_url %}
+      <img src={{ author.image_url }} alt="profile picture of {{ author.name }}" />
+      {% else %}
+      <img src="http://34.149.174.166/pexels-murat-esibatir-4355346.jpg" alt="{{ author.name }} picture unavailable. Placeholder picture used." />    {% endif %}
+    </div>
+      <h4>{{ author.name }}</h4>
+    {% empty %}
+    <h4>No Authors?!?! Weird.</h4>
+    {% endfor %}
+    {% endif %}{% comment "endif Authors" %}{% endcomment %}
+</div>
+<div class="sub-header-container">
+  <div class="sub-header">
+    <h5>{{ Article.teaser }}</h5>
+  </div>
+</div>
+
+<div class="article-container">
+  {{ Article.body|linebreaks }}
+</div>
+{% endif %}{% comment "endif Article" %}{% endcomment %}
+
+{% endblock  %}
