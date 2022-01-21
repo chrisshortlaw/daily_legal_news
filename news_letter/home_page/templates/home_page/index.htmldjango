@@ -5,8 +5,7 @@
   <section class="section-padding hero">
     <div class="container">
       <div class="row ">
-        <div class="col-md-1"></div>
-        <div class="col-12 col-md-7 ">
+        <div class="col-12 col-md-7">
           <div class="card border-light head-line" style="max-width: 100%;">
             <img class="card-img-top" src="http://34.149.174.166/judgment-artwork.png" alt="vector image of scales of justice">
               
@@ -17,7 +16,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-md-4 gx-4">
+        <div class="col-12 col-md-5 gx-4">
           <div class="row top-article-row">
             <div class="col-12 head-art-card">
               <div class="card border-light top-article-card" style="min-height: 12%;" >
@@ -62,33 +61,40 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </div>
   </section>
   <section class="section-padding section-links">
-    <div class=" row">
-      <div class="col-md-1"></div>
-      <div class="col-12 col-md-10 gx-5">
-  {% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
-        <h2 class="section-links-heading">Sections</h2>
-        <div class="links-to-sections">
-          <div class="link-block link-block-grey">
-            <h3>Block 1</h3>
+    <div class="container"> 
+    {% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
+          <div class='section-heading-container'>
+            <h2 class="section-links-heading">Sections</h2>
           </div>
-          <div class="link-block link-block-blue">
-            <h3>Block 2</h3>
+          <div class="links-to-sections">
+            <div class="link-block link-block-grey">
+              <h6>Crime</h6>
+              <a href={% url 'section' 'crime' %} class="stretched-link align-items-stretch"><h4>Crime</h4></a>
+            </div>
+            <div class="link-block link-block-blue">
+              <h6>Jurisprudence</h6>
+              <a href={% url 'section' 'jurisprudence' %} class="stretched-link align-items-stretch"><h4>Theory</h4></a>
+            </div>
+            <div class="link-block link-block-red">
+              <h6>US Law</h6>
+              <a href={% url 'section' 'united-states' %} class="stretched-link align-items-stretch"><h4>US Law</h4></a>
+            </div>
+            <div class="link-block link-block-lightblue">
+              <h6>UK Law</h6>
+              <a href={% url 'section' 'united-kingdom' %} class="stretched-link align-items-stretch"><h4>UK Law</h4></a>
+            </div>
+            <div class="link-block link-block-lightyellow">
+              <h6>Tort & Delict</h6>
+              <a href={% url 'section' 'tort-and-delict' %} class="stretched-link align-items-stretch"><h4>Tort & Delict</h4></a>
+            </div>
+
           </div>
-          <div class="link-block link-block-red">
-            <h3>Block 3</h3>
-          </div>
-          <div class="link-block link-block-lightblue">
-            <h3>Block 4</h3>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 {% comment "" %}
@@ -121,30 +127,18 @@
   </section>
 {% endcomment %}
 
-
-{% comment "" %}  
-<section class="section-padding products">
-    <div class="container carousel-container">
-      <h2 class="display-2">Products</h2>
-      {% include '../includes/product_carousel.htmldjango' %}
-    </div>
-  </section>
-{% endcomment %}
-
-
-  <section class="section-padding about">
-    <h2 class="about-header display-2">About</h2>
+<section class="section-padding about">
+  <div class="container">
+    <h2 class="about-header">About</h2>
     <div class="about-flex-container">
       <br>
       <p class='about-text text-center'>We are an democratically-run collective of accountants and professional who live in a commune that doubles as our office.<br>We can sell your website or help you invent a new religion. Whatever you prefer.</p>
       <a type='button' class='btn btn-light' role='button' href="#">About Us</a>
     </div>
-  </section>
+  </div>
+</section>
 
 {% endblock %}
 {% block extrajs %}
-  <script>
-    {% comment "" %}{% include '../includes/product_carousel.js'%}{% endcomment %}
 
-  </script>
 {% endblock extrajs %}
