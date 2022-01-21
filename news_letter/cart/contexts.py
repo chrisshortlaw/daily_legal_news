@@ -36,3 +36,5 @@ def cart_content(request):
             "product_count": product_count
             }
     return context
+
+

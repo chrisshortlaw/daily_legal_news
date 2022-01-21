@@ -3,11 +3,11 @@
   </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="nabarDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      Dropdown
+      More
     </a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropDown">
       <li><a class="dropdown-item" href={% url 'products' %}>Products</a></li>
-      <li><a class="dropdown-item" href="#">Link</a></li>
+      <li><a class="dropdown-item" href={% url 'articles' %}>Articles</a></li>
       <li><a class="dropdown-item" href="#">Link</a></li>
     </ul>
   </li>

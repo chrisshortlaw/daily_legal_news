@@ -6,8 +6,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: 'IBM Plex Sans', san-serif;
+h6,
+.toast-body {
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 
@@ -34,7 +35,7 @@ h6 {
 
 .products h2,
 .about h2{
-  font-family: 'Raleway', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   font-size: 3.5em;
   font-weight: 500;
 }
@@ -59,6 +60,7 @@ html {
 }
 
 /* --------------------------------------------------------------------------------- COLORS ------------------------------------------- */
+
 .modal-content.modal-blue-bg {
   background-color: #0095AD;
   color: #FFFFFF;
@@ -208,8 +210,16 @@ hr{
   }
 
 /* ----------------------------------------------------- HOME PAGE: LINKS TO SECTIONS ------------------------ */
+
+  .section-heading-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
   .section-links-heading {
-    font-weight: 700;
+    font-weight: 500;
     font-size: 4rem;
     margin-bottom: 2rem;
     }
@@ -219,22 +229,45 @@ hr{
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
-
     }
 
   .link-block{
-    width: 50%;
+    width: 100%;
     color: grey;
     background-color: #ffa5ff;
-    margin: 1rem 1rem 1rem 1rem;
+    margin: 0rem 1rem;
     padding: 1rem 1rem;
-
+    min-height: 20rem;
+    position: relative;
     }
 
-  .link-block h3 {
-    margin-top: 66%;
-    padding: 1rem 1rem;
+  .link-block:first-child{
+    margin: 0rem 0rem 0rem 0rem;
+  }
+
+  .link-block:last-child{
+    margin: 0rem 0rem 0rem 0rem;
+  }
+
+
+  .link-block h4 {
     }
+
+  .link-block h6 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+  }
+
+  .link-block a {
+    color: inherit;
+    text-decoration: none;
+    position: absolute;
+    top: 70%;
+    left: 15%;
+  }
 
   .link-block:hover{
     /* box-shadow: 
@@ -264,6 +297,11 @@ hr{
     .link-block-lightblue {
       background-color: #E9F6FD;
       color: #4c5454; 
+    }
+
+    .link-block-lightyellow {
+      background-color: #ffdd4a;
+      color: #4c5454;
     }
 
 .text-with-button{
@@ -314,6 +352,7 @@ hr{
 
 .about {
   background-color: #4c5454;
+  background: radial-gradient(circle, rgba(76,84,84,1) 0%, rgba(76,84,84,.9) 27%, rgba(255,255,255,1) 90%);
   background-size: cover;
   height: auto;
   width: auto;
@@ -327,8 +366,9 @@ hr{
   }
 
 .about-header {
-  color: #FFFFFF;
-  padding-left: 2%;
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #4c5454;
+  font-weight: 600;
   }
 
 .about-text {
@@ -360,7 +400,162 @@ hr{
 .col-divider {
  border-right: 3px solid white; 
 }
+/* --------------------------------------------- NOTIFICATIONS -------------------------- */
 
+.cart-notification-bg {
+  background-color: #E9F6FD;
+}
+.cart-notification-header-container,
+.cart-notification-footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem; 
+}
+
+.cart-notification-body-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+}
+
+.notification-header h3 {
+  color: #4c5454;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.notification {
+  z-index: 999;
+  position: fixed;
+  top: 3%;
+  right:3%;
+}
+
+.notification.cart-notification {
+  position: fixed;
+  z-index: 999;
+  top: 3%;
+  right: 3%;
+}
+
+
+
+.success-notification-bg .toast-header {
+  background-color: #669D31;
+  color: #FFFFFF;
+}
+  
+.succes-notification-bg .toast-header {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.warning-notification-bg .toast-header,
+.warning-notification-bg .toast-body {
+  background-color: #ffdd4a;
+  color: #4c5454;
+}
+
+.error-notification-bg .toast-header,
+.error-notification-bg .toast-body {
+  background-color: #F46966;
+  color: black;
+}
+
+.info-notification-bg .toast-header,
+.info-notification-bg .toast-body {
+  background-color: #E9F6Fd;
+  color: #4c5454;
+}
+
+
+/* --------------------------------------------- CART NOTIFICATION: GRID ------------------------------------------------------------ */
+.cart-notification{
+  max-width:320px;
+  }
+
+
+.cart-notif-quantity {
+  grid-area: quantity;
+}
+
+.cart-notif-image {
+  grid-area: image;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.card-notif-image > img {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-notif-name {
+  grid-area: name;
+  display: flex;
+  flex-direction: column;
+  align-items: space-around;
+}
+
+.card-notif-price{
+  grid-area: price;
+}
+
+.card-notif-subtotal{
+  grid-area: subtotal;
+}
+
+.cart-notif-body-container {
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "quantity . image  name  . subtotal"
+    ;
+  align-items: start;
+  justify-content: space-evenly;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 186px;
+}
+
+.cart-notif-body-container > div {
+  font-family: 'Raleway', sans-serif;
+}
+
+.cart-notif-header-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.notif-header{
+  padding: 1rem 0rem;
+}
+
+.cart-notif-footer-container {
+  display: flex;
+  flex-direction: column;
+  padding: .75rem .75rem;
+  align-items: space-between;
+  justify-content: center;
+}
+
+.cart-notif-total{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-notif-footer-container> button{
+  align-self: flex-end;
+}
 
 /* --------------------------------------------- FORMS & FORM TEMPLATES ------------------------- */
 
@@ -608,6 +803,10 @@ form.modify-cart input[type=number]{
   justify-content: flex-start;
   margin-left: 6rem;
   padding: 2rem 0rem;
+}
+
+.tag-container{
+  margin-left: 6rem;
 }
 
 .profile-picture img {

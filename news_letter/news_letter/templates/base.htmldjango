@@ -20,6 +20,7 @@
 
   {% block corejs %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
   {% endblock %}
 
@@ -29,13 +30,25 @@
 
 <body>
   {% if messages %}
-    <div class="message-content"></div>
+    <div class="message-content">
+      {% for message in messages %}
+        {% if message.level == 40 %}
+          {% include './includes/notifications/error_notification.html' %}
+        {% elif message.level == 30 %}
+          {% include './includes/notifications/warning_notification.html' %}
+        {% elif message.level == 25 %}
+        {% include './includes/notifications/success_notification.html' %}
+        {% else %}
+          {% include './includes/notifications/info_notification.html' %}
+        {% endif %}
+      {% endfor %}
+    </div>
   {% endif %}
   
   {% block nav_bar %}
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href='#'>Daily News</a>
+      <a class="navbar-brand" href={% url 'index' %}>Daily News</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -101,6 +114,14 @@
   })
 </script>
 {% endcomment %}
+{% endblock %}
+{% block toastjs %}
+  <script type='text/javascript'>
+    $(  document ).ready(function(){
+      $('.toast').toast('show');
+        });
+  </script>
+
 {% endblock %}
 
 </html>
