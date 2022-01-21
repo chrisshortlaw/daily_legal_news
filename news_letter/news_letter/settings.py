@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (Config.SECRET_KEY or 
+SECRET_KEY = (Config.SECRET_KEY or
               'django-insecure-4@tb&p+_ll^^fy3&chl03__ff%9839qknm6&(fdc6%su8hv4)#')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -82,7 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'cart.contexts.add_to_cart'
+                'cart.contexts.cart_content'
             ],
         },
     },
