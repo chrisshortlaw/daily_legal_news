@@ -3,17 +3,17 @@
 
 {% block content %}
 
-{% if Article %}
+{% if article %}
 <div class="article-title-container">
   <div class="article-title">
-    <h2>{{ Article.title }}</h2>
-    <p>{{ Article.date }}</p>
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.date }}</p>
   </div>
 </div>
 
 <div class="author-profile">
-  {% if Authors %}
-    {% for author in Authors  %}
+  {% if authors %}
+    {% for author in authors  %}
     <div class="profile-picture">
       {% if author.image_url %}
       <img src={{ author.image_url }} alt="profile picture of {{ author.name }}" />
@@ -26,14 +26,19 @@
     {% endfor %}
     {% endif %}{% comment "endif Authors" %}{% endcomment %}
 </div>
+<div class="tag-container">
+  {% for tag in tags %}
+  <span class="badge rounded-pill bg-info text-dark" aria-label="article-tag">{{ tag.name }}</span>
+  {% endfor %}
+</div>
 <div class="sub-header-container">
   <div class="sub-header">
-    <h5>{{ Article.teaser }}</h5>
+    <h5>{{ article.teaser }}</h5>
   </div>
 </div>
 
 <div class="article-container">
-  {{ Article.body|linebreaks }}
+  {{ article.body|linebreaks }}
 </div>
 {% endif %}{% comment "endif Article" %}{% endcomment %}
 

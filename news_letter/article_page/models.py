@@ -7,13 +7,16 @@ from django_extensions.db.fields import AutoSlugField
 
 
 class Tag(models.Model):
-
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from=['name'])
 
     @property
     def get_tagged_articles(self):
         return Article.objects.filter(tag=self)
+
+    def __str__(self):
+        # string method allows for friendlier display on admin page
+        return f'{self.name}'
 
 
 class Author(models.Model):
@@ -26,6 +29,9 @@ class Author(models.Model):
                                 blank=True,
                                 validators=[URLValidator])
     slug = AutoSlugField(populate_from=['name'])
+
+    def __str__(self):
+        return f'{self.slug}'
 
 
 class Article(models.Model):
@@ -57,6 +63,9 @@ class Article(models.Model):
     @property
     def comment_count(self):
         return Comment.objects.filter(article=self).count()
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 class Comment(models.Model):

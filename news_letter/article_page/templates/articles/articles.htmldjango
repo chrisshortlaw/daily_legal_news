@@ -4,7 +4,7 @@
 {% block content %}
 <div class="articles-heading">
   {% comment "Insert context here to respond to queries" %}{% endcomment %}
-  <h2>All Articles</h2>
+  <h2>{{ page_title }}</h2>
 </div>
 
 <div class='container'>

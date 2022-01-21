@@ -28,8 +28,6 @@ class TagAdmin(admin.ModelAdmin):
     list_display = ['name']
     list_filter = ['name']
 
-
-
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
