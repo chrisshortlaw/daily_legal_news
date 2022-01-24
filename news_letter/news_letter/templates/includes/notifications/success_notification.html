@@ -28,7 +28,7 @@
         <div>Quantity: {{ product_count }}</div>
         <div>Total: € {{ total }}</div>
       </div>
-      <button class="btn btn-dark" type="button">Checkout</button>
+      <a href={% url 'check_out' %} class="btn btn-dark" type="button">Checkout</a>
     </div>
   </div>
 </div>
