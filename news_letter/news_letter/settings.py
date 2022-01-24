@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import builtins
 from pathlib import Path
 from env import Config
 import os
@@ -24,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = (Config.SECRET_KEY or
               'django-insecure-4@tb&p+_ll^^fy3&chl03__ff%9839qknm6&(fdc6%su8hv4)#')
+STRIPE_PUBLIC_KEY = Config.STRIPE_PUBLIC_KEY
+STRIPE_SECRET_KEY = Config.STRIPE_SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -44,10 +47,12 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'crispy_forms',
     'home_page',
     'products',
     'article_page',
-    'cart'
+    'cart',
+    'checkout'
     ]
 
 MIDDLEWARE = [
@@ -73,7 +78,8 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'home_page', 'templates'),
                  os.path.join(BASE_DIR, 'products', 'templates'),
                  os.path.join(BASE_DIR, 'article_page', 'templates'),
-                 os.path.join(BASE_DIR, 'cart', 'templates')
+                 os.path.join(BASE_DIR, 'cart', 'templates'),
+                 os.path.join(BASE_DIR, 'checkout', 'templates')
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -84,6 +90,11 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'cart.contexts.cart_content'
             ],
+            # Added Crispy Forms to the Templates
+            'builtins': [
+                'crispy_forms.templatetags.crispy_forms_tags',
+                'crispy_forms.templatetags.crispy_forms_field',
+                ]
         },
     },
 ]
@@ -97,6 +108,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 WSGI_APPLICATION = 'news_letter.wsgi.application'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # ACCOUNT ACCESS CONFIGURATION
 
