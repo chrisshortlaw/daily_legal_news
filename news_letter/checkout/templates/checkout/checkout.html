@@ -1,0 +1,120 @@
+{% extends 'base.htmldjango' %}
+{% load static %}
+
+{% block extracss %}
+  
+
+{% endblock %}
+
+{% block content %}
+<section class="bread-crumb-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-dark"><a href={% url 'index' %}>Home</a>
+      <li class="breadcrumb-item text-dark"><a href="{% url 'products' %}">Products</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+    </ol>
+  </nav>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="cart-header text-center">
+      <h2>Checkout</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="order-summary-header text-center pb-4"><h3>Order Summary</h3></div>
+          {% for item  in cart_content %}
+          <div class="row">
+            <div class="col-3 cart-image"><img src={{ item.product.image_url }} /></div>
+            <div class="col-4 cart-product">
+              <div class="cart-product-name text-wrap" aria-label="product name">{{ item.product.name }}</div>
+              <div class="cart-product-price" aria-label="product price">€ {{ item.sub_total }} EUR</div>
+            </div>
+            <div class="col-4 justify-content-end cart-quantity">
+              <form class="modify-cart" action={% url 'modify_cart' item.product_id %} method="POST">
+                    {% csrf_token %}
+                <input type="number" min=1 value={{ item.quantity }} id="id_quantity_{{ item.product_id }}" data-product_id="{{ item.product_id }}" name="quantity" max="20" aria-label="Quantity">
+                  <div class="button-container">
+                    <input class="btn update-cart" type="submit" value="Update" role="button">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                </form>
+                <form class="remove-product" action= {% url 'remove_product' item.product_id %} method="POST">
+                    {% csrf_token %}
+                    <input class="btn remove_product" type="submit" value="Remove" role="button">
+                    <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                  </div>
+                </form>
+            </div>
+          </div>
+          <hr>
+          {% endfor %}
+          <div class="total-display container">
+            <div class="row justify-content-end">
+              <div class="col-4"><h3>Items:</h3></div>
+              <div class="col-4"><h3>{{ product_count }}</h3></div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-4"><h3>Total:</h3></div>
+              <div class="col-4"><h3>€ {{ total }}</h3></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="checkout-form-header text-center pb-4"><h3>Complete Order</h3></div>
+          <div class="cart-content">
+            <form action= {% url 'check_out' %} method="POST" id="payment-form">
+              {% csrf_token %}
+              <fieldset class="rounded px-3 mb-5">
+                <legend class="fieldset-label small px-2 w-auto">Name</legend>
+                  {{ order_form.full_name | as_crispy_field }}
+                  {{ order_form.email | as_crispy_field }}
+                  {{ order_form.telephone | as_crispy_field }}
+              </fieldset>
+              <fieldset class="rounded px-3 mb-5">
+                <legend class="fieldset-label small px-2 w-auto">Address</legend>
+                  {{ order_form.address_1 | as_crispy_field }}
+                  {{ order_form.address_2 | as_crispy_field }}
+                  {{ order_form.address_3 | as_crispy_field }}
+                  {{ order_form.town_city | as_crispy_field }}
+                  {{ order_form.country | as_crispy_field }}
+                  {{ order_form.post_code | as_crispy_field }}
+              </fieldset>
+              <fieldset class="rounded px-3 mb-5">
+                <div class="mb-3" id="card-element"></div>
+            <!-- Display a payment form -->
+                <div id="payment-element">
+                  <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit-button" class="btn btn-dark">
+                  <div class="spinner hidden" id="spinner"></div>
+                  <span id="button-text">Pay now</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+                <!-- Display a payment form -->
+                <a href={% url 'cart' %} class="btn btn-info">Continue Shopping</a>
+                <div id="card-errors"></div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="post-submit-overlay">
+  <h1 class="loading-spinner">
+    <span>
+      <i class="fas fa-spinner fa-pulse"></i>
+    </span>
+  </h1>
+</div>
+
+{% endblock content %}
+{% block postloadjs %}
+  {{ stripe_public_key | json_script:"id_stripe_public_key" }}
+  {{ client_secret | json_script:"id_client_secret" }}
+  <script src={% static 'js/checkout.js' %} ></script>
+{% endblock postloadjs %} 
