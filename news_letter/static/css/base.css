@@ -1,5 +1,5 @@
 /* FONT FAMILY */
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&family=Oswald:wght@200;300;400;500;600;700&family=Raleway:ital,wght@0,200;0,400;0,600;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
 h1,
 h2,
@@ -69,7 +69,7 @@ html {
 /* --------------------------------------------------------------------------------- NAV-BAR & MODALS --------------------------------- */
 
 #forgot-pass-modal h5.news-letter-modal-header {
-  font-family: 'Oswald', sans-serif;
+  font-family: 'Source Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -442,8 +442,6 @@ hr{
   right: 3%;
 }
 
-
-
 .success-notification-bg .toast-header {
   background-color: #669D31;
   color: #FFFFFF;
@@ -555,6 +553,43 @@ hr{
 
 .cart-notif-footer-container> button{
   align-self: flex-end;
+}
+
+
+/* --------------------------------------------- Cart Items ------------------------------------- */
+
+.cart-header {
+  padding: 1rem 0rem;
+  text-decoration: underline;
+}
+
+.cart-image img{
+  width: 100px;
+  height: 100px;
+}
+
+.cart-product .cart-product-name {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: 600;
+  letter-spacing: -.08rem;
+  margin-bottom: .5rem
+}
+
+.total-display .product-number {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.cart-product .cart-product-price {
+  font-family: 'Source Sans', sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.08rem;
+  padding-top: .5rem;
+  
 }
 
 /* --------------------------------------------- FORMS & FORM TEMPLATES ------------------------- */
@@ -710,7 +745,7 @@ form.modify-cart input[type=number]{
   display: inline;
 }
 
-/* --------------------------------------------------------------------------------------- LOGIN.HTML ------------------------ */
+/* --------------------------------------------------------------------------------------- LOGIN.HTML ------------------------------------- */
 
 .login-bg {
   background-color: #00a5cf;
@@ -725,7 +760,7 @@ form.modify-cart input[type=number]{
 }
 
 
-/* --------------------------------------------- ARTICLES -------------------------------------- */
+/* --------------------------------------------------------------------------------------- ARTICLES -------------------------------------- */
 .article-card-container {
   display: flex;
   align-items: flex-start;
@@ -863,6 +898,28 @@ form.modify-cart input[type=number]{
   .cart-total-amt {
     font-weight: 400;
     padding-left: .5rem;
+  }
+
+
+/* --------------------------------------------- OVERLAY ---------------------------------------- */
+
+  #post-submit-overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(23, 162, 184, .85);
+    z-index: 999
+  }
+
+  .loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
   }
 
 /* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
