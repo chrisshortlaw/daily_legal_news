@@ -1,4 +1,4 @@
-from datetime import datetime
+from typing import Dict
 from django.test import TestCase
 from .forms import OrderForm
 from .models import Order, OrderLineItem
@@ -68,6 +68,7 @@ class TestCheckout(TestCase):
                         'product_count': product_count
                         }
 
+        self.order = self.order_form.save()
 
         return super().setUp()
 
@@ -79,15 +80,15 @@ class TestCheckout(TestCase):
         self.assertNotIsInstance(self.order_form, Order)
 
         self.assertTrue(self.order_form.is_valid(), 'order_form is not valid')
-        self.order = self.order_form.save()
 
         self.assertIsInstance(self.order, Order)
         self.assertIsNotNone(self.order.order_number)
         self.assertTrue(self.order.order_total == 0)
 
-    def TestOrderLineItem(self):
+    def testOrderLineItem(self):
 
-        self.assertTrue(self.cart == {1: 1})
+        self.assertTrue(len(self.cart.items()) == 1)
+        self.assertIsInstance(self.cart, Dict)
 
         for item_id, item_data in self.cart.items():
             try:
@@ -106,11 +107,12 @@ class TestCheckout(TestCase):
 
         order_line_items = OrderLineItem.objects.all()
 
-        self.assertTrue(len(order_line_items) == 1, 'Error: Length of order_line_items is greater than 1. Expected: 1')
+        self.assertTrue(len(order_line_items) == 1,
+                        'Error: Length of order_line_items is greater than 1. Expected: 1')
 
         self.assertIsInstance(order_line_items[0].order, Order)
         self.assertIsInstance(order_line_items[0].product, Product)
 
 # Check if self.order has updated with addition of line item
         self.assertTrue(self.order.order_total == 1.00)
-        self.assertTrue(self.order.date == datetime.today())
+        # self.assertIsInstance(self.order.date, Date)
