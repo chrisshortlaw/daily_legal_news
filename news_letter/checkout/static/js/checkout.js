@@ -85,7 +85,6 @@ form.addEventListener('submit', function(ev) {
         shipping: {
             name: $.trim(form.full_name.value),
             phone: $.trim(form.telephone.value),
-            email: $.trim(form.email.value),
             address: {
               line1: $.trim(form.address_1.value),
               line2: $.trim(form.address_2.value),
@@ -114,6 +113,6 @@ form.addEventListener('submit', function(ev) {
         }
     });
   }).fail(function(){
-    location.relod();
+    location.reload();
   });
 });
