@@ -22,6 +22,9 @@ def all_articles(request):
                 article_dictionary['image_url'] = article.article_image_url
                 article_dictionary['id'] = article.id
                 article_dictionary['tags'] = article.tag.all()
+                article_dictionary['comment_count'] = article.comment_count
+                article_dictionary['likes_count'] = article.likes_count
+                article_dictionary['comments'] = Comment.objects.filter(article=article)
                 articles_by_author.append(article_dictionary)
 
             context = {
@@ -39,6 +42,9 @@ def all_articles(request):
             article_dictionary['image_url'] = article.article_image_url
             article_dictionary['id'] = article.id
             article_dictionary['tags'] = article.tag.all()
+            article_dictionary['comment_count'] = article.comment_count
+            article_dictionary['likes_count'] = article.likes_count
+            article_dictionary['comments'] = Comment.objects.filter(article=article)
             all_articles.append(article_dictionary)
 
             context = {
@@ -59,7 +65,14 @@ def article_page(request, article_id):
     tags = article.tag.all()
     # Retrieve authors from many-to-many table
     art_authors = article.author.all()
-    context = {"article": article, "authors": art_authors, "tags": tags}
+    comments = Comment.objects.filter(article=article)
+    context = {"article": article,
+               "authors": art_authors,
+               "tags": tags,
+               "comment_count": article.comment_count,
+               "likes": article.likes_count,
+               "comments": comments
+               }
     return render(request,
                   'articles/article_page.htmldjango',
                   context=context)
@@ -78,6 +91,9 @@ def article_section(request, tag_name):
         article_dictionary['image_url'] = article.article_image_url
         article_dictionary['id'] = article.id
         article_dictionary['tags'] = article.tag.all()
+        article_dictionary['comment_count'] = article.comment_count
+        article_dictionary['likes_count'] = article.likes_count
+        article_dictionary['comments'] = Comment.objects.filter(article=article)
         article_section.append(article_dictionary)
 
     context = {

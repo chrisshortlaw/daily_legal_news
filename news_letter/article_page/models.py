@@ -7,6 +7,12 @@ from django_extensions.db.fields import AutoSlugField
 
 
 class Tag(models.Model):
+    '''
+    Creates Tag which can be attached to articles
+    Fields:
+    - name: charfield, max_length of 50
+    - slug: created automatically.
+    '''
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from=['name'])
 
@@ -20,7 +26,15 @@ class Tag(models.Model):
 
 
 class Author(models.Model):
-
+    '''
+    Creates an Author instance for Articles
+    Fields:
+    - name: charfield (req'd)
+    - email: EmailField (req'd)
+    - profile_image: ImageField(blank=True, null=True)
+    - image_url: URLField()
+    - slug: Auto-generated
+    '''
     name = models.CharField(max_length=250)
     email = models.EmailField()
     profile_image = models.ImageField(null=True, blank=True)
@@ -31,26 +45,40 @@ class Author(models.Model):
     slug = AutoSlugField(populate_from=['name'])
 
     def __str__(self):
-        return f'{self.slug}'
+        return f'{self.name}'
 
 
 class Article(models.Model):
-
+    '''
+    Class holds the Articles which will be uploaded to the site
+    Fields:
+    - title: max_length = 250
+    - author: ManytoManyField. Instance of Author
+    - date: auto-generated
+    - body: Text Field;
+    - article_image: ImageField
+    - article_image_url
+    - slug: auto-generated
+    - teaser: created on save
+    - tag: ManytoManyField. Instances of Tag. 
+    '''
     title = models.CharField(max_length=250)
-    author = models.ManyToManyField('Author', related_name="authors")
+    author = models.ManyToManyField('Author',
+                                    related_name="authors")
     date = models.DateField(auto_now=True)
     body = models.TextField()
-    # likes = models.ForeignKey(User,
+    # likes = models.ForeignKey('Likes',
     #                          on_delete=models.CASCADE,
     #                          related_name='liked_by',
     #                          default=0
-    #                         )
-    article_image = models.ImageField(null=True, blank=True)
+    #                        )
+    article_image = models.ImageField(null=True,
+                                      blank=True)
     article_image_url = models.URLField(max_length=1024,
                                         null=True,
-                                        blank=True, validators=[URLValidator])
+                                        blank=True,
+                                        validators=[URLValidator])
     # slug will be used for article url
-    # Consider reoplacing with autoslugfield from django extensions
     slug = AutoSlugField(max_length=50, populate_from=['title', 'id'])
     teaser = models.TextField(max_length=250,
                               blank=True)
@@ -64,13 +92,24 @@ class Article(models.Model):
     def comment_count(self):
         return Comment.objects.filter(article=self).count()
 
+    @property
+    def likes_count(self):
+        return Likes.objects.filter(article=self).count()
+
     def __str__(self):
         return f'{self.title}'
 
 
 class Comment(models.Model):
     """
-    TODO: Replace Name field with User - require log in to comment
+    Holds comments which are made by users and attached to articles.
+    Fields:
+        - article: Type[Article]
+        - User: Type[User]
+        - body: TextField, limit of 300
+        - date: DateField - auto-generated
+        - parent: Type[Comment] - a parent comment of this comment (optional)
+        - approved: Boolean - whether comment is approved or not
     """
     article = models.ForeignKey('Article',
                                 on_delete=models.CASCADE,
@@ -80,8 +119,39 @@ class Comment(models.Model):
                              )
     body = models.TextField(max_length=300)
     date = models.DateTimeField(auto_now_add=True)
+    parent = models.ForeignKey('Comment',
+                               on_delete=models.CASCADE,
+                               related_name="replies",
+                               null=True,
+                               blank=True,
+                               default=None)
     approved = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{str(self.user)}, {self.article.title[:20]}'
 
+    @property
+    def comment_body(self):
+        return f'{self.body}'
+
+    @property
+    def get_parent(self):
+        if self.parent:
+            return f'{self.parent.id}'
+        else:
+            return f'{self.article.id}'
+
+
+class Likes(models.Model):
+    '''
+    Contains likes which users can add to articles
+    Fields:
+        - article: Type[Article] - foreign key
+        - user: Type[User]
+    '''
+    article = models.ForeignKey('Article',
+                                on_delete=models.CASCADE,
+                                related_name='liked_article')
+    user = models.ForeignKey(User,
+                             on_delete=models.CASCADE,
+                             related_name="liked_by")

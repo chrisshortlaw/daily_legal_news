@@ -31,6 +31,10 @@
   <span class="badge rounded-pill bg-info text-dark" aria-label="article-tag">{{ tag.name }}</span>
   {% endfor %}
 </div>
+<div class='d-flex flex-row container'>
+  <div class="comment-count"><h5>Comment Count: {{ comment_count }}</h5></div>
+  <div class="like_count"><h5>Likes: {{ likes }}</h5></div>
+</div>
 <div class="sub-header-container">
   <div class="sub-header">
     <h5>{{ article.teaser }}</h5>
