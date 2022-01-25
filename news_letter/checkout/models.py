@@ -21,7 +21,17 @@ class Order(models.Model):
     address_2 = models.CharField(max_length=80, null=True, blank=True)
     address_3 = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateField(auto_now_add=True)
-    order_total = models.DecimalField(decimal_places=2, max_digits=10, null=False, default=0)
+    original_cart = models.TextField(null=False,
+                                     blank=False,
+                                     default='')
+    stripe_payment_id = models.CharField(max_length=254,
+                                         null=False,
+                                         blank=False,
+                                         default='')
+    order_total = models.DecimalField(decimal_places=2,
+                                      max_digits=10,
+                                      null=False,
+                                      default=0)
 
     def _generate_unique_id(self, id_length):
         '''
