@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Author, Article, Comment, Tag
+from .models import Author, Article, Comment, Tag, Likes
 # Register your models here.
 
 
@@ -25,10 +25,17 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['name']
+    list_display = ['name', 'tag_colour']
     list_filter = ['name']
+
+
+class LikesAdmin(admin.ModelAdmin):
+    list_display = ('article',)
+    list_filter = ('user',)
+
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Tag, TagAdmin)
+admin.site.register(Likes, LikesAdmin)
