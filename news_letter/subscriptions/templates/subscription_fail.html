@@ -1,0 +1,45 @@
+{% extends 'base.htmldjango' %}
+{% load static %}
+
+{% block extracss %}
+  
+
+{% endblock %}
+
+{% block content %}
+<section class="bread-crumb-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-dark"><a href={% url 'index' %}>Home</a>
+      <li class="breadcrumb-item text-dark"><a href="{% url 'subscriptions' %}">Subscriptions</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Payment Cancelled</li>
+    </ol>
+  </nav>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="cart-header text-center">
+      <h2></h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="checkout-form-header text-center pb-4">
+            <h3>Payment Cancelled</h3>
+          </div>
+          <div>
+            <h4>Your payment process has been cancelled. If you wish to complete, please return to the <a href={% url 'subscriptions' %}>Subscriptions</a> page and proceed with your order.</h4>
+          </div>
+          <div>
+            <h4>Click <a href= {% url 'index' %}>here</a> if you wish to return to the front page.</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}
