@@ -11,19 +11,20 @@ from checkout.web_hook_handler import StripeWebHookHandler
 
 import stripe
 # This is your test secret API key.
-stripe.api_key = 'sk_test_51KL7FbDDAG3wj1f3ZLiRzdL8DIZKU6bmFI32OziXurA3jn0i5GVCMNFnhjkhekiZDefOoA16XzQs8h7hZp0TWBs800F622n5Xv'
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Replace this endpoint secret with your endpoint's unique secret
 # If you are testing with the CLI, find the secret by running 'stripe listen'
 # If you are using an endpoint defined with the API or dashboard, look in your webhook settings
 # at https://dashboard.stripe.com/webhooks
-endpoint_secret = 'whsec_...'
+endpoint_secret = settings.STRIPE_WH_SECRET
+
 
 @require_POST
 @csrf_exempt
 def webhook(request):
     event = None
-    payload = request.data
+    payload = request.body
 
     try:
         event = json.loads(payload)
@@ -42,15 +43,20 @@ def webhook(request):
             print('⚠️  Webhook signature verification failed.' + str(e))
             return HttpResponse(content=e, status=400)
 
-    # Handle the event
-    if event['type'] == 'payment_intent.payment_failed':
-        payment_intent = event['data']['object']
-        response = StripeWebHookHandler.handle_payment_intent_failed(payment_intent)
-    elif event['type'] == 'payment_intent.succeeded':
-        payment_intent = event['data']['object']
-        response = StripeWebHookHandler.handle_payment_intent_succeeded(payment_intent)
-    # ... handle other event types
-    else:
-        print('Unhandled event type {}'.format(event['type']))
+    handler = StripeWebHookHandler(request)
+
+    event_map = {
+                 'payment_intent.payment_failed': handler.handle_payment_intent_failed,
+                 'payment_intent.succeeded': handler.handle_webhook,
+                 'checkout.session.completed': handler.handle_checkout_session_completed,
+                 'invoice.paid': handler.handle_invoice_paid,
+                 'invoice.payment_failed': handler.handle_invoice_payment_failed
+                }
+
+    event_type = event['type']
+
+    event_handler = event_map.get(event_type, handler.handle_webhook)
+
+    response = event_handler(event)
 
     return response

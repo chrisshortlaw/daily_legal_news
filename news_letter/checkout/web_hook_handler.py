@@ -3,6 +3,7 @@ from time import sleep
 
 from .models import OrderLineItem, Order
 from products.models import Product
+from django.contrib.auth.models import User
 
 
 class StripeWebHookHandler:
@@ -15,7 +16,7 @@ class StripeWebHookHandler:
 
     def handle_webhook(self, event):
 
-        return HttpResponse(content=f'Webhook Received: {event["type"]}',
+        return HttpResponse(content=f'handle_webhook: Webhook Received: {event["type"]}',
                             status=200)
 
     def handle_payment_intent_succeeded(self, event):
@@ -24,82 +25,33 @@ class StripeWebHookHandler:
         '''
         intent = event.data.object
         pay_id = intent.id
-        cart = intent.metadata.cart
         # save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details
-        shipping_details = intent.shipping
-        end_total = round(intent.charges.data[0].amount / 100, 2)
 
-        for field, value in shipping_details.address.items():
-            if value == "":
-                shipping_details.address[field] = None
-
-        order_exists = False
+        user_exists = False
         attempt = 1
         # Checks 5 times if Order is in system
         while attempt <= 5:
             try:
-                order = Order.objects.get(
-                        full_name__iexact=shipping_details.name,
+                order = User.objects.get(
+                        full_name__iexact=billing_details.name,
                         email__iexact=billing_details.email,
-                        telephone__iexact=shipping_details.phone,
-                        country__iexact=shipping_details.address.country,
-                        postcode__iexact=shipping_details.address.postal_code,
-                        town_city__iexact=shipping_details.address.city,
-                        address_1__iexact=shipping_details.address.line1,
-                        address_2__iexact=shipping_details.address.line2,
-                        address_3__iexact=shipping_details.address.line3,
-                        order_total=end_total,
-                        original_cart=cart,
-                        stripe_payment_id=pay_id
                         )
-                order_exists = True
+                user_exists = True
                 break
-            except Order.DoesNotExist:
+            except User.DoesNotExist:
                 attempt += 1
                 sleep(1)
-        if order_exists:
+        if user_exists:
             return HttpResponse(
-                    content = f'Webhook recieved: { event["type"] } | SUCCESS: Verified order already in database',
+                    content=f'Webhook received: { event["type"] } | SUCCESS: Verified user in database',
                     status=200
                     )
         else:
-            order = None
-            try:
-                order = Order.objects.create(
-                        full_name__iexact=shipping_details.name,
-                        email__iexact=billing_details.email,
-                        telephone__iexact=shipping_details.phone,
-                        country__iexact=shipping_details.address.country,
-                        postcode__iexact=shipping_details.address.postal_code,
-                        town_city__iexact=shipping_details.address.city,
-                        address_1__iexact=shipping_details.address.line1,
-                        address_2__iexact=shipping_details.address.line2,
-                        address_3__iexact=shipping_details.address.line3,
-                        order_total=end_total,
-                        original_cart=cart,
-                        stripe_payment_id=pay_id
-                )
-                for item_id, item_data in cart.items():
-                    product = Product.objects.get(id=item_id)
-                    if isinstance(item_data, int):
-                        order_line_item = OrderLineItem(
-                                order=order,
-                                product=product,
-                                quantity=item_data
-                                )
-                        order_line_item.save()
-            except Exception as e:
-                if order:
-                    order.delete()
-                return HttpResponse(
-                        content=f'Webhook received: {event["type"]}|Error{e}',
-                        status=500
-                        )
             return HttpResponse(
-                                content=f'Webhook Received: {event["type"]}|Success: Created order in webhook',
-                                status=200
+                                content=f'Webhook received: {event["type"]}|Error{e}',
+                                status=500
                                 )
 
     def handle_payment_intent_failed(self, event):
@@ -107,6 +59,27 @@ class StripeWebHookHandler:
         Handle the payment_intent.payment_failed webhook
         '''
         return HttpResponse(
-                content=f'Webhook Received: {event["type"]}',
+                content=f'Payment Failed: Webhook Received: {event["type"]}',
                 status=200
                 )
+
+    def handle_checkout_session_completed(self, event):
+
+        return HttpResponse(
+                content=f'Checkout Session Completed: Webhook Received: {event["type"]}',
+                status=200
+                )
+
+    def handle_invoice_paid(self, event):
+
+        return HttpResponse(
+                            content=f'Invoice Paid. Webhook Received: { event["type"] }',
+                            status=200
+                            )
+
+    def handle_invoice_payment_failed(self, event):
+
+        return HttpResponse(
+                            content=f'Invoice Payment Failed. Webhook Received: { event["type"] }',
+                            status=200
+                            )
