@@ -9,11 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import django_heroku
 import builtins
 from pathlib import Path
 from env import Config
 import os
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,6 +28,7 @@ SECRET_KEY = (Config.SECRET_KEY or
               'django-insecure-4@tb&p+_ll^^fy3&chl03__ff%9839qknm6&(fdc6%su8hv4)#')
 STRIPE_PUBLIC_KEY = Config.STRIPE_PUBLIC_KEY
 STRIPE_SECRET_KEY = Config.STRIPE_SECRET_KEY
+STRIPE_WH_SECRET = Config.STRIPE_WH_SECRET
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,7 +54,9 @@ INSTALLED_APPS = [
     'products',
     'article_page',
     'cart',
-    'checkout'
+    'checkout',
+    'user_profiles',
+    'subscriptions'
     ]
 
 MIDDLEWARE = [
@@ -79,7 +83,9 @@ TEMPLATES = [
                  os.path.join(BASE_DIR, 'products', 'templates'),
                  os.path.join(BASE_DIR, 'article_page', 'templates'),
                  os.path.join(BASE_DIR, 'cart', 'templates'),
-                 os.path.join(BASE_DIR, 'checkout', 'templates')
+                 os.path.join(BASE_DIR, 'checkout', 'templates'),
+                 os.path.join(BASE_DIR, 'user_profiles', 'templates'),
+                 os.path.join(BASE_DIR, 'subscriptions', 'templates')
                 ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -119,6 +125,7 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 5
 ACCOUNT_USERNAME_MAX_LENGTH = 15
 LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/accounts/login/'
 
 
@@ -195,3 +202,10 @@ MEDIA_ROOT = (os.path.join(BASE_DIR, 'media'))
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Stripe Price ID
+
+SUB_BASIC_MONTHLY = 'price_1KMJPmDDAG3wj1f360dQZoLl'
+SUB_PREMIUM_MONTHLY = 'price_1KMMRjDDAG3wj1f3RdZGwgd1'
+
+django_heroku.settings(locals())
