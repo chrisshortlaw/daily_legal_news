@@ -15,6 +15,7 @@ class Tag(models.Model):
     '''
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from=['name'])
+    tag_colour = models.CharField(max_length=50, null=True, blank=True)
 
     @property
     def get_tagged_articles(self):
