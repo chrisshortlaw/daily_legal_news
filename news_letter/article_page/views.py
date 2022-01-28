@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from .models import Article, Author, Comment, Tag
+from .forms import CommentForm
+from django.shortcuts import redirect, reverse
+from django.contrib import messages
 # Create your views here.
 
 
@@ -66,13 +69,34 @@ def article_page(request, article_id):
     # Retrieve authors from many-to-many table
     art_authors = article.author.all()
     comments = Comment.objects.filter(article=article)
-    context = {"article": article,
-               "authors": art_authors,
-               "tags": tags,
-               "comment_count": article.comment_count,
-               "likes": article.likes_count,
-               "comments": comments
-               }
+
+    user = request.session.get('user', {})
+
+    if request.POST:
+        form = CommentForm(
+                           {
+                            'article': article,
+                            'body': request.post['body'],
+                            'user': user,
+                           }
+                            )
+        if form.is_valid():
+            comment = form.save()
+            messages.info(request, 'Your comment has been posted and is awaiting moderation')
+            return redirect(reverse('article_page'))
+        else:
+            messages.error(request, 'Sorry. Your comment could not be posted.')
+    else:
+        comment_form = CommentForm()
+        context = {"article": article,
+                   "authors": art_authors,
+                   "tags": tags,
+                   "comment_count": article.comment_count,
+                   "likes": article.likes_count,
+                   "comments": comments,
+                   "comment_form": comment_form
+                   }
+
     return render(request,
                   'articles/article_page.htmldjango',
                   context=context)
