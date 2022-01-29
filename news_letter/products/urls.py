@@ -7,8 +7,8 @@ from . import views
     name = [insert name found in Config class in apps.py]
 '''
 urlpatterns = [
-        path('products/', views.all_products, name='products'),
-        path('products/<product_name>/',
+        path('', views.all_products, name='products'),
+        path('<product_id>',
              views.product_page,
              name='product_page')
         ]
