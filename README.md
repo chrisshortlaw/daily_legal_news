@@ -113,7 +113,7 @@ A news-paper web-app with a store page. Users of the app can leave comments and 
 8. Main page should show users the most relevant or up-to-date content
 9. Users should be encouraged to register an account and login.
 10. Users will have a means of adding comments to articles. 
-13. [Add more here] 
+11. [Add more here] 
 
 ##### *Content
 
