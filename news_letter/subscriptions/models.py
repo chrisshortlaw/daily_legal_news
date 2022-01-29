@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from user_profiles.models import Profile
 
 # Create your models here.
 
@@ -31,18 +30,4 @@ class Subscription(models.Model):
 
     def __str__(self):
         return f'{self.service.name}:{self.price.price}'
-
-
-class Subscriber(models.Model):
-    user = models.OneToOneField(Profile,
-                                on_delete=models.CASCADE,
-                                related_name='subscriber')
-    subscription = models.ForeignKey('Subscription',
-                                     on_delete=models.CASCADE
-                                     )
-    customer_id = models.CharField(max_length=50)
-    is_active = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f'{ self.user }: {self.customer_id}'
 
