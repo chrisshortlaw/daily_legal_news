@@ -17,7 +17,7 @@ def all_products(request):
             messages.error(request, "No search criteria specified.")
             return redirect(reverse('products'))
 
-        queries = Q(name__icontains=query)|Q(description__icontains=query)
+        queries = Q(name__icontains=query) | Q(description__icontains=query)
         products = Product.objects.filter(queries)
 
     context = {
@@ -27,9 +27,9 @@ def all_products(request):
     return render(request, 'products/product.htmldjango', context)
 
 
-def product_page(request, product_name):
+def product_page(request, product_id):
 
-    product = Product.objects.get(name=str(product_name))
+    product = Product.objects.get(id=product_id)
 
     context = {"Product": product}
 
