@@ -3,12 +3,14 @@ import json
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect, reverse
 from django.contrib import messages
+from django.contrib.auth.models import User
 from .forms import OrderForm
 from .models import Order, OrderLineItem
 from cart.contexts import cart_content
 from django.conf import settings
 from products.models import Product
-from djanog.http import require_POST
+from django.views.decorators.http import require_POST
+from subscriptions.views import subscriptions
 
 import stripe
 
@@ -98,7 +100,7 @@ def check_out(request):
 
 def checkout_success(request, order_number):
 
-    save_info = request.session.get('save_info')
+    # save_info = request.session.get('save_info')
 
     order = get_object_or_404(Order, order_number=order_number)
     messages.success(request, f'Order Success. Number: {order_number}')
@@ -108,4 +110,6 @@ def checkout_success(request, order_number):
 
     context = {"order": order}
 
-    return render(request, 'checkout/checkout_success.html', context=context)
+    return render(request,
+                  'checkout/checkout_success.html',
+                  context=context)
