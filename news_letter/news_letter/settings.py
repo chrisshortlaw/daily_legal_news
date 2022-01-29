@@ -12,8 +12,10 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import django_heroku
 import builtins
 from pathlib import Path
-from env import Config
 import os
+
+if os.path.exists('..env.py'):
+    from env import Config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
