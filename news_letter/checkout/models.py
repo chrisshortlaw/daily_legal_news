@@ -3,14 +3,21 @@ import string
 
 from django.db import models
 from django.db.models import Sum
+from django.db.models.deletion import SET_NULL
 
 from products.models import Product
+from user_profiles.models import Profile
 
 # Create your models here.
 
 
 class Order(models.Model):
     order_number = models.CharField(max_length=16, null=False, editable=False)
+    user_profile = models.ForeignKey(Profile,
+                                     on_delete=SET_NULL,
+                                     related_name='orders',
+                                     null=True,
+                                     blank=True)
     full_name = models.CharField(max_length=60, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     telephone = models.CharField(max_length=25, null=True, blank=True)
