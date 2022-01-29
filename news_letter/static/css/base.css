@@ -68,6 +68,21 @@ html {
 
 /* --------------------------------------------------------------------------------- NAV-BAR & MODALS --------------------------------- */
 
+.nav-cart {
+  position: relative;
+}
+
+.nav-cart .cart-badge {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  z-index: 99;
+  width: 30px;
+  height: 16px;
+  background-color: #0095AD;  
+  font-size: 8px;
+}
+
 #forgot-pass-modal h5.news-letter-modal-header {
   font-family: 'Source Sans', sans-serif;
   font-size: 1.5rem;
@@ -249,10 +264,6 @@ hr{
     margin: 0rem 0rem 0rem 0rem;
   }
 
-
-  .link-block h4 {
-    }
-
   .link-block h6 {
     position: absolute;
     top: 10%;
@@ -374,6 +385,29 @@ hr{
 .about-text {
   color: #FFFFFF;
   padding: 5% 5%;
+  }
+
+
+/* ---------------------------------------------------------------------------- TAGS - ADDITIONAL COLOURS --------------------- */
+
+  .constitution {
+    background-color: #218380;
+    color: #FFFFFF;
+  }
+
+  .contract{
+    background-color: #38405F;
+    color: #FFFFFF;
+  }
+
+  .common-law {
+    background-color: #6B2B06;
+    color: #FFFFFF;
+  }
+
+  .bailment {
+    background-color: #F8E5EE;
+    color: #353B3B; 
   }
 
 /* ---------------------------------------------------------------------------- FOOTER ------------------ */
@@ -609,14 +643,15 @@ hr{
 .auth-form p:last-of-type{
   margin-bottom: 2.5rem;
 }
-
-.auth-form>button{
-  margin: 0 auto;
-  width: 66%;
+.auth-form>button {
+  margin-top: 1rem;
 }
 
 /* --------------------------------------------- AUTH_BASE.HTML --------------------------------- */
+.all-auth-section {
+  background-color: #00a5cf;
 
+}
 .form-container {
   display: flex;
   justify-content: center;
@@ -626,11 +661,29 @@ hr{
 }
 
 .form-container-child {
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
   padding: 2rem 2rem;
-  background-color: #00a5cf;
   color: #FFFFFF;
+}
+
+/* -------------------------------------- ACCOUNTS/SIGNUP.HTML ------------------ */
+
+.allauth-button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 1rem 2rem;
+}
+
+.allauth-button-container a {
+  margin-right: .75rem;
+}
+
+/* ----------------------------------------------- ACCOUNTS/PASSWORD_RESET.HTML ----------------- */
+
+.reset-pass-button {
+  margin-top: 1rem;
 }
 
 /* ---------------------------------------------------------------------------------------- END OF FORM TEMPLATES -------------------------- */
@@ -752,15 +805,35 @@ form.modify-cart input[type=number]{
   color: #FFFFFF;
 }
 
-.login-form,
-.signup,
-.auth-form {
-  margin-left: 1rem;
-  padding-left: 1rem;
+/* --------------------------------------------------------------------------------------- ARTICLES -------------------------------------- */
+.articles-container{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  margin: 2rem 2rem;
 }
 
+.articles-heading {
+  font-size: 3rem;
 
-/* --------------------------------------------------------------------------------------- ARTICLES -------------------------------------- */
+  font-family: 'IBM Plex Sans', sans-serif;
+  width: 30%;
+  flex-grow: 1;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.articles-heading>div {
+  margin: 1rem 1rem;
+}
+
+.articles-heading .articles-heading-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
 .article-card-container {
   display: flex;
   align-items: flex-start;
@@ -770,7 +843,7 @@ form.modify-cart input[type=number]{
 }
 
 .article-card-container .card {
-  width: 25%;
+  width: 30%;
   margin: 1rem 1rem;
 }
 
@@ -875,6 +948,48 @@ form.modify-cart input[type=number]{
   font-size: 1.33rem;
   }
 
+/* --------------------------------------------- ARTICLE_PAGE - COMMENTS ----------------------------- */
+
+  .comment-section {
+    padding: 2rem 2rem;
+    background-color: #f6f6ef;
+  }
+  .comments {
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-comment-table{
+    margin-left: 1.75rem;
+  }
+
+  .comment-form > .btn{
+    margin-top: 1rem;
+  }
+
+  .comment-tree {
+    width: 85%;
+  }
+
+  .acomment{
+    width: 100%;
+    height: auto;
+  }
+  
+  .comment-header{
+    color: gray;
+  }
+
+  .comment-username,
+  .date{
+    padding: 0rem .5rem 0rem 0rem;
+  }
+
+  .comment-body{
+    font-size: 1.25rem;
+  }
+  
+
 /* --------------------------------------------- CART ------------------------------------------- */
 
   .quantity-row {
@@ -920,6 +1035,22 @@ form.modify-cart input[type=number]{
     justify-content: center;
     margin: 0;
     height: 100%;
+  }
+
+
+/* --------------------------------------------- PROFILE ---------------------------------------------------------- */
+
+  .user-profile {
+    padding: 2rem 3rem;
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .profile-container>div{
+    flex-grow: 1;
   }
 
 /* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
