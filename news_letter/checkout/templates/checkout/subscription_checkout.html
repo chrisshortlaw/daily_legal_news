@@ -1,0 +1,93 @@
+{% extends 'base.htmldjango' %}
+{% load static %}
+
+{% block extracss %}
+  
+
+{% endblock %}
+
+{% block content %}
+<section class="bread-crumb-container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item text-dark"><a href={% url 'index' %}>Home</a>
+      <li class="breadcrumb-item text-dark"><a href="">Subscriptions</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+    </ol>
+  </nav>
+</section>
+
+<section class="section-padding">
+  <div class="container">
+    <div class="cart-header text-center">
+      <h2>Checkout</h2>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="order-summary-header text-center pb-4"><h3>Order Summary</h3></div>
+          <div class="row">
+            <div class="col-3 cart-image"><img src="">Image Goes Here</div>
+            <div class="col-4 cart-product">
+              <div class="cart-product-name text-wrap" aria-label="product name"> Insert Name Here</div>
+              <div class="cart-product-price" aria-label="product price">€ Insert Price HERE  EUR</div>
+            </div>
+          </div>
+          <hr>
+          <div class="total-display container">
+            <div class="row justify-content-end">
+              <div class="col-4"><h3>Subscription</h3></div>
+              <div class="col-4"><h3>Name of Subscription</h3></div>
+            </div>
+            <div class="row justify-content-end">
+              <div class="col-4"><h3>Total:</h3></div>
+              <div class="col-4"><h3>€ INSERT SUBSCRIPTION TOTAL</h3></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="checkout-form-header text-center pb-4"><h3>Complete Order</h3></div>
+          <div class="cart-content">
+            <form action= {% url 'check_out' %} method="POST" id="payment-form">
+              {% csrf_token %}
+              <fieldset class="rounded px-3 mb-5">
+                <legend class="fieldset-label small px-2 w-auto">Your Details</legend>
+                  {{ order_form.full_name | as_crispy_field }}
+                  {{ order_form.email | as_crispy_field }}
+              <fieldset class="rounded px-3 mb-5">
+                <div class="mb-3" id="card-element"></div>
+                <!-- Display a payment form -->
+                <div id="payment-element">
+                  <!--Stripe.js injects the Payment Element-->
+                </div>
+                <button id="submit-button" class="btn btn-dark">
+                  <div class="spinner hidden" id="spinner"></div>
+                  <span id="button-text">Pay now</span>
+                </button>
+                <div id="payment-message" class="hidden"></div>
+                <!-- Display a payment form -->
+                <a href={% url 'cart' %} class="btn btn-info">Continue Shopping</a>
+                <!-- DISPLAY ANY CARD ERRORS -->
+                <div id="card-errors"></div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div id="post-submit-overlay">
+  <h1 class="loading-spinner">
+    <span>
+      <i class="fas fa-spinner fa-pulse"></i>
+    </span>
+  </h1>
+</div>
+
+{% endblock content %}
+{% block postloadjs %}
+  {{ stripe_public_key | json_script:"id_stripe_public_key" }}
+  {{ client_secret | json_script:"id_client_secret" }}
+  <script src={% static 'js/checkout.js' %} ></script>
+{% endblock postloadjs %} 
