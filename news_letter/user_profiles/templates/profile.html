@@ -1,0 +1,14 @@
+{% extends 'base.htmldjango' %}
+{% block content %}
+<section class="user-profile">
+  <div class="profile-container">
+    <div class='profile-form'>
+      {{ form | crispy }}
+    </div>
+    <div class="my-profile">
+      <h3>Subscription Information Here</h3>
+    </div>
+  </div>
+</section>
+{% endblock content %}
+
