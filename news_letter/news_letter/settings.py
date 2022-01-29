@@ -14,7 +14,7 @@ import builtins
 from pathlib import Path
 import os
 
-if os.path.exists('..env.py'):
+if os.path.exists('C:\\code\\django_projects\\news_letter\\news_letter\\env.py'):
     from env import Config
 
 
