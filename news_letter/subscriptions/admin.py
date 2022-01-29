@@ -1,4 +1,4 @@
-from subscriptions.models import ServiceProduct, Price, Subscription, Subscriber
+from subscriptions.models import ServiceProduct, Price, Subscription
 from django.contrib import admin
 
 # Register your models here.
@@ -26,9 +26,3 @@ class SubscriptionAdmin(admin.ModelAdmin):
     list_display = ('service', 'price', )
 
 
-@admin.register(Subscriber)
-class SubscriberAdmin(admin.ModelAdmin):
-    fields = ('user',
-              'subscription',
-              'is_active')
-    list_display = ('user', 'subscription', 'is_active')
