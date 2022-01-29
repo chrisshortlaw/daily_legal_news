@@ -58,7 +58,7 @@ form.addEventListener('submit', function(ev) {
     let csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     
     let postData = { 
-      'csrfmiddlewaretoken': csrftoken,
+      'csrfmiddlewaretoken': csrfToken,
       'client_secret': clientSecret,
       'save_info': saveInfo,
     };
