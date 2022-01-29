@@ -26,11 +26,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY') or env.Config.SECRET_KEY
-STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY') or env.Config.STRIPE_PUBLIC_KEY
-STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY') or env.Config.STRIPE_SECRET_KEY
-STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET') or env.Config.STRIPE_WH_SECRET
-
+SECRET_KEY = os.environ.get('SECRET_KEY') 
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY') 
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -135,20 +134,18 @@ ACCOUNT_FORMS = {
                  "reset_password": "news_letter.forms.CustomResetPasswordForm"
                  }
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 # Configuration imported from untracked config file
-# TODO: Change to environment variables for production & deployment
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('DB_NAME') or env.Config.DB_NAME,
-        'USER': os.environ.get('DB_USER') or env.Config.DB_USER,
-        'PASSWORD': os.environ.get('DB_PASSWORD') or env.Config.DB_PASSWORD,
-        'HOST': os.environ.get('DB_HOST') or env.Config.DB_HOST,
-        'PORT': os.environ.get('DB_PORT') or env.Config.DB_PORT
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': int(os.environ.get('DB_PORT'))
     }
 }
 
