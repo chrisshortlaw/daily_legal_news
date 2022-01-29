@@ -84,6 +84,7 @@ class Article(models.Model):
     teaser = models.TextField(max_length=250,
                               blank=True)
     tag = models.ManyToManyField('Tag', related_name="tags")
+    is_restricted = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):
         self.teaser = str((str(self.body)[0:250]).rsplit(". ", maxsplit=1)[0])+"..."
