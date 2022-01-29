@@ -3,6 +3,14 @@ from .models import Comment
 
 
 class CommentForm(forms.ModelForm):
+    '''
+    Form for submission of comments to articles
+    Fields:
+        - article: Type[Article]
+        - body: TextField
+        - parent: Type[Comment], default=None
+        - approved: Boolean Field, default=False
+    '''
     class Meta:
         model = Comment
         fields = ('article', 'body', 'user',
