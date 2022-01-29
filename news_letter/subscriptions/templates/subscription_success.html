@@ -24,18 +24,28 @@
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-12 col-md-6">
-
+        <div class="col-12 col-md-4">
+          <img src="https://storage.googleapis.com/ci_project_image_bucket/rocket-image.png">
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-8">
           <div class="checkout-form-header text-center pb-4">
             <h3>Thank You</h3>
           </div>
           <div>
-            <h4>Your Subscription has been successfully completed</h4>
+            <h4>
+              Your Subscription has been successfully completed
+            </h4>
           </div>
           <div>
-            <h4>An email with the details has been sent your email account.</h4>
+            <h4>
+              An email with the details has been sent your email account.
+            </h4>
+            <p>Payment Email: {{ customer.email }}</p>
+            <p>Payment Name: {{ customer.name }}</p>
+          </div>
+          <div>
+            <h4>Your Order:</h4>
+            <p> Payment: € {{ session.amount_total  }}</p>
           </div>
         </div>
       </div>
