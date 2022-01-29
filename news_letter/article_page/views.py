@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Article, Author, Comment, Tag
 from .forms import CommentForm
 from django.shortcuts import redirect, reverse
 from django.contrib import messages
+from django.conf import settings
 # Create your views here.
 
 
@@ -87,19 +89,51 @@ def article_page(request, article_id):
         else:
             messages.error(request, 'Sorry. Your comment could not be posted.')
     else:
-        comment_form = CommentForm()
-        context = {"article": article,
-                   "authors": art_authors,
-                   "tags": tags,
-                   "comment_count": article.comment_count,
-                   "likes": article.likes_count,
-                   "comments": comments,
-                   "comment_form": comment_form
-                   }
+        if article.is_restricted:
+            if request.user.is_authenticated:
+                if request.user.groups.filter(name='Subscriber'):
+                    comment_form = CommentForm()
+                    context = {"article": article,
+                               "authors": art_authors,
+                               "tags": tags,
+                               "comment_count": article.comment_count,
+                               "likes": article.likes_count,
+                               "comments": comments,
+                               "comment_form": comment_form
+                               }
+                    return render(request,
+                                  'articles/article_page.htmldjango',
+                                  context=context)
+                else:
+                    context = {
+                            "article_teaser": article.teaser,
+                            "article_title": article.title,
+                            "authors": art_authors,
+                            "article_date": article.date,
+                            "tags": tags,
+                            "comment_count": article.comment_count
+                            }
+                    return render(request,
+                                  'articles/paywall.htmldjango',
+                                  context=context)
+            else:
+                messages.info(request, 'You must be logged in to view this page')
+                return redirect(f'{settings.LOGIN_URL}?next={request.path}')
+        else:
+            comment_form = CommentForm()
+            context = {"article": article,
+                       "authors": art_authors,
+                       "tags": tags,
+                       "comment_count": article.comment_count,
+                       "likes": article.likes_count,
+                       "comments": comments,
+                       "comment_form": comment_form
+                       }
+            return render(request,
+                          'articles/article_page.htmldjango',
+                          context=context)
 
-    return render(request,
-                  'articles/article_page.htmldjango',
-                  context=context)
+
 
 
 def article_section(request, tag_name):
