@@ -7,8 +7,11 @@
       <div class="row ">
         <div class="col-12 col-md-7">
           <div class="card border-light head-line" style="max-width: 100%;">
-            <img class="card-img-top" src="http://34.149.174.166/judgment-artwork.png" alt="vector image of scales of justice">
-              
+            {% if head_liner_article.head_liner_image_url %}
+            <img class="card-img-top" src="{{ head_liner_article.head_liner_image_url }}" alt="vector image of scales of justice">
+            {% else %}
+            <img class="card-img-top" src="https://storage.googleapis.com/ci_project_image_bucket/scales-of-justice-vector.png" alt="vetor image of scales of justice">
+            {% endif %}
             <div class="card-body">
               <a href="{% url 'articles' %}?author={{ head_liner_article.head_liner_author_slug }}" class="card-subtitle mb-2 text-muted main-header-author">{{ head_liner_article.head_liner_author_name }}</a>
               <p><a href={% url 'article_page' head_liner_article.head_liner_id %} class="main-header-anchor">{{ head_liner_article.head_liner_title }}</a></p>
@@ -53,7 +56,7 @@
             <div class="col-12 head-art-card">
               <div class="card border-light" style="min-height: 12%;">
                 <div class="card-body">
-                <a href="#" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
+                  <a href={% url 'article_page' top_articles.2.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
                   {% for author in top_articles.2.author  %}
                   <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
                   {% endfor %}
@@ -83,15 +86,15 @@
             </div>
             <div class="link-block link-block-red">
               <h6>US Law</h6>
-              <a href={% url 'section' 'united-states' %} class="stretched-link align-items-stretch"><h4>US Law</h4></a>
+              <a href={% url 'section' 'us-law' %} class="stretched-link align-items-stretch"><h4>US Law</h4></a>
             </div>
             <div class="link-block link-block-lightblue">
               <h6>UK Law</h6>
-              <a href={% url 'section' 'united-kingdom' %} class="stretched-link align-items-stretch"><h4>UK Law</h4></a>
+              <a href={% url 'section' 'uk-law' %} class="stretched-link align-items-stretch"><h4>UK Law</h4></a>
             </div>
             <div class="link-block link-block-lightyellow">
               <h6>Tort & Delict</h6>
-              <a href={% url 'section' 'tort-and-delict' %} class="stretched-link align-items-stretch"><h4>Tort & Delict</h4></a>
+              <a href={% url 'section' 'torts' %} class="stretched-link align-items-stretch"><h4>Tort & Delict</h4></a>
             </div>
 
           </div>
