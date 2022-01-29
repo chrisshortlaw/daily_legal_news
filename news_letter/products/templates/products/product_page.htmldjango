@@ -77,7 +77,7 @@
 </section>
 <section class="section-padding">
   <h2 class="display-2">People Also Bought</h2>
-  <div class="container also-bought">
+{% comment "" %}<div class="container also-bought">
     <div>
       <img src="../media/pexels-taffy-buoniconti-6815654.jpg" class="product-image" alt='...'/> 
     </div>
@@ -87,7 +87,7 @@
     <div>
       <img src="../media/pexels-taffy-buoniconti-6815654.jpg" class="product-image" alt='...'/> 
     </div>
-  </div>
+</div> {% endcomment %}
 </section>
 
 {% endblock %}

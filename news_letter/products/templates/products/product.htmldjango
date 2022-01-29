@@ -18,18 +18,16 @@
   <div class="container">
     <div class="row justify-content-center">
       {% for item in Product %}
-        <div class="col">
-          <div class="container">
-            <div class="card">
-              <img src="http://34.149.174.166/pexels-taffy-buoniconti-6815654.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
-                <p class="card-text">{{ item.description }}</p>
-                <p><b>Price: €{{ item.price }}</b></p>
-                <p><em>Rating: {{ item.rating }}</em></p>
-                <a href={% url 'product_page' item.name %} class="btn btn-primary">Details Page</a>
-              </div>
+        <div class="col-md-4">
+          <div class="card">
+            <img src={{ item.image_url }} class="card-img-top img-fluid" alt="Image of {{ item.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
+              <p class="card-text">{{ item.description }}</p>
+              <p class="card-text"><b>Price: €{{ item.price }}</b></p>
+              <p class="card-text"><em>Rating: {{ item.rating }}</em></p>
+              <a href={% url 'product_page' item.id %} class="btn btn-primary">Details Page</a>
             </div>
           </div>
         </div>
