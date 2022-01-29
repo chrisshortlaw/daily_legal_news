@@ -1,1 +1,1 @@
-web: gunicorn news_letter.wsgi
+web: gunicorn news_letter.news_letter.wsgi
