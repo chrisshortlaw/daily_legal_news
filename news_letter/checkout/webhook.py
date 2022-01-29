@@ -50,7 +50,9 @@ def webhook(request):
                  'payment_intent.succeeded': handler.handle_webhook,
                  'checkout.session.completed': handler.handle_checkout_session_completed,
                  'invoice.paid': handler.handle_invoice_paid,
-                 'invoice.payment_failed': handler.handle_invoice_payment_failed
+                 'invoice.payment_failed': handler.handle_invoice_payment_failed,
+                 'invoice.updated': handler.handle_invoice_updated,
+                 'customer.subscription.created': handler.handle_subscription
                 }
 
     event_type = event['type']
