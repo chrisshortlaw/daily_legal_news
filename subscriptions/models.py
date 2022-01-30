@@ -39,7 +39,8 @@ class Subscription(models.Model):
             ]
     service = models.ForeignKey('ServiceProduct', on_delete=models.CASCADE)
     price = models.ForeignKey('Price', on_delete=models.CASCADE)
-    subscription_billing_id = models.CharField(max_length=50)
+    subscription_billing_id = models.CharField(max_length=50,
+                                               default='missing_id')
     subscription_status = models.CharField(max_length=25,
                                            choices=SUBSCRIPTION_STATUS,
                                            default='incomplete')
