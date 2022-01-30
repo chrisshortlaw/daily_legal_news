@@ -1,6 +1,3 @@
-import json
-import datetime
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -10,10 +7,14 @@ from subscriptions.models import Subscription
 
 # Create your models here.
 SUBSCRIPTION_STATUS = [
-        ('curr', 'Current'),
-        ('pstd', 'Past Due'),
-        ('cncl', 'Cancelled'),
-        ('none', 'None')
+        ('active', 'Current'),
+        ('past_due', 'Past Due'),
+        ('canceled', 'Cancelled'),
+        ('none', 'None'),
+        ('incomplete', 'Incomplete'),
+        ('incomplete_expired', 'Incomplete Expired'),
+        ('trialing', 'Trialing'),
+        ('unpaid', 'Unpaid')
         ]
 
 
@@ -45,53 +46,15 @@ class Profile(models.Model):
     customer_id = models.CharField(max_length=50, null=True, blank=True)
     stripe_email = models.EmailField(max_length=254, null=True, blank=True)
     stripe_name = models.CharField(max_length=50, null=True, blank=True)
-    subscription_billing_id = models.CharField(max_length=50, null=True, blank=True)
-    _payment_start_date = models.DateField(null=True, blank=True)
-    _next_payment_date = models.DateField(null=True, blank=True)
-    _last_payment_date = models.DateField(null=True, blank=True)
-    subscription_amount = models.IntegerField(null=True, blank=True)
     subscription = models.ForeignKey(Subscription,
                                      on_delete=models.CASCADE,
                                      related_name='subscription',
                                      blank=True,
                                      null=True)
     is_subscriber = models.BooleanField(default=False)
-    subscription_status = models.CharField(max_length=4,
-                                           choices=SUBSCRIPTION_STATUS,
-                                           default='none')
 
     def __str__(self):
         return self.user.name
-
-    @property
-    def payment_start_date(self):
-        if self._payment_start_date is not None:
-            return self._payment_start_date
-
-    def set_payment_start_date(self, timestamp):
-        self._payment_start_date = datetime.datetime.fromtimestamp(timestamp).date()
-        return self._payment_start_date
-
-    @property
-    def next_payment_date(self):
-        if self._next_payment_date is not None:
-            return self._next_payment_date
-
-    def set_next_payment_date(self, timestamp):
-        self._next_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
-
-    @property
-    def last_payment_date(self):
-        if self._last_payment_date is not None:
-            return self._last_payment_date
-
-    def set_last_payment_date(self, timestamp):
-        self._last_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
-        return self._last_payment_date
-
-
-
-
 
 
 @receiver(post_save, sender=User)
