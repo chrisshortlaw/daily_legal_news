@@ -47,7 +47,8 @@ def subscription_success(request):
         if user_sub.DoesNotExist:
             new_sub = Subscription(price=session.metadata.price,
                                    service=session.metadata.service,
-                                   sub_id=session.subscription)
+                                   sub_id=session.subscription,
+                                   user=request.user)
             subbed_profile.subscription = new_sub
             messages.info(request, f'New Subscription Created for {request.user}')
         else:

@@ -34,6 +34,9 @@ class SubscriptionProduct(models.Model):
                               on_delete=models.CASCADE,
                               related_name="sub_price")
 
+    def __str__(self):
+        return f'{self.service}: { self.price }'
+
 
 class Subscription(models.Model):
     SUBSCRIPTION_STATUS = [
@@ -46,9 +49,10 @@ class Subscription(models.Model):
             ('trialing', 'Trialing'),
             ('unpaid', 'Unpaid')
             ]
-    sub_product = models.ForeignKey('SubscriptionProduct', on_delete=models.CASCADE, related_name="sub_product")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriber', null=True, blank=True)
+    sub_product = models.ForeignKey('SubscriptionProduct', on_delete=models.CASCADE, related_name="sub_product", null=True, blank=True)
     sub_id = models.CharField(max_length=50,
-                                               default='missing_id')
+                              default='missing_id')
     subscription_status = models.CharField(max_length=25,
                                            choices=SUBSCRIPTION_STATUS,
                                            default='incomplete')
@@ -57,7 +61,7 @@ class Subscription(models.Model):
     _last_payment_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.service.name}:{self.price}'
+        return f'{self.sub_product}:{self.sub_id}'
 
     @property
     def payment_start_date(self):
@@ -75,7 +79,7 @@ class Subscription(models.Model):
 
     def set_next_payment_date(self, timestamp):
         self._next_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
-        
+
     @property
     def last_payment_date(self):
         if self._last_payment_date is not None:
@@ -84,5 +88,4 @@ class Subscription(models.Model):
     def set_last_payment_date(self, timestamp):
         self._last_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
         return self._last_payment_date
-
 
