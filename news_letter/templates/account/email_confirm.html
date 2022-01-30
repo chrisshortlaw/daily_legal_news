@@ -1,4 +1,4 @@
-{% extends "auth_base.html" %}
+{% extends "account/auth_base.html" %}
 
 {% load i18n %}
 {% load account %}
@@ -17,7 +17,7 @@
 
 <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
 {% csrf_token %}
-    <button type="submit">{% trans 'Confirm' %}</button>
+    <button type="submit" class="btn btn-dark">{% trans 'Confirm' %}</button>
 </form>
 
 {% else %}
