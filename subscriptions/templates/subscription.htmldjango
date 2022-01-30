@@ -20,7 +20,12 @@
           <div class='plan-footer'>
             <form action={% url 'subscription_checkout' %} method="POST">
               {% csrf_token %}
+              <input type="hidden" name="userEmail" value={{ request.user.email }}>
+              {% if request.user.profile.customer_id %}
+              <input type="hidden" name="customer_id" value={{ request.user.profile.customer_id }}>
+              {% endif %}
               <input type="hidden" name='priceId' value="{{ subscription.price.price_id }}">
+              <input type="hidden" name='serviceId' value="{{ subscription.service.name }}">
               <button type="submit"> Subscribe</button>
             </form>
           </div>

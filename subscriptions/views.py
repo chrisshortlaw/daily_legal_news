@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from user_profiles.models import Profile
-from .models import Subscription
+from .models import Subscription, SubscriptionProduct
 
 import stripe
 # Create your views here.
@@ -15,7 +15,7 @@ import stripe
 
 def subscriptions(request):
 
-    subscription_products = Subscription.objects.all()
+    subscription_products = SubscriptionProduct.objects.all()
 
     context = {
             'subscription_products': subscription_products,
@@ -42,7 +42,19 @@ def subscription_success(request):
             subbed_profile.customer_id = customer.id
             subbed_profile.stripe_email = customer.email
             subbed_profile.stripe_name = customer.name
-            subbed_profile.subscription_billing_id = session.subscription
+
+        user_sub = Subscription.objects.get(sub_id__exact=session.subscription)
+        if user_sub.DoesNotExist:
+            new_sub = Subscription(price=session.metadata.price,
+                                   service=session.metadata.service,
+                                   sub_id=session.subscription)
+            subbed_profile.subscription = new_sub
+            messages.info(request, f'New Subscription Created for {request.user}')
+        else:
+            user_sub.price = session.metadata.price
+            user_sub.service = session.metadata.price
+            messages.info(request, f'Subscription details updated for {request.user}')
+
     except Exception as e:
         messages.error(request,
                        f'Error: {e}. Please contact customer service')
@@ -70,6 +82,7 @@ def create_checkout_session(request):
 
     if request.method == 'POST':
         price = request.POST['priceId']
+        service = request.POST['serviceId']
         try:
             stripe.api_key = stripe_secret_key 
 
@@ -89,7 +102,11 @@ def create_checkout_session(request):
                                 }],
                     client_reference_id=user_ref,
                     customer_email=user_email,
-                    customer=cust_id
+                    customer=cust_id,
+                    metadata={
+                        "price": price,
+                        "service": service
+                        }
                     )
             return redirect(checkout_session.url, code=303)
         except Exception as e:

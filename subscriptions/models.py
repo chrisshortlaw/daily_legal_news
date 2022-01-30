@@ -26,6 +26,15 @@ class Price(models.Model):
         return f'{self.price}'
 
 
+class SubscriptionProduct(models.Model):
+    service = models.ForeignKey('ServiceProduct',
+                                on_delete=models.CASCADE,
+                                related_name='service')
+    price = models.ForeignKey('Price',
+                              on_delete=models.CASCADE,
+                              related_name="sub_price")
+
+
 class Subscription(models.Model):
     SUBSCRIPTION_STATUS = [
             ('active', 'Current'),
@@ -37,9 +46,8 @@ class Subscription(models.Model):
             ('trialing', 'Trialing'),
             ('unpaid', 'Unpaid')
             ]
-    service = models.ForeignKey('ServiceProduct', on_delete=models.CASCADE)
-    price = models.ForeignKey('Price', on_delete=models.CASCADE)
-    subscription_billing_id = models.CharField(max_length=50,
+    sub_product = models.ForeignKey('SubscriptionProduct', on_delete=models.CASCADE, related_name="sub_product")
+    sub_id = models.CharField(max_length=50,
                                                default='missing_id')
     subscription_status = models.CharField(max_length=25,
                                            choices=SUBSCRIPTION_STATUS,
