@@ -31,7 +31,7 @@
 
   {% endblock %}
 
-  <title>News Letter {% block extra_title %} {% endblock %} </title>
+  <title>Daily Legal News {% block extra_title %} {% endblock %} </title>
 
 </head>
 
