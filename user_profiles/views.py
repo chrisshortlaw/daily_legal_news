@@ -16,9 +16,8 @@ def profile(request):
 
     if profile:
         user = profile.user
-        subscription_obj = Subscription.objects.get(user__username=user.username)
-        print(f'subscription obj: {subscription_obj }')
-        if subscription_obj:
+        try:
+            subscription_obj = Subscription.objects.get(user__username=user.username)
 
             subscription['sub_type'] = subscription_obj.sub_product.service
             subscription['sub_start'] = subscription_obj.payment_start_date
@@ -27,6 +26,9 @@ def profile(request):
             subscription['sub_status'] = subscription_obj.subscription_status
             subscription['sub_id'] = subscription_obj.sub_id
             subscription['sub_amount'] = int(subscription_obj.sub_product.price.price)/100
+
+        except Subscription.DoesNotExist:
+            pass
 
     context = {
                "form": form,
