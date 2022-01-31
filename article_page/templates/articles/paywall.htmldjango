@@ -41,10 +41,14 @@
   </div>
 </div>
 
-<div>
-  This page is for subscribers only. If you are a subscriber, please log in.
-  Not a subscriber? You are missing out. Get the latest news for as little as €0.40 a day!
-  [Insert link to subscription page here]
-
+<div class='container'>
+  <div class='flex-container'>
+    <div class="paywall">
+      <h3>This page is for subscribers only. If you are a subscriber, please<a href={% url 'account_login' %}>log in.</a></h3>
+      <br>
+      <h4>Not a subscriber? You are missing out. Get the latest news for as little as €0.40 a day!</h4>
+      <a class="btn btn-dark" href={% url 'subscriptions' %}>Subscribe</a>
+    </div>
+  </div>
 </div>
 {% endblock content %}
