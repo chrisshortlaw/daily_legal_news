@@ -221,6 +221,22 @@ hr{
     padding-top: 0rem;
   }
 
+  .top-art-body {
+    position: relative;
+  }
+
+  .top-art-date {
+    position: absolute;
+    top: 0%;
+    right: 5%;
+  }
+
+  .top-art-comments {
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+  }
+
   .card-title.top-article-title,
   .card-subtitle.top-article-author{
     padding-left: 0rem;
@@ -428,11 +444,18 @@ hr{
 .footer-header {
   text-transform: uppercase;
   color: #FFFFFF;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
 }
 
 .footer-col-header,
 .section-link{
   color: #FFFFFF;
+}
+
+.section-link a {
+  color: #FFFFFF;
+  text-decoration: none;
 }
 
 .col-divider {
@@ -469,7 +492,7 @@ hr{
 .notification {
   z-index: 999;
   position: fixed;
-  top: 3%;
+  top: 15%;
   right:3%;
 }
 
@@ -1115,7 +1138,35 @@ form.modify-cart input[type=number]{
       width: 100%;
     }
 
+/* ----------------------------------------------------- PAYWALL ---------------- */
 
+    .flex-container{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .paywall {
+      display: flex;
+      flex-direction: column;
+      align-items: space-between;
+      width: 50%;
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+    }
+
+    .paywall a {
+
+      margin: 1rem 1rem;
+      width: 80%;
+    }
+
+    .paywall h3,
+    .paywall h4{
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
 
 /* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
 
@@ -1221,6 +1272,4 @@ form.modify-cart input[type=number]{
     top: 70%;
     left: 15%;
   }
-
-
 }
