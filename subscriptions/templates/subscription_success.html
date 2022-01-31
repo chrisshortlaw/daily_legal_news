@@ -25,7 +25,8 @@
     <div class="container">
       <div class="row">
         <div class="col-12 col-md-4">
-          <img src="https://storage.googleapis.com/ci_project_image_bucket/rocket-image.png">
+          
+          <img class="img-fluid" src="https://storage.googleapis.com/ci_project_image_bucket/rocket-image.png">
         </div>
         <div class="col-12 col-md-8">
           <div class="checkout-form-header text-center pb-4">
@@ -36,17 +37,28 @@
               Your Subscription has been successfully completed
             </h4>
           </div>
-          <div>
-            <h4>
+            <h5>
               An email with the details has been sent your email account.
-            </h4>
-            <p>Payment Email: {{ customer.email }}</p>
-            <p>Payment Name: {{ customer.name }}</p>
-          </div>
-          <div>
-            <h4>Your Order:</h4>
-            <p> Payment: € {{ session.amount_total  }}</p>
-          </div>
+            </h5>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>Payment Email:</td>
+                  <td>{{ customer.email }}</td>
+                </tr>
+                <tr>
+                  <td>
+                    Payment Name:
+                  </td>
+                  <td>{{ customer.name }}</td>
+                </tr>
+                <tr>
+                  <td>Your Order</td>
+                  <td>{{ service }}</td>
+                  <td>€{{ session.payment_amount }}</td>
+                </tr>
+              </tbody>
+            </table>
         </div>
       </div>
     </div>
