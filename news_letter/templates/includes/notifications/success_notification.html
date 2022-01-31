@@ -3,32 +3,4 @@
     <strong class="me-auto">{{ message }}</strong>
     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
   </div>
-  <div class="toast-body cart-notif-container">
-    <div class="cart-notif-header-container">
-      <div class="notif-header">
-        <h3>Your Cart</h3>
-      </div>
-    </div>
-    {% for item in cart_content %}
-    <div class="cart-notif-body-container">
-      <div class="card-notif-quantity"><strong>{{ item.quantity }}</strong></div>
-      <div class="card-notif-image"> <img src={{ item.product.image_url }}></div>
-      <div class="card-notif-name">
-        <div>{{ item.product.name }}</div>
-        <div><em>€ {{ item.product.price }}</em></div>
-      </div>
-      <div class="cart-notif-subtotal">€ {{ item.sub_total }}</div>
-    </div>
-    <hr>
-    {% empty %}
-    <div>Your Cart is empty.</div>
-    {% endfor %}
-    <div class="cart-notif-footer-container">
-      <div class="cart-notif-total">
-        <div>Quantity: {{ product_count }}</div>
-        <div>Total: € {{ total }}</div>
-      </div>
-      <a href={% url 'check_out' %} class="btn btn-dark" type="button">Checkout</a>
-    </div>
-  </div>
-</div>
+

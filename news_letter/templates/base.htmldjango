@@ -55,7 +55,7 @@
   {% block nav_bar %}
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href={% url 'index' %}>Daily News</a>
+      <a class="navbar-brand" href={% url 'index' %}>Daily Legal News</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle Navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -64,7 +64,7 @@
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href= {% url 'index' %}>Home</a>
           </li>
-          <li>
+          <li class="nav-item">
             <a class="nav-link" href={% url 'articles' %}>Articles</a>
           </li>
           {% if request.user.is_authenticated %}
@@ -83,16 +83,21 @@
             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
           </li>
           {% endif %}
+         
           <li>
             <form class="d-flex" method="GET" action={% url 'articles' %}>
               <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
               <button class="btn grey-bg" type="submit">Search</button>
             </form>
           </li>
+          {% comment 'If block here' %}{% {% endcomment %}
+          <li class="nav-item">
+            <a href={% url 'subscriptions' %} class="nav-link">Subscribe</a>
+          </li>
           {% include './includes/nav_bar.htmldjango' %}
-        </ul>
+          </ul>
         <div>
-          {% comment "" %}Insert Modal Here{% endcomment %}
+          {% comment "" %}Modal {% endcomment %}
           {% include './includes/modal.htmldjango' %}
         </div>
       </div>
@@ -114,15 +119,6 @@
 <script>
 {% block extrajs %}
 
-{% comment %}
-<script>
-  var myModal = document.getElementById('myModal')
-  var myInput = document.getElementById('myInput')
-
-  myModal.addEventListener('shown.bs.modal', function () {
-    myInput.focus()
-  })
-{% endcomment %}
 {% endblock %}
 {% block toastjs %}
     $(  document ).ready(function(){
