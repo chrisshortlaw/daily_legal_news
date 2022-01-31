@@ -31,10 +31,12 @@
                 </div>
               </div>
               <div class="card border-light top-article-card" style="min-height: 12%;" >
-                <div class="card-body">
+                <div class="card-body top_art_body">
                   <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5></a>
+                  <p class="top-art-date">{{ top_articles.0.top_art_date }}</p>
                   {% for author in top_articles.0.author  %}
                   <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
+                  <p class="top-art-comments">Comments: {{ top_articles.0.comment_count  }}</p>
                   {% endfor %}
                   <hr>
                 </div>
@@ -43,8 +45,10 @@
             
             <div class="col-12 head-art-card">
               <div class="card border-light top-article-card" style="min-height: 12%;">
-                <div class="card-body">
+                <div class="card-body top-art-body">
                   <a href="{% url 'article_page' top_articles.1.id %}" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.1.title }}</h5></a>
+                  <p class="top-art-date">{{ top_articles.1.top_art_date }}</p>
+                  <p class="top-art-comments">Comments: {{ top_articles.1.comment_count }}</p>
                   {% for author in top_articles.1.author  %}
                   <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
                   {% endfor %}
@@ -55,8 +59,10 @@
 
             <div class="col-12 head-art-card">
               <div class="card border-light" style="min-height: 12%;">
-                <div class="card-body">
+                <div class="card-body top_art_body">
                   <a href={% url 'article_page' top_articles.2.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
+                  <p class="top-art-date">{{ top_articles.2.top_art_date }}</p>
+                  <p class="top-art-comments">Comments: {{ top_articles.2.comment_count }}</p>
                   {% for author in top_articles.2.author  %}
                   <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
                   {% endfor %}
@@ -100,43 +106,17 @@
           </div>
     </div>
   </section>
-{% comment "" %}
-  <section class='section-padding container article-container'>
-    <div class="article-heading">
-      <h2 >New Articles</h2>
-    </div>
-    <div class='row'>
-      <article class='col-md-6 col-12'>
-        <h3>Article</h3>
-        <p>{% lorem 2 p random %}</p>
-      </article>
-
-      <article class='col-md-3 col-12'>
-        <h3>Article</h3>
-        <p>{% lorem 1 p random %}</p>
-      </article>
-
-    </div>
-    <div class='row'>
-      <article class='col-md-7 col-12'>
-        <h3>Article</h3>
-        <p>{% lorem 2 p random %}</p>
-      </article>
-      <article class='col-md-3 col-12'>
-        <h3>Article</h3>
-        <p>{% lorem 2 p random %}</p>
-      </article>
-    </div>
-  </section>
-{% endcomment %}
 
 <section class="section-padding about">
   <div class="container">
-    <h2 class="about-header">About</h2>
+    <h2 class="about-header">Subscribe</h2>
     <div class="about-flex-container">
       <br>
-      <p class='about-text text-center'>We are an democratically-run collective of accountants and professional who live in a commune that doubles as our office.<br>We can sell your website or help you invent a new religion. Whatever you prefer.</p>
-      <a type='text/html' class='btn btn-light' role='button' href="#">About Us</a>
+      <p class='about-text text-center'>
+      Subscribe and receive the most up-to-date and informative legal articles and news on the Web.
+      <br>
+      </p>
+      <a type='text/html' class='btn btn-light' role='button' href={% url 'subscriptions' %}>Subscribe Now</a>
     </div>
   </div>
 </section>

@@ -19,13 +19,16 @@ def index(request):
                           "head_liner_author_name": head_liner_author[0].name,
                           "head_liner_author_id": head_liner_author[0].id,
                           "head_liner_author_slug": head_liner_author[0].slug,
-                          "head_liner_image_url": head_liner.article_image_url}
+                          "head_liner_image_url": head_liner.article_image_url,
+                          "head_liner_comment_count": head_liner.comment_count}
 
     top_articles = []
     for article in head_articles[1:]:
         top_art_dict = {}
         top_art_dict["title"] = article.title
         top_art_dict["id"] = article.id
+        top_art_dict["top_art_date"] = article.date
+        top_art_dict['comment_count'] = article.comment_count
         art_author = article.author.all()
         top_art_dict["author"] = []
         for author in art_author:
