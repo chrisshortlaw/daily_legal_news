@@ -1,18 +1,1 @@
-  <li class="nav-item">
-    <a class="nav-link" href={% url 'cart' %}>
-      <span class="nav-cart">
-        <i class="fas fa-shopping-cart fa-lg"></i>
-        <span class="cart-badge badge badge-info" aria-label="cart total badge">€{{ total }}</span>
-      </span>
-    </a>
-  </li>
-  <li class="nav-item"><a></a></li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" href="#" id="nabarDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      More
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="navbarDropDown">
-      <li><a class="dropdown-item" href={% url 'products' %}>Products</a></li>
-      <li><a class="dropdown-item" href="#">Link</a></li>
-    </ul>
-  </li>
+ 

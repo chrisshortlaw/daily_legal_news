@@ -1,5 +1,5 @@
 {% comment "" %} Modal for Sign In {% endcomment %}
-<div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="signInModal" aria-hidden="true">
+<div class="modal fade" id="sign-in-modal" tabindex="-1" aria-labelledby="sign-in-label" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen-sm-down">
     <div class="modal-content modal-blue-bg">
       <div class="modal-header blue-bg">
@@ -26,7 +26,7 @@
             {% endif %}
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-target="#forgot-pass-modal" data-bs-toggle="modal">Forgot Password?</a>
+          <button type="button" class="btn btn-secondary" data-bs-target="#forgot-pass-modal" data-bs-toggle="modal">Forgot Password?</button>
           <button type="submit" class='btn btn-light'>Sign In</button>
         </div>
       </form>
@@ -34,14 +34,14 @@
   </div>
 </div>
 {% comment "" %} Modal for Forgot Password {% endcomment %}
-<div class='modal fade' id='forgot-pass-modal' tabindex="-1" aria-labelledby="forgotPasswordModal" aria-hidden="true">
+<div class='modal fade' id='forgot-pass-modal' tabindex="-1" aria-labelledby="forgot-pass-modal-label" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen-sm-down">
     <div class="modal-content modal-blue-bg">
       <div class="modal-header">
         <h5 class="news-letter-modal-header" id="forgot-pass-modal-label">Forgot Your Password?</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" data-bs-target="#forgot-pass-modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{% url 'account_reset_password' %}" class="password_reset" method="POST">
+      <form method="POST" action="{% url 'account_reset_password' %}" class="password_reset">
         <div class="modal-body">   
             {% csrf_token %}
             <label for="id_email" class="body-font news-letter-modal-body">E-mail:</label>
