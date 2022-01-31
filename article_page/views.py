@@ -5,6 +5,8 @@ from .forms import CommentForm
 from django.shortcuts import redirect, reverse
 from django.contrib import messages
 from django.conf import settings
+from django.db.models import Q
+
 # Create your views here.
 
 
@@ -13,6 +15,7 @@ def all_articles(request):
     author = None
     all_articles = []
     articles_by_author = []
+    searched_articles = []
     context = {}
 
     if request.GET:
@@ -38,6 +41,33 @@ def all_articles(request):
                 "current_author": author,
                 "articles_by_author": articles_by_author
                 }
+        elif 'search' in request.GET:
+            query = request.GET['search']
+            print(request.GET['search'])
+            if not query:
+                messages.error(request, "No search criteria specified.")
+                return redirect(reverse('all_articles'))
+
+            queries = Q(title__icontains=query) | Q(body__icontains=query)
+            articles = Article.objects.filter(queries)
+            for article in articles:
+                article_dictionary = {}
+                article_dictionary['title'] = article.title
+                article_dictionary['authors'] = article.author.all()
+                article_dictionary['image_url'] = article.article_image_url
+                article_dictionary['id'] = article.id
+                article_dictionary['tags'] = article.tag.all()
+                article_dictionary['comment_count'] = article.comment_count
+                article_dictionary['likes_count'] = article.likes_count
+                article_dictionary['comments'] = Comment.objects.filter(article=article)
+                searched_articles.append(article_dictionary)
+
+            context = {
+                    "page_title": 'Search Results',
+                    "articles": articles,
+                    "current_author": author,
+                    "articles_by_author": articles_by_author
+                    }
     else:
         articles = Article.objects.all()
         for article in articles:
@@ -75,19 +105,19 @@ def article_page(request, article_id):
     user = request.session.get('user', {})
 
     if request.POST:
-        form = CommentForm(
-                           {
-                            'article': article,
-                            'body': request.post['body'],
-                            'user': user,
-                           }
-                            )
-        if form.is_valid():
-            comment = form.save()
-            messages.info(request, 'Your comment has been posted and is awaiting moderation')
-            return redirect(reverse('article_page'))
-        else:
-            messages.error(request, 'Sorry. Your comment could not be posted.')
+        if request.user.is_authenticated:
+            new_comment = CommentForm({
+                                       'article': article.id,
+                                       'body': request.POST['body'],
+                                       'user': request.user
+                                       })
+            if new_comment.is_valid():
+                new_comment.save()
+                messages.info(request, 'Your comment has been posted and is awaiting moderation')
+                return redirect(reverse('article_page', kwargs={'article_id': article.id}))
+            else:
+                messages.error(request, 'Sorry. Your comment could not be posted.')
+                return redirect(reverse('article_page', kwargs={'article_id': article.id}))
     else:
         if article.is_restricted:
             if request.user.is_authenticated:

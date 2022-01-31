@@ -27,7 +27,7 @@
           {% if article.image_url %}
             <img src={{ article.image_url }} class="card-img-top" alt="">
           {% else %}
-            <img src="http://34.149.174.166/judgment-artwork.png" class="card-image-top" alt="">
+            <img src="https://storage.googleapis.com/ci_project_image_bucket/scales-of-justice-vector.png" class="card-image-top" alt="sacles of justice image">
           {% endif %}
           <div class="card-body link-block-grey">
             <h5 class="card-title"><a href= {% url 'article_page' article.id %} class='stretched-link article-card-title'>{{ article.title }}</a></h5>
@@ -42,7 +42,6 @@
     {% comment "insert endfor here" %}{% endcomment %}
     </div>
   </div>
-</div>
 
 
 

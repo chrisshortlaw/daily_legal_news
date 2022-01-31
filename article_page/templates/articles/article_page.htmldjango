@@ -28,14 +28,9 @@
 </div>
 <div class="tag-container">
   {% for tag in tags %}
-  <span class="badge rounded-pill {{ tag.tag_colour }}" aria-label="article-tag">{{ tag.name }}</span>
+  <span class="badge rounded-pill {{ tag.tag_colour }}">{{ tag.name }}</span>
   {% endfor %}
 </div>
-{% comment "" %}<div class='d-flex flex-row container'>
-  <div class="comment-count"><h5>Comment Count: {{ comment_count }}</h5></div>
-  <div class="like_count"><h5>Likes: {{ likes }}</h5></div>
-</div>
-{% endcomment %}
 <div class="sub-header-container">
   <div class="sub-header">
     <h5>{{ article.teaser }}</h5>
@@ -47,20 +42,25 @@
 </div>
 {% endif %}{% comment "endif Article" %}{% endcomment %}
 <section class="comment-section">
+  <div class="comments-header text-center">
+    <h3>Have Your Say</h3>
+  </div>
   <div class="comments">
-    <table class="main-comment-table" width='100%'>
+    <table class="main-comment-table" >
       <tbody>
         <tr>
           <td>
-            <table width="80%">
+            <table class="table-container">
               <tbody>
                 <tr>
-                  <td colspan="2"></td>
-                  <td colspan="3">
+                  <td>&nbsp;</td>
+                  <td>
                     <form action={% url 'article_page' article.id %} method='POST' class="comment-form">
                       {% csrf_token %}
                       {{ comment_form.body | as_crispy_field }}
-                      <input type="submit" value="Submit" role="button" class="btn btn-dark">
+                      <input type="hidden" name='userId' value= {{ request.user.id }}> 
+                      <input type=hidden name='articleId' value={{ article.id }}>
+                      <input type="submit" value="Submit" class="btn btn-dark">
                     </form>
                   </td>
                 </tr>
@@ -73,7 +73,7 @@
     {% if comments %}
         <tr>
           <td>
-            <table class="comment-tree">
+            <table class="table comment-tree">
               <tbody>
                 {% for comment in comments  %}
                 <tr id={{ comment.id }} class='acomment'>
