@@ -9,7 +9,7 @@ from django.conf import settings
 
 from django.contrib.auth.models import User, Group
 from user_profiles.models import Profile
-from .web_hook_handler import process_user_profile, add_user_to_subscriber_group
+from .web_hook_handler import process_user_profile, add_user_to_subscriber_group, remove_user_from_subscriber_group
 
 import stripe
 # Create your tests here.
@@ -176,10 +176,25 @@ class TestCheckout(TestCase):
 
         added_subscriber = add_user_to_subscriber_group(sub_profile)
 
-        self.assertTrue(added_subscriber[0].exists())
+        self.assertIsNotNone(added_subscriber[0])
 
         self.assertTrue(added_subscriber[1])
 
         subscriber_group = Group.objects.get(name='Subscriber')
 
-        self.assertTrue(subscriber_group in added_subscriber[0])
+        self.assertTrue(added_subscriber[0] in subscriber_group.user_set.all())
+
+        another_subscriber = User.objects.create_user(username='test_sub2',
+                                                  email='test2@email.com',
+                                                  password='Testpass123')
+        another_subscriber.save()
+
+        add_user_to_subscriber_group(another_subscriber)
+
+        self.assertTrue(another_subscriber in subscriber_group.user_set.all())
+
+        remove_user_from_subscriber_group(another_subscriber)
+        self.assertFalse(subscriber_group in another_subscriber.groups.all())
+
+        remove_user_from_subscriber_group(sub_profile)
+        self.assertFalse(sub_profile in subscriber_group.user_set.all())
