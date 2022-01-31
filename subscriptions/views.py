@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 
 from user_profiles.models import Profile
 from .models import Subscription, SubscriptionProduct
+from checkout.web_hook_handler import remove_user_from_subscriber_group, add_user_to_subscriber_group
 
 import stripe
 # Create your views here.
@@ -14,11 +15,21 @@ import stripe
 
 
 def subscriptions(request):
-
+    products = []
     subscription_products = SubscriptionProduct.objects.all()
+    for product in subscription_products:
+        prod_dict = {}
+        sub_price = int(int(product.price.price) / 100)
+        prod_dict['product'] = product
+        prod_dict['sub_price'] = sub_price
+        details = product.service.details.split(',')
+        prod_dict['details'] = details
+        products.append(prod_dict)
+
 
     context = {
-            'subscription_products': subscription_products,
+            'subscription_products': products
+
             }
 
     return render(request,
@@ -30,40 +41,49 @@ def subscription_success(request):
 
     session = stripe.checkout.Session.retrieve(request.GET['session_id'])
     customer = stripe.Customer.retrieve(session.customer)
-    print(f'Stripe Session: {session}')
-    print(f'Customer: { customer }')
+
+    payment_amount = int(int(session.amount_total)/100)
+    service = session.metadata.service
 
     try:
         subbed_user = User.objects.get(
-                                       request.user.email['email']
+                                       email=session.metadata.user_email
                                         )
-        subbed_profile = Profile.objects.get(user=subbed_user)
+        sub_product = SubscriptionProduct.objects.get(id=session.metadata.product_id)
+        subbed_profile = Profile.objects.get(user__id=subbed_user.id)
+        user_sub = Subscription.objects.filter(sub_id=session.subscription)
+
         if subbed_profile:
             subbed_profile.customer_id = customer.id
             subbed_profile.stripe_email = customer.email
             subbed_profile.stripe_name = customer.name
+            subbed_profile.save()
 
-        user_sub = Subscription.objects.get(sub_id__exact=session.subscription)
-        if user_sub.DoesNotExist:
-            new_sub = Subscription(price=session.metadata.price,
-                                   service=session.metadata.service,
+
+        if not user_sub:
+            sub_product = SubscriptionProduct.objects.get(id=session.metadata.product_id)
+            new_sub = Subscription(sub_product=sub_product,
                                    sub_id=session.subscription,
-                                   user=request.user)
-            subbed_profile.subscription = new_sub
-            messages.info(request, f'New Subscription Created for {request.user}')
+                                   user=subbed_profile.user,
+                                   subscription_status='active')
+            new_sub.save()
+            messages.info(request, f'New Subscription Created for {subbed_profile.user}')
         else:
-            user_sub.price = session.metadata.price
-            user_sub.service = session.metadata.price
-            messages.info(request, f'Subscription details updated for {request.user}')
+            sub_product = SubscriptionProduct.objects.get(id=session.metadata.product_id)
+            # This is dangerous but should only return 1 object
+            user_sub[0].sub_product.add(sub_product)
+            user_sub[0].save()
+            messages.info(request, f'Subscription details updated for {subbed_profile.user.email}')
 
     except Exception as e:
         messages.error(request,
                        f'Error: {e}. Please contact customer service')
         return redirect(reverse('index'))
-
     context = {
                 'session': session,
-                'customer': customer
+                'customer': customer,
+                'payment_amount': payment_amount,
+                'service': service
                 }
 
     return render(request,
@@ -84,6 +104,7 @@ def create_checkout_session(request):
     if request.method == 'POST':
         price = request.POST['priceId']
         service = request.POST['serviceId']
+        product_id = request.POST['productId']
         try:
             stripe.api_key = stripe_secret_key 
 
@@ -103,13 +124,38 @@ def create_checkout_session(request):
                                 }],
                     client_reference_id=user_ref,
                     customer_email=user_email,
-                    customer=cust_id,
                     metadata={
+                        "product_id": product_id,
                         "price": price,
-                        "service": service
+                        "service": service,
+                        "user_email": user_email
                         }
                     )
             return redirect(checkout_session.url, code=303)
         except Exception as e:
             messages.error(request, f'Error: {e}')
             return redirect(reverse('subscriptions'))
+
+
+@login_required
+def cancel_subscription(request):
+
+    if request.POST:
+        user = User.objects.get(id=request.user.id)
+
+        subscription = request.POST['subId']
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+
+        stripe.Subscription.delete(
+            subscription,
+            )
+        remove_user_from_subscriber_group(user)
+        user.save()
+
+        sub = Subscription.objects.get(sub_id=subscription)
+        sub.subscription_status = 'canceled'
+        sub.next_payment_date = None
+        sub.sub_product = ""
+        sub.save()
+        messages.info(request, 'You have cancelled your subscription')
+        return redirect(reverse('index'))

@@ -40,7 +40,7 @@ class SubscriptionProduct(models.Model):
 
 class Subscription(models.Model):
     SUBSCRIPTION_STATUS = [
-            ('active', 'Current'),
+            ('active', 'Active'),
             ('past_due', 'Past Due'),
             ('canceled', 'Cancelled'),
             ('none', 'None'),
@@ -50,7 +50,7 @@ class Subscription(models.Model):
             ('unpaid', 'Unpaid')
             ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='subscriber', null=True, blank=True)
-    sub_product = models.ForeignKey('SubscriptionProduct', on_delete=models.CASCADE, related_name="sub_product", null=True, blank=True)
+    sub_product = models.ForeignKey('SubscriptionProduct', on_delete=models.CASCADE, related_name="sub", null=True, blank=True)
     sub_id = models.CharField(max_length=50,
                               default='missing_id')
     subscription_status = models.CharField(max_length=25,

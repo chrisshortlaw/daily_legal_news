@@ -12,5 +12,8 @@ urlpatterns = [
              name="subscription_success"),
         path('subscribe/fail',
              views.subscription_fail,
-             name="subscription_fail")
+             name="subscription_fail"),
+        path('subscribe/cancel',
+             views.cancel_subscription,
+             name="subscription_cancel")
         ]
