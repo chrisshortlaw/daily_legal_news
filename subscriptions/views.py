@@ -115,11 +115,13 @@ def create_checkout_session(request):
             user_email = request.user.email
             user_profile = Profile.objects.get(user=request.user)
             cust_id = user_profile.customer_id
+            # NOTE: success_url and cancel_url must be hard-coded strings - passing variable will cause session to fail
+            # Change this for production
 
             checkout_session = stripe.checkout.Session.create(
-                    success_url= 'http://localhost:8000/subscriptions/subscribe/success?session_id={CHECKOUT_SESSION_ID}',
+                    success_url='https://daily-legal-news.herokuapp.com/subscriptions/subscribe/success?session_id={CHECKOUT_SESSION_ID}',
                     #TODO Fix in deployment -,
-                    cancel_url='http://localhost:8000/subscriptions/subscribe/fail',
+                    cancel_url='https://daily-legal-news.herokuapp.com/subscriptions/subscribe/fail',
                     mode='subscription',
                     line_items=[{
                                 'price': price,
