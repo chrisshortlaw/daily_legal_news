@@ -499,7 +499,7 @@ hr{
 .notification.cart-notification {
   position: fixed;
   z-index: 999;
-  top: 3%;
+  top: 15%;
   right: 3%;
 }
 
