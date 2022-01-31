@@ -1,59 +1,43 @@
 {% extends 'base.htmldjango' %}
 {% block content %}
-<section class='section-padding'>
-  <div class='container'>
-    <div class="row">
+<section class='section-padding blue-bg'>
+    <div class='container'>
+      <div class="row justify-content-evenly sub-row">
       {% if subscription_products %}
       {% for subscription in subscription_products %}
-      <div class='col-12 col-md-4'>
-        <div class='plan'>
-          <div class="plan-header">
-            <h3 class="plan-title">{{ subscription.service.name }}</h3>
-            <p>Access to articles in the basic package. Stay ahead of the field with our legal intelligence and content written by experts in their fields.</p>
-
-          </div>
-          <div class='plan-body'>
-            <h3 class='plan-price'>{{ subscription.price.price }}</h3>
-            <p>{{ subscription.price.price_id }}<p>
-            
-          </div>
-          <div class='plan-footer'>
-            <form action={% url 'subscription_checkout' %} method="POST">
-              {% csrf_token %}
-              <input type="hidden" name="userEmail" value={{ request.user.email }}>
-              {% if request.user.profile.customer_id %}
-              <input type="hidden" name="customer_id" value={{ request.user.profile.customer_id }}>
+        <div class="col-12 col-md-4">
+          <div class="plan card h-100">
+            <div class="card-body">
+              <h3 class="plan-title card-title text-center">{{ subscription.product.service.name }}</h3>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <h3 class='plan-price text-center'>€{{ subscription.sub_price }}</h3>
+              {% if subscription.details %}
+              <ul>
+                {% for detail in subscription.details %}
+                <li>{{ detail }}</li>
+                {% endfor %}
+              </ul>
               {% endif %}
-              <input type="hidden" name='priceId' value="{{ subscription.price.price_id }}">
-              <input type="hidden" name='serviceId' value="{{ subscription.service.name }}">
-              <button type="submit"> Subscribe</button>
-            </form>
+              <div class='plan-footer text-center align-items-center'>
+                <form action={% url 'subscription_checkout' %} method="POST">
+                  {% csrf_token %}
+                  <input type="hidden" name="userEmail" value={{ request.user.email }}>
+                  {% if request.user.profile.customer_id %}
+                  <input type="hidden" name="customer_id" value={{ request.user.profile.customer_id }}>
+                  {% endif %}
+                  <input type="hidden" name="productId" value={{ subscription.product.id }}>
+                  <input type="hidden" name='priceId' value="{{ subscription.product.price.price_id }}">
+                  <input type="hidden" name='serviceId' value="{{ subscription.product.service.name }}">
+                  <button type="submit" class="btn grey-bg subscriber-button"> Subscribe {{ subscription.product.service.name }}</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
+        {% endfor %}
+        {% endif %}
       </div>
-      {% endfor %}
-      {% else %}
-      <div class='col-12 col-md-4'>
-        <div class='plan'>
-          <div class="plan-header">
-            <h3 class="plan-title">Test Block</h3>
-            <p>Access to articles in the basic package. Stay ahead of the field with our legal intelligence and content written by experts in their fields.</p>
-
-          </div>
-          <div class='plan-body'>
-            <h3 class='plan-price'>€ 5000</h3>
-            
-          </div>
-          <div class='plan-footer'>
-            <a href="#" class='btn btn-dark'>Subscribe</a>
-          </div>
-        </div>
-      </div>
-
-      {% endif %}
-
     </div>
-  </div>
-</section>
-{% endblock content %}
+  </section>
+  {% endblock content %}
 
