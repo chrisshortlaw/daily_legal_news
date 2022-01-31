@@ -5,7 +5,8 @@ from django.forms import ModelForm
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        exclude = ('user', 'customer_id', '_next_payment_date', '_last_payment_date', '_payment_start_date', 'subscription', 'subscription_billing_id', 'subscription_amount', 'stripe_name', 'stripe_email', 'subscription_status', 'is_subscriber')
+        exclude = ('user', 'customer_id', 'subscription',
+                   'stripe_name', 'stripe_email', 'is_subscriber')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
