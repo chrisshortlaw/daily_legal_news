@@ -52,7 +52,9 @@ def webhook(request):
                  'invoice.paid': handler.handle_invoice_paid,
                  'invoice.payment_failed': handler.handle_invoice_payment_failed,
                  'invoice.updated': handler.handle_invoice_updated,
-                 'customer.subscription.created': handler.handle_subscription
+                 'customer.subscription.created': handler.handle_subscription,
+                 'customer.subscription.canceled': handler.handle_subscription, 
+                 'customer.subscription.deleted': handler.handle_subscription
                 }
 
     event_type = event['type']
