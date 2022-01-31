@@ -32,7 +32,7 @@
               </div>
               <div class="card border-light top-article-card" style="min-height: 12%;" >
                 <div class="card-body">
-                  <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5><a>
+                  <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5></a>
                   {% for author in top_articles.0.author  %}
                   <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
                   {% endfor %}
@@ -136,7 +136,7 @@
     <div class="about-flex-container">
       <br>
       <p class='about-text text-center'>We are an democratically-run collective of accountants and professional who live in a commune that doubles as our office.<br>We can sell your website or help you invent a new religion. Whatever you prefer.</p>
-      <a type='button' class='btn btn-light' role='button' href="#">About Us</a>
+      <a type='text/html' class='btn btn-light' role='button' href="#">About Us</a>
     </div>
   </div>
 </section>
