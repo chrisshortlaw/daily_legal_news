@@ -2,36 +2,53 @@
 {% block content %}
 <section class="user-profile">
   <div class="container">
-    <div class="row">
-      <div class='col-12 col-md-6 profile-form'>
-        {{ form | crispy }}
-      </div>
-      <div class="col-12 col-md-6 my-profile">
-        <h3>Subscription Information </h3>
-        <table class="table table-striped">
-          <tbody>
-            <tr>
-              <td>Subscription Type</td>
-              <td>{{ profile.subscription.name }}</td>
-            </tr>
-            <tr>
-              <td>Subscription Amount</td>
-              <td>{{ profile.subscription_amount }}</td>
-            </tr>
-            <tr>
-              <td>Start Date</td>
-              <td>{{ profile.payment_start_date }}</td>
-            </tr>
-            <tr>
-              <td>Last Payment Date:</td>
-              <td>{{ profile.last_payment_date }}</td>
-            </tr>
-            <tr>
-              <td>Next Payment Date</td>
-              <td>{{ profile.next_payment_date }}</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-8 my-profile">
+        <div>
+          <h3>Subscription Information </h3>
+        {% if subscription %}        
+          <table class="table table-striped">
+            <tbody>
+              <tr>
+                <td>Subscription Type</td>
+                <td>{{ subscription.sub_type }}</td>
+              </tr>
+              <tr>
+                <td>Subscription Amount</td>
+                <td>€ {{ subscription.sub_amount }}</td>
+              </tr>
+              <tr>
+                <td>Start Date</td>
+                <td>{{ subscription.sub_start }}</td>
+              </tr>
+              <tr>
+                <td>Last Payment Date:</td>
+                <td>{{ subscription.sub_last }}</td>
+              </tr>
+              <tr>
+                <td>Next Payment Date</td>
+                <td>{{ subscription.sub_next }}</td>
+              </tr>
+              <tr>
+                <td>Subscription Status</td>
+                <td>{{ subscription.sub_status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <form action={% url 'subscription_cancel' %} method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="subId" value={{ subscription.sub_id }}>
+            <button type="submit" class="btn grey-bg subscriber-button">Cancel Subscription</button>
+          </form>
+        </div>
+        {% else %}
+        <div> 
+          <h2>You are currently not subscribed. Why not consider joining today?</h2>
+          <a href={% url 'subscriptions' %} class="btn grey-bg">Subscribe Now</a>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>

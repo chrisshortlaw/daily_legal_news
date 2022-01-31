@@ -20,10 +20,3 @@ class TestUserProfiles(TestCase):
     def tearDown(self) -> None:
         return super().tearDown()
 
-    def testUserProfile(self):
-
-        self.test_user1.profile.set_next_payment_date(1646075967)
-        self.test_user1.profile.save()
-
-        self.assertEqual(self.test_user1.profile.next_payment_date, datetime.datetime.fromtimestamp(1646075967).date())
-

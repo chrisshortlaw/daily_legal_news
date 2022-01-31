@@ -54,7 +54,7 @@ class Profile(models.Model):
     is_subscriber = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.user.name
+        return f'{self.user.username}'
 
 
 @receiver(post_save, sender=User)
