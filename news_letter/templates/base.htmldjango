@@ -77,7 +77,7 @@
 
           {% else %}
           <li class="nav-item">
-            <a class="nav-link" data-bs-toggle="modal" data-bs-target="#sign-in-modal" href="#">Sign In</a>
+            <a class="nav-link"href={% url 'account_login' %}>Sign In</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
@@ -98,7 +98,6 @@
           </ul>
         <div>
           {% comment "" %}Modal {% endcomment %}
-          {% include './includes/modal.htmldjango' %}
         </div>
       </div>
     </div>
