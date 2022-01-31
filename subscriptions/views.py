@@ -50,6 +50,7 @@ def subscription_success(request):
                                        email=session.metadata.user_email
                                         )
         sub_product = SubscriptionProduct.objects.get(id=session.metadata.product_id)
+
         subbed_profile = Profile.objects.get(user__id=subbed_user.id)
         user_sub = Subscription.objects.filter(sub_id=session.subscription)
 
@@ -58,6 +59,8 @@ def subscription_success(request):
             subbed_profile.stripe_email = customer.email
             subbed_profile.stripe_name = customer.name
             subbed_profile.save()
+        # add user to subscriber group
+        add_user_to_subscriber_group(subbed_profile)
 
 
         if not user_sub:

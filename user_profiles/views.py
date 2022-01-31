@@ -17,7 +17,7 @@ def profile(request):
     if profile:
         user = profile.user
         try:
-            subscription_obj = Subscription.objects.get(user__username=user.username)
+            subscription_obj = Subscription.objects.get(user=user)
 
             subscription['sub_type'] = subscription_obj.sub_product.service
             subscription['sub_start'] = subscription_obj.payment_start_date
