@@ -14,7 +14,7 @@ import builtins
 from pathlib import Path
 import os
 
-if os.path.exists('C:\\code\\django_projects\\news_letter\\news_letter\\env.py'):
+if os.path.exists('env.py'):
     import env
 
 
@@ -33,7 +33,9 @@ STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://daily-legal-news.herokuapp.com/', 'localhost', '127.0.0.1', '[::1]']
+DEBUG_PROPAGATE_EXCEPTIONS = True
+
+ALLOWED_HOSTS = ['https://daily-legal-news.herokuapp.com/', 'localhost', '127.0.0.1', '[::1]', '.localhost', 'localhost:8000', '*']
 
 
 # Application definition
@@ -105,6 +107,29 @@ TEMPLATES = [
     },
 ]
 
+# LOGGING
+
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': {
+            'console': {
+                'class': 'logging.StreamHandler',
+                },
+            },
+        'root': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            },
+        'loggers': {
+            'django': {
+                'handlers': ['console'],
+                'level': 'INFO',
+                'propagate': False
+                },
+            },
+        }
+
 AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
         'allauth.account.auth_backends.AuthenticationBackend',
@@ -116,7 +141,7 @@ EMAIL_PORT = 587
 EMAIL_HOST = 'smtp.gmail.com'
 
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASS = os.environ.get('EMAIL_HOST_PASS')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
 
 WSGI_APPLICATION = 'news_letter.wsgi.application'
