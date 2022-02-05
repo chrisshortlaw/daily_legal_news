@@ -2,112 +2,65 @@
 {% load static %}
 
 {% block content %}
-  <section class="section-padding hero">
-    <div class="container">
-      <div class="row ">
-        <div class="col-12 col-md-7">
-          <div class="card border-light head-line" style="max-width: 100%;">
-            {% if head_liner_article.head_liner_image_url %}
-            <img class="card-img-top" src="{{ head_liner_article.head_liner_image_url }}" alt="vector image of scales of justice">
-            {% else %}
-            <img class="card-img-top" src="https://storage.googleapis.com/ci_project_image_bucket/scales-of-justice-vector.png" alt="vetor image of scales of justice">
-            {% endif %}
-            <div class="card-body">
-              <a href="{% url 'articles' %}?author={{ head_liner_article.head_liner_author_slug }}" class="card-subtitle mb-2 text-muted main-header-author">{{ head_liner_article.head_liner_author_name }}</a>
-              <p><a href={% url 'article_page' head_liner_article.head_liner_id %} class="main-header-anchor">{{ head_liner_article.head_liner_title }}</a></p>
-              <br>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-md-5 gx-4">
-          <div class="row top-article-row">
-            <div class="col-12 head-art-card">
-              <div class="card border-light top-article-card" style="min-height: 12%;" >
-                <div class="card-body">
-                  <h3 class="card-title top-article-title">
-                  Latest 
-                  </h3>
-                  <hr>
-                </div>
-              </div>
-              <div class="card border-light top-article-card" style="min-height: 12%;" >
-                <div class="card-body top_art_body">
-                  <a href= {% url 'article_page' top_articles.0.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.0.title }}</h5></a>
-                  <p class="top-art-date">{{ top_articles.0.top_art_date }}</p>
-                  {% for author in top_articles.0.author  %}
-                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                  <p class="top-art-comments">Comments: {{ top_articles.0.comment_count  }}</p>
-                  {% endfor %}
-                  <hr>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-12 head-art-card">
-              <div class="card border-light top-article-card" style="min-height: 12%;">
-                <div class="card-body top-art-body">
-                  <a href="{% url 'article_page' top_articles.1.id %}" class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.1.title }}</h5></a>
-                  <p class="top-art-date">{{ top_articles.1.top_art_date }}</p>
-                  <p class="top-art-comments">Comments: {{ top_articles.1.comment_count }}</p>
-                  {% for author in top_articles.1.author  %}
-                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                  {% endfor %}
-                  <hr>
-                </div>
-              </div>
-            </div>
 
-            <div class="col-12 head-art-card">
-              <div class="card border-light" style="min-height: 12%;">
-                <div class="card-body top_art_body">
-                  <a href={% url 'article_page' top_articles.2.id %} class="top-article-anchor"><h5 class="card-title top-article-title">{{ top_articles.2.title }}</h5></a>
-                  <p class="top-art-date">{{ top_articles.2.top_art_date }}</p>
-                  <p class="top-art-comments">Comments: {{ top_articles.2.comment_count }}</p>
-                  {% for author in top_articles.2.author  %}
-                  <a href="#" class="top-article-author"><h6 class="card-subtitle mb-2 text-muted top-article-author">{{ author.name }}</h6></a>
-                  {% endfor %}
-                  <hr>
-                </div>
-              </div>
-            </div>
-          </div>
+ {% include '../includes/alt_index.htmldjango' with head_liner_article=head_liner_article top_articles=top_articles Articles=Articles Authors=Authors %}
+
+<section class="dln-front-section section-links">
+  {% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
+    <div class='section-heading-container'>
+      <h2 class="section-links-heading">Sections</h2>
+    </div>
+    <div class="links-to-sections">
+      <div class="link-block link-block-grey">
+        <h6>Crime</h6>
+        <a href={% url 'section' 'crime' %} class="stretched-link align-items-stretch"><h4>Crime</h4></a>
+      </div>
+      <div class="link-block link-block-blue">
+        <h6>Jurisprudence</h6>
+        <a href={% url 'section' 'jurisprudence' %} class="stretched-link align-items-stretch"><h4>Theory</h4></a>
+      </div>
+      <div class="link-block link-block-red">
+        <h6>US Law</h6>
+        <a href={% url 'section' 'us-law' %} class="stretched-link align-items-stretch"><h4>US Law</h4></a>
+      </div>
+      <div class="link-block link-block-lightblue">
+        <h6>UK Law</h6>
+        <a href={% url 'section' 'uk-law' %} class="stretched-link align-items-stretch"><h4>UK Law</h4></a>
+      </div>
+      <div class="link-block link-block-lightyellow">
+        <h6>Tort & Delict</h6>
+        <a href={% url 'section' 'torts' %} class="stretched-link align-items-stretch"><h4>Tort & Delict</h4></a>
+      </div>
+
+    </div>
+</section>
+<section class='article-block dln-front-section'>
+  <div class="article-block-heading-container">
+    <h2>More Articles</h2>
+  </div>
+  <div class='article-block-container'>
+    {% for block_article in block_articles %}
+      <div class='article-block-item article-{{ forloop.counter }}'>
+        <div class='article-block-item-title'>
+          <a href="{% url 'article_page' block_article.id %}"><h3>{{ block_article.title }}</h3></a>
+        </div>
+        <div class="article-block-item-author">
+          {% for author in block_article.author %}
+          <a href="{% url 'articles' %}?=author{{ author.slug }}"><p>{{ author.name }}</p></a>
+          {% endfor %}
+        </div>
+        <div class="article-block-item-teaser">
+          {{ block_article.teaser }}
+        </div>
+        <div class="article-block-item-image">
+          <img src="{{ block_article.image_url }}">
         </div>
       </div>
-    </div>
-  </section>
-  <section class="section-padding section-links">
-    <div class="container"> 
-    {% comment "This section will house links to other sections or comments of interest" %}{% endcomment %}
-          <div class='section-heading-container'>
-            <h2 class="section-links-heading">Sections</h2>
-          </div>
-          <div class="links-to-sections">
-            <div class="link-block link-block-grey">
-              <h6>Crime</h6>
-              <a href={% url 'section' 'crime' %} class="stretched-link align-items-stretch"><h4>Crime</h4></a>
-            </div>
-            <div class="link-block link-block-blue">
-              <h6>Jurisprudence</h6>
-              <a href={% url 'section' 'jurisprudence' %} class="stretched-link align-items-stretch"><h4>Theory</h4></a>
-            </div>
-            <div class="link-block link-block-red">
-              <h6>US Law</h6>
-              <a href={% url 'section' 'us-law' %} class="stretched-link align-items-stretch"><h4>US Law</h4></a>
-            </div>
-            <div class="link-block link-block-lightblue">
-              <h6>UK Law</h6>
-              <a href={% url 'section' 'uk-law' %} class="stretched-link align-items-stretch"><h4>UK Law</h4></a>
-            </div>
-            <div class="link-block link-block-lightyellow">
-              <h6>Tort & Delict</h6>
-              <a href={% url 'section' 'torts' %} class="stretched-link align-items-stretch"><h4>Tort & Delict</h4></a>
-            </div>
+    {% endfor %}
+  </div>
+</section>
 
-          </div>
-    </div>
-  </section>
-
-<section class="section-padding about">
+<section class="dln-front-section about">
   <div class="container">
     <h2 class="about-header">Subscribe</h2>
     <div class="about-flex-container">
@@ -116,7 +69,7 @@
       Subscribe and receive the most up-to-date and informative legal articles and news on the Web.
       <br>
       </p>
-      <a type='text/html' class='btn btn-light' role='button' href={% url 'subscriptions' %}>Subscribe Now</a>
+      <a type='text/html' class='btn blue-bg' role='button' href={% url 'subscriptions' %}>Subscribe Now</a>
     </div>
   </div>
 </section>

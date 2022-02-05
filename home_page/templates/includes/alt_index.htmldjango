@@ -1,0 +1,77 @@
+<section class="top-title">
+  <div class="title-container">
+    <h1 class="title">Daily Legal News</h1>
+  </div>
+</section>
+
+<section class="headlines dln-front-section">
+  <div class="headlines-container">
+    <div class="headline-image-container">
+      {% if head_liner_article.head_liner_image_url %}
+        <img class="img-fluid" src="{{ head_liner_article.head_liner_image_url }}" alt="vector image of scales of justice">
+      {% else %}
+        <img class="img-fluid" src="https://storage.googleapis.com/ci_project_image_bucket/scales-of-justice-vector.png" alt="vetor image of scales of justice">
+        {% endif %}
+    </div>
+        <div class="headline-content-container">
+          <div class="headline-text-block">
+            <div class="headline-author">
+              <a href="{% url 'articles' %}?author={{ head_liner_article.head_liner_author_slug }}">
+                <p>{{ head_liner_article.head_liner_author_name }}</p>
+              </a>
+            </div>
+            <div class="headline">
+              <a href="{% url 'article_page' head_liner_article.head_liner_id %}">
+                <h3>{{ head_liner_article.head_liner_title }}</h3>
+              </a>
+            </div>
+          </div>
+        <div class="date-comment-container">
+          <div class="date-comment-block">
+            <div class="headline-date">
+              <p>
+              <em>
+                {{ head_liner_article.date }}
+              </em>
+              </p>
+            </div>
+            <div class="headline-comments"><p><i class="far fa-comments"></i> {{ head_liner_article.head_liner_comment_count }}</p></div>
+          </div>
+        </div>
+      </div>
+    <div class="other-articles">
+      <div class="other-articles-header">
+        <h2>Latest</h2>
+        <hr>
+      </div>
+      {% for top_article in top_articles %}
+      <div class="side-article">
+        <div class="side-head-author-block">
+          <div class="side-headline">
+            <a href="{% url 'article_page' top_article.id %}" class="top-article-anchor"><h4>{{ top_article.title }}</h4>
+            </a>
+          </div>
+          {% for author in top_article.author %}
+          <div class="side-author">
+            <a href="{% url 'articles' %}?author={{ author.slug }}">
+              <p>{{ author.name }}</p>
+            </a>
+          </div>
+        {% endfor %}
+        </div>
+        <div class="side-date-comment-block">
+          <div class="side-date">
+            <p><em>{{ top_article.top_art_date }}</em></p>
+          </div>
+          <div class="side-comment-count">
+
+            <span><i class="far fa-comments"></i></span><span>&nbsp;</span><span>{{ top_article.comment_count }}</span>
+          </div>
+        </div>
+      </div>
+      <hr>
+      {% endfor %}
+    </div>
+  </div>
+
+</section>
