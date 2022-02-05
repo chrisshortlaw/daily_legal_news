@@ -1,0 +1,1506 @@
+/* FONT FAMILY */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,200;0,400;0,500;0,600;0,700;1,200&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.toast-body {
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+
+.body-font {
+  font-family: 'Raleway', sans-serif;
+}
+
+.main-header {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+  font-size: 2rem;
+  text-transform: capitalize;
+}
+
+.card-title.top-article-title,
+.card-subtitle.top-article-author {
+  padding: 1.25rem 1.25rem;
+}
+
+.card-img-top {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.products h2,
+.about h2{
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 3.5em;
+  font-weight: 500;
+}
+
+.article-heading h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: 700;
+}
+
+/* General */
+
+html {
+  height: 100%;
+}
+
+.dln-front-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+
+.section-padding {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.blue-bg {
+  background-color: #0095AD;
+}
+.white-bg {
+  background-color: #FFFFFF;
+}
+
+.grey-bg {
+  background-color: #4c5454;
+  color: #FFFFFF;
+}
+/* --------------------------------------------------------------------------------- COLORS ------------------------------------------- */
+
+.modal-content.modal-blue-bg {
+  background-color: #0095AD;
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------------- NAV-BAR & MODALS --------------------------------- */
+
+.nav-cart {
+  position: relative;
+}
+
+.nav-cart .cart-badge {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  z-index: 99;
+  width: 30px;
+  height: 16px;
+  background-color: #0095AD;  
+  font-size: 8px;
+}
+
+#forgot-pass-modal h5.news-letter-modal-header {
+  font-family: 'Source Sans', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+label.news-letter-modal-body {
+  font-size: 1rem;
+}
+
+#id_email,
+#id_login,
+#id_password,
+#signup_form input,
+.auth-form input{
+  border: solid 2px #fff;
+  border-radius: 45px;
+}
+
+/* --------------------------------------------------------------------------------- HOME PAGE ---------------------------------------- */
+
+/* --------------------------------------------------------------------------------- TITLE -------------------------------------------- */
+
+.title-container {
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.title {
+  font-size: 6em;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------------- HEADLINES - CSS GRID -------------------------------------- */
+
+.headlines-container {
+  display: grid;
+  grid-template-areas:
+    "headline-image headline-image side-article"
+    "headline-image headline-image side-article"
+    "headline-image headline-image side-article"
+    "headline-image headline-image side-article"
+    "headline-text headline-text side-article";
+}
+
+.dln-front-section {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+
+.headline-image-container{
+  grid-area: headline-image;
+  padding-bottom: 1rem;
+}
+
+.headline-image-container > img {
+  max-width: 100%;
+  height: auto;
+}
+
+.headline-content-container {
+  grid-area: headline-text;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: stretch;
+  margin-right: 4.75rem;
+}
+
+.headline-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: flex-start;
+}
+
+.headline-text-block{
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: flex-start;
+  flex: 2;
+}
+
+.headline-author > a {
+  color: grey;
+  text-decoration: none;
+}
+
+.headline-author a p {
+  text-decoration: none;
+  color: grey;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.25rem;
+}
+
+.headline{
+  font-family: 'IBM Plex Sans', sans-serif;
+  overflow: hidden;
+}
+
+.headline > a {
+  color: black;
+  text-decoration: none;
+  }
+
+.headline a h3 {
+  font-weight: 700;
+  font-size: 2.5rem;
+}
+
+.headline a h3:hover,
+.headline-author a p:hover{
+  text-decoration: underline;
+}
+
+.date-comment-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.headline-date {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: grey;
+}
+
+.headline-comments {
+  color: grey;
+  margin-top: 2rem;
+}
+
+.other-articles {
+  grid-area: side-article;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch; 
+}
+
+.other-articles-header {
+  width: 100%;
+}
+
+.side-article{
+  position: relative;
+ }
+
+ .side-headline a h4 {
+   font-family: 'IBM Plex Sans', sans-serif;
+   font-weight: 700;
+ }
+
+ .side-author {
+   font-family: 'Raleway', sans-serif;
+   color: grey;
+ }
+
+ .side-author a {
+   text-decoration: none;
+   color: grey;
+ }
+
+ .side-date {
+   float: left;
+   font-family: 'IBM Plex Sans', sans-serif;
+   color: grey;
+   margin-top: 1.3rem;
+ }
+
+ .side-comment-count {
+   float: right;
+   margin-top: 1.3rem;
+ }
+
+ .side-headline:hover,
+ .side-author:hover {
+   text-decoration: underline;
+ }
+
+.text-block{
+  background-color: rgb(243, 255, 255);
+}
+
+.main-header{
+  padding: 5vh 5vw;
+}
+
+.main-image-container {
+  padding: 2rem 2rem;
+}
+
+.main-image {
+  max-height: 100%;
+  min-height: 50%;
+  max-width: 100%;
+  background-color: white;
+  background-image: url('http://34.149.174.166/geert-pieters-0Z-r591z3DI-unsplash.jpg?project=sunny-passage-335520');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.head-line .card-body,
+.top-article-row .card-body{
+  padding: 1rem 0rem;
+}
+
+.main-header-anchor{
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 2.5rem;
+  text-decoration: none;
+  color: black;
+  display: block;
+  position: relative;
+  padding: 0.2rem 0;
+  overflow: hidden;
+}
+
+.main-header-anchor:hover{
+  color: inherit;
+}
+
+.main-header-anchor::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 90%;
+  height: 0.1rem;
+  background-color: black;
+  transition: opacity 300ms, transform 300ms;
+  opacity: 1;
+  transform: translate3d(-100%, 0, 0);
+}
+
+.main-header-anchor:hover::after,
+.main-header-anchor:focus::after{
+    transform: translate3d(0,0,0);
+  }
+
+.main-header-author{
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: grey;
+  display: block;
+  position: relative;
+  margin: 0.75rem 0rem;
+  padding: 0.2rem 0;
+  overflow: hidden;
+    }
+
+.main-header-author:hover{
+  text-decoration: underline;
+    }
+
+.top-article-anchor,
+.top-article-author{
+  color: inherit;
+  text-decoration: none;
+  }
+
+.top-article-anchor:hover{
+  color:inherit;
+  text-decoration: underline;
+    }
+
+.top-article-author:hover{
+  color: white;
+    }
+
+hr{
+  border-bottom: 1px dotted grey;
+  
+    }
+
+  .top-article-card .card-body,
+  .top-article-card .card-title {
+    padding-top: 0rem;
+  }
+
+  .top-art-body {
+    position: relative;
+  }
+
+  .top-art-date {
+    position: absolute;
+    top: 0%;
+    right: 5%;
+  }
+
+  .top-art-comments {
+    position: absolute;
+    bottom: 15%;
+    right: 5%;
+  }
+
+  .card-title.top-article-title,
+  .card-subtitle.top-article-author{
+    padding-left: 0rem;
+    padding-right: 0rem;
+  }
+    
+  .card-title.top-article-title{
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .card-subtitle.top-article-author{
+    font-family: 'Raleway', sans-serif;
+  }
+
+/* ----------------------------------------------------- HOME PAGE: LINKS TO SECTIONS ------------------------ */
+
+  .section-heading-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .section-links-heading {
+    font-weight: 500;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+    }
+
+  .links-to-sections{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    }
+
+  .link-block{
+    width: 100%;
+    color: grey;
+    background-color: #ffa5ff;
+    margin: 0rem 1rem;
+    padding: 1rem 1rem;
+    min-height: 20rem;
+    position: relative;
+    }
+
+  .link-block:first-child{
+    margin: 0rem 0rem 0rem 0rem;
+  }
+
+  .link-block:last-child{
+    margin: 0rem 0rem 0rem 0rem;
+  }
+
+  .link-block h6 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+  }
+
+  .link-block a {
+    color: inherit;
+    text-decoration: none;
+    position: absolute;
+    top: 70%;
+    left: 15%;
+  }
+
+  .link-block:hover{
+      box-shadow: 1px 2px 30px 4px rgba(0,0,0,0.4); 
+    }
+
+    .link-block-grey {
+      background-color: #4c5454;
+      color: #FFFFFF;
+    }
+
+    .link-block-blue {
+      background-color: #0091AD;
+      color: #FFFFFF;
+    }
+
+    .link-block-red {
+      background-color: #F46966;
+      color: black;
+    }
+    .link-block-lightblue {
+      background-color: #E9F6FD;
+      color: #4c5454; 
+    }
+
+    .link-block-lightyellow {
+      background-color: #ffdd4a;
+      color: #4c5454;
+    }
+
+.text-with-button{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  }
+
+.text-with-button p{
+  text-align: center;
+  }
+
+.text-with-button button{
+  max-width: 30%;
+  align-self: center;
+  }
+
+.welcome-text{
+  text-align: center;
+  margin-top: 10%;
+  }
+
+.image-container {
+  max-height: 250px;
+  }
+
+.intro-image {
+  max-height: 250px;
+  max-width: 450px;
+}
+
+.products{
+  height: auto;
+  width: 100vw;
+  background-color: #EE5A58;
+  background-size: cover;
+}
+
+.carousel-container {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.carousel-inner > .carousel-item > img {
+  width: 640px;
+  height: 360px;
+  }
+
+.about {
+  background-color: #4c5454;
+  background: radial-gradient(circle, rgba(76,84,84,1) 0%, rgba(76,84,84,.9) 27%, rgba(255,255,255,1) 90%);
+  background-size: cover;
+  height: auto;
+  width: auto;
+  }
+
+.about-flex-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  }
+
+.about-header {
+  font-family: 'IBM Plex Sans', sans-serif;
+  color: #4c5454;
+  font-weight: 600;
+  }
+
+.about-text {
+  color: #FFFFFF;
+  padding: 5% 5%;
+  }
+
+
+/* ---------------------------------------------------------------------------- TAGS - ADDITIONAL COLOURS --------------------- */
+
+  .constitution {
+    background-color: #218380;
+    color: #FFFFFF;
+  }
+
+  .contract{
+    background-color: #38405F;
+    color: #FFFFFF;
+  }
+
+  .common-law {
+    background-color: #6B2B06;
+    color: #FFFFFF;
+  }
+
+  .bailment {
+    background-color: #F8E5EE;
+    color: #353B3B; 
+  }
+
+
+  /* --------------------------------------------------------------------------- ARTICLE-BLOCK ------------------------------------- */
+
+  .article-block-container {
+    display: grid;
+    grid-template-areas:
+      "article-2 . article-1 article-1 article-1 . article-3"
+      "article-2 . article-1 article-1 article-1 . article-3"
+      "article-4 article-4 article-4 . article-5 article-5"
+      "article-4 article-4 article-4 . article-5 article-5";
+  }
+
+  .article-1 {
+    grid-area: article-1;
+  }
+
+  .article-2 {
+    grid-area: article-2;
+  }
+
+  .article-3 {
+    grid-area: article-3;
+  }
+
+  .article-4 {
+    grid-area: article-4;
+  }
+
+  .article-5 {
+    grid-area: article-5;
+  }
+
+  .article-block-item-image {
+    padding: 2rem 2rem;
+  }
+
+  .article-block-item-image > img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .article-block-item {
+    padding: 1rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  .article-block-item-title h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+
+/* ---------------------------------------------------------------------------- FOOTER ------------------ */
+
+.footer{
+  background-color: #EE5A58;
+  background-size: cover;
+}
+
+.footer-padding {
+  padding:4rem 3rem; 
+}
+
+.footer-header {
+  text-transform: uppercase;
+  color: #FFFFFF;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 500;
+}
+
+.footer-col-header,
+.section-link{
+  color: #FFFFFF;
+}
+
+.section-link a {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.col-divider {
+ border-right: 3px solid white; 
+}
+/* --------------------------------------------- NOTIFICATIONS -------------------------- */
+
+.cart-notification-bg {
+  background-color: #E9F6FD;
+}
+.cart-notification-header-container,
+.cart-notification-footer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 1rem; 
+}
+
+.cart-notification-body-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  overflow: auto;
+}
+
+.notification-header h3 {
+  color: #4c5454;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.notification {
+  z-index: 999;
+  position: fixed;
+  top: 15%;
+  right:3%;
+}
+
+.notification.cart-notification {
+  position: fixed;
+  z-index: 999;
+  top: 15%;
+  right: 3%;
+}
+
+.success-notification-bg .toast-header {
+  background-color: #669D31;
+  color: #FFFFFF;
+}
+  
+.succes-notification-bg .toast-header {
+  background-color: #FFFFFF;
+  color: black;
+}
+
+.warning-notification-bg .toast-header,
+.warning-notification-bg .toast-body {
+  background-color: #ffdd4a;
+  color: #4c5454;
+}
+
+.error-notification-bg .toast-header,
+.error-notification-bg .toast-body {
+  background-color: #F46966;
+  color: black;
+}
+
+.info-notification-bg .toast-header,
+.info-notification-bg .toast-body {
+  background-color: #E9F6Fd;
+  color: #4c5454;
+}
+
+
+/* --------------------------------------------- CART NOTIFICATION: GRID ------------------------------------------------------------ */
+.cart-notification{
+  max-width:320px;
+  }
+
+
+.cart-notif-quantity {
+  grid-area: quantity;
+}
+
+.cart-notif-image {
+  grid-area: image;
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.card-notif-image > img {
+  width: 40px;
+  height: 40px;
+}
+
+.cart-notif-name {
+  grid-area: name;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-notif-price{
+  grid-area: price;
+}
+
+.card-notif-subtotal{
+  grid-area: subtotal;
+}
+
+.cart-notif-body-container {
+  z-index: 9999;
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "quantity . image  name  . subtotal"
+    ;
+  align-items: start;
+  justify-content: space-evenly;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 186px;
+}
+
+.cart-notif-body-container > div {
+  font-family: 'Raleway', sans-serif;
+}
+
+.cart-notif-header-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.notif-header{
+  padding: 1rem 0rem;
+}
+
+.cart-notif-footer-container {
+  display: flex;
+  flex-direction: column;
+  padding: .75rem .75rem;
+  justify-content: center;
+}
+
+.cart-notif-total{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cart-notif-footer-container> button{
+  align-self: flex-end;
+}
+
+
+/* --------------------------------------------- Cart Items ------------------------------------- */
+
+.cart-header {
+  padding: 1rem 0rem;
+  text-decoration: underline;
+}
+
+.cart-image img{
+  width: 100px;
+  height: 100px;
+}
+
+.cart-product .cart-product-name {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 25px;
+  line-height: 35px;
+  font-weight: 600;
+  letter-spacing: -.08rem;
+  margin-bottom: .5rem
+}
+
+.total-display .product-number {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.cart-product .cart-product-price {
+  font-family: 'Source Sans', sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  letter-spacing: -0.08rem;
+  padding-top: .5rem;
+  
+}
+
+/* --------------------------------------------- FORMS & FORM TEMPLATES ------------------------- */
+
+/* --------------------------------------------- GENERAL ---------------------------------------- */
+.input-field {
+  border: solid 1px #ffffff;
+  border-radius: 45px;
+}
+
+.input-label,
+.auth-form>p{
+  font-family: 'Raleway', sans-serif;
+  color: #FFFFFF;
+}
+
+.auth-form p:last-of-type{
+  margin-bottom: 2.5rem;
+}
+.auth-form>button {
+  margin-top: 1rem;
+}
+
+/* --------------------------------------------- AUTH_BASE.HTML --------------------------------- */
+.all-auth-section {
+  background-color: #00a5cf;
+
+}
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.form-container-child {
+  width: 50%;
+  height: 50%;
+  padding: 2rem 2rem;
+  color: #FFFFFF;
+}
+
+/* -------------------------------------- ACCOUNTS/SIGNUP.HTML ------------------ */
+
+.allauth-button-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding: 1rem 2rem;
+}
+
+.allauth-button-container a {
+  margin-right: .75rem;
+}
+
+/* ----------------------------------------------- ACCOUNTS/PASSWORD_RESET.HTML ----------------- */
+
+.reset-pass-button {
+  margin-top: 1rem;
+}
+
+/* ---------------------------------------------------------------------------------------- END OF FORM TEMPLATES -------------------------- */
+
+/* ---------------------------------------------------------------------------------------- PRODUCT-PAGE ----------------------------------- */
+
+.bread-crumb-container {
+  font-family: 'IBM Plex Sans', sans-serif;
+  padding-left: 2rem;
+  padding-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-bottom: 1rem;
+}
+
+.bread-crumb-container nav ol li a {
+  color: black;
+  text-decoration: none;
+}
+
+.bread-crumb-container nav ol li a:hover {
+  text-decoration: underline;
+} 
+
+.product-showcase {
+  max-height: 880px;
+  padding-top: 0rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+}
+
+
+input[type=number] {
+  border-top: 0rem none;
+  border-left: 0rem none;
+  border-right: 0rem none;
+  width: 100%;
+  height: 2rem;
+  border-bottom: .1rem solid;
+  margin-bottom: 1rem;
+}
+
+.product-page-name {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.product-image > img {
+  width: 100%;
+  max-height: 40%; 
+  background-color: #4c5454;
+}
+
+.product-col-padding {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.product-page-price {
+  font-weight: 400;
+  color: #4c5454;
+}
+
+.add-to-cart {
+  width: 100%;
+  height: 3.5rem;
+  color: white;
+  background-color: #00A5CF;
+  border-radius: 45px;
+  padding: 1rem .5rem;
+  margin: 1rem 0rem;
+}
+
+/* -------------------------------------------------------------------------------------------------- CART FORM --------------------------------------- */
+
+.update-cart {
+  height: 2rem;
+  color: white;
+  font-size: .75rem;
+  background-color: #00A5CF;
+  border-radius: 45px;
+  margin-right: .5rem;
+}
+
+.remove_product {
+  height: 2rem;
+  color: black;
+  background-color: #EE5A58;
+  font-size: .75rem;
+  border-radius: 45px;
+  margin-left: .5rem;
+}
+
+.remove_product:hover{
+  color: white;
+}
+
+.button-container{
+  display: flex;
+  width: 50%;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+form.modify-cart input[type=number]{
+  width: 80%;
+}
+
+.also-bought {
+  display: inline;
+}
+
+/* --------------------------------------------------------------------------------------- LOGIN.HTML ------------------------------------- */
+
+.login-bg {
+  background-color: #00a5cf;
+  color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------------------- ARTICLES -------------------------------------- */
+.articles-container{
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+  margin: 2rem 2rem;
+}
+
+.articles-heading {
+  font-size: 3rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  width: 30%;
+  flex-grow: 1;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.articles-heading>div {
+  margin: 1rem 1rem;
+}
+
+.articles-heading .articles-heading-container {
+  display: inline-flex;
+  justify-content: center;
+}
+
+.article-card-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.article-card-container .card {
+  width: 30%;
+  margin: 1rem 1rem;
+}
+
+.article-card-container .card .card-img-top {
+  width: 100%;
+}
+
+.article-card:hover .article-card.card-img-top {
+  background: #4c5454;
+}
+
+.article-card:hover .article-card.card-body {
+  background-color: #0091AD;
+}
+
+.article-card-author {
+  color: #FFFFFF;
+  text-decoration: none;
+  margin: 1rem 0rem;
+  padding: 1rem 0rem;
+}
+
+.article-card-title{
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.article-card-title:hover{
+  color: #FFFFFF;
+}
+
+.article-card-author:hover {
+  text-decoration: underline;
+  color: #FFFFFF;
+}
+
+
+
+/* --------------------------------------------- ARTICLE_PAGE ---------------------------------- */
+.article-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  margin-left: 6rem;
+}
+
+.article-title h2{
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 2.75rem;
+  font-weight: 600;
+}
+
+.article-title p{
+  font-size: 1.5rem;
+  font-family: 'IBM PLex Sans', sans-serif;
+  font-weight: 300;
+}
+
+.author-profile {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-left: 6rem;
+  padding: 2rem 0rem;
+}
+
+.tag-container{
+  margin-left: 6rem;
+}
+
+.profile-picture img {
+  max-height: 75px;
+  max-width: 75px;
+  border-radius: 50%;
+  margin-right: 3rem;
+}
+
+.sub-header-container{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.sub-header{
+  margin-left: 6rem;
+  padding: 1rem 0rem;
+  width: 75%;
+}
+
+.sub-header h5 {
+  font-size: 2.25rem;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 400;
+}
+
+.article-container {
+  margin-left: 6rem;
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.33rem;
+  width: 75%;
+  }
+
+/* --------------------------------------------- ARTICLE_PAGE - COMMENTS ----------------------------- */
+
+  .comment-section {
+    padding: 2rem 2rem;
+    background-color: #f6f6ef;
+  }
+
+
+  .comments {
+    display: flex;
+    justify-content: center;
+  }
+
+  .comments-header{
+    padding-bottom: 2rem;
+  }
+
+  .main-comment-table{
+    width: 100%;
+    margin-left: 1.75rem;
+  }
+
+  .table-container {
+    width: 80%;
+  }
+
+  .comment-form > .btn{
+    margin-top: 1rem;
+  }
+
+  .comment-tree {
+    width: 85%;
+  }
+
+  .acomment{
+    width: 100%;
+    height: auto;
+  }
+  
+  .comment-header{
+    color: gray;
+  }
+
+  .comment-username,
+  .date{
+    padding: 0rem .5rem 0rem 0rem;
+  }
+
+  .comment-body{
+    font-size: 1.25rem;
+  }
+  
+
+/* --------------------------------------------- CART ------------------------------------------- */
+
+  .quantity-row {
+    width: 6rem;
+  }
+
+  .cart-total{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 600; 
+  }
+
+  .cart-total div{
+    max-width: 20%;
+  }
+
+  .cart-total-amt {
+    font-weight: 400;
+    padding-left: .5rem;
+  }
+
+
+/* --------------------------------------------- OVERLAY ---------------------------------------- */
+
+  #post-submit-overlay{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(23, 162, 184, .85);
+    z-index: 999
+  }
+
+  .loading-spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    height: 100%;
+  }
+
+
+/* --------------------------------------------- PROFILE ---------------------------------------------------------- */
+
+  .user-profile {
+    padding: 2rem 3rem;
+  }
+
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .profile-container>div{
+    flex-grow: 1;
+  }
+
+/* ------------------------------------------------ SUBSCRIPTIONS ------------------------- */
+ .sub-row {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+  .plan {
+    border-radius: 20px;
+  }
+
+  .plan-header {
+    padding: 2rem 2rem 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    
+  }
+  
+  .plan-price {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 3.5rem;
+    align-self: center;
+  }
+
+  .plan-body {
+    padding: 2rem 2rem 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .plan:hover{
+    box-shadow: 1px 2px 30px 4px rgba(0,0,0,0.4); 
+    }
+
+    .plan-footer{
+      position: relative;      
+      padding: 1rem 1rem 2rem 1rem;
+    }
+
+    .plan-footer form{
+      margin: 0 auto;
+      bottom: 10%;
+    }
+
+    .subscribe-button {
+      width: 100%;
+    }
+
+/* ----------------------------------------------------- PAYWALL ---------------- */
+
+    .flex-container{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .paywall {
+      display: flex;
+      flex-direction: column;
+      align-items: space-between;
+      width: 50%;
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+    }
+
+    .paywall a {
+
+      margin: 1rem 1rem;
+      width: 80%;
+    }
+
+    .paywall h3,
+    .paywall h4{
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+/* --------------------------------------------- MEDIA QUERIES ---------------------------------- */
+
+@media only screen and (max-width: 577px) {
+
+  .product-col-padding {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .form-container-child {
+    width: 100%;
+    height: 100%;
+    padding: 1rem 0rem;
+  }
+  
+  .auth-form {
+    margin: 1rem 1rem;
+    padding: 1rem 1rem;
+  }
+
+  .input-label,
+  .auth-form > p label{
+    display: block;
+  }
+
+  .auth-form>button{
+    margin: 0 auto;
+    width: 100%;
+  }
+  .links-to-sections {
+    flex-direction: column;
+  }
+  .link-block {
+    width: 80%;
+  }
+
+  .article-container,
+  .tag-container,
+  .sub-header,
+  .author-profile,
+  .article-title-container{
+    margin-left: 2rem;
+  }
+
+  .articles-container{
+    flex-direction: column;
+  }
+
+  .article-card-container {
+    align-items:flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .article-card-container .card {
+    width: 80%;
+  }
+
+}
+
+@media only screen and (min-width: 577px) and (max-width: 1199px) {
+  .article-card-container .card {
+    width: 25%;
+  }
+} 
+
+@media only screen and (max-width: 1000px) {
+  .links-to-sections {
+    flex-direction: column;
+    
+    justify-content: center;
+  }
+
+  .link-block{
+      width: 80%;
+      margin: 1rem 0rem;
+      padding: 1rem 1rem;
+      min-height: 10rem;
+      position: relative;
+      }
+
+  .link-block:first-child{
+    margin: 1rem 0rem ;
+  }
+
+  .link-block:last-child{
+    margin: 1rem 0rem ;
+  }
+
+  .link-block h6 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    font-family: 'Raleway', sans-serif;
+    font-style: italic;
+  }
+
+  .link-block a {
+    color: inherit;
+    text-decoration: none;
+    position: absolute;
+    top: 70%;
+    left: 15%;
+  }
+}
