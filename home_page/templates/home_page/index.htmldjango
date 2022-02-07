@@ -61,16 +61,14 @@
 </section>
 
 <section class="dln-front-section about">
-  <div class="container">
-    <h2 class="about-header">Subscribe</h2>
-    <div class="about-flex-container">
-      <br>
-      <p class='about-text text-center'>
-      Subscribe and receive the most up-to-date and informative legal articles and news on the Web.
-      <br>
-      </p>
-      <a type='text/html' class='btn blue-bg' role='button' href={% url 'subscriptions' %}>Subscribe Now</a>
-    </div>
+  <h2 class="about-header">Subscribe</h2>
+  <div class="about-flex-container text-center">
+    <br>
+    <p class='about-text text-center'>
+    Subscribe and receive the most up-to-date and informative legal articles and news on the Web.
+    <br>
+    </p>
+    <a type='text/html' class='btn blue-bg' role='button' href={% url 'subscriptions' %}>Subscribe Now</a>
   </div>
 </section>
 
