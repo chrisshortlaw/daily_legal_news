@@ -76,7 +76,7 @@
                 <a class="dropdown-item" href="{% url 'section' 'crime' %}">Crime</a>
               </li>
               <li>
-                <a class="dropdown-item" href="{% url 'section' 'jurisprudence' %}">Jurisprudence</a>
+                <a class="dropdown-item" href="{% url 'section' 'theory' %}">Jurisprudence</a>
               </li>
               <li>
                 <a class="dropdown-item" href="{% url 'section' 'us-law' %}">US Law</a>
