@@ -5,7 +5,6 @@
 <div class="container">
   <div class="articles-container">
     <div class="articles-heading">
-      {% comment "Insert context here to respond to queries" %}{% endcomment %}
       {{ page_title }}
     </div>
   </div>
@@ -13,17 +12,8 @@
 
   <div class='container'>
     <div class="article-card-container align-items-stretch">
-    {% comment "insert for loop and div row here" %}{% endcomment %}
       {% for article in articles %}
-      {% comment "insert col-12 col-md-4 here" %}{% endcomment %}
         <div class="card article-card">
-          {% comment "" %}    
-          <div class="card-body link-block-lightblue">
-              <blockquote class="blockquote">
-                {{ item.teaser }}
-              </blockquote>
-            </div>
-          {% endcomment %}
           {% if article.image_url %}
             <img src={{ article.image_url }} class="card-img-top" alt="">
           {% else %}
@@ -39,10 +29,6 @@
       {% empty %}
       <h3> Nothing!</h3>
     {% endfor %}
-    {% comment "insert endfor here" %}{% endcomment %}
     </div>
   </div>
-
-
-
 {% endblock  %}

@@ -25,7 +25,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ['name', 'tag_colour']
+    list_display = ['name', 'tag_colour', 'slug']
     list_filter = ['name']
 
 
