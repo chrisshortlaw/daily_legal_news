@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+import logging
 
 from user_profiles.models import Profile
 from .models import Subscription, SubscriptionProduct
@@ -12,6 +13,7 @@ import stripe
 # Create your views here.
 
 # Subscription Page Views
+logger = logging.getLogger(__name__)
 
 
 def subscriptions(request):
@@ -79,6 +81,7 @@ def subscription_success(request):
             messages.info(request, f'Subscription details updated for {subbed_profile.user.email}')
 
     except Exception as e:
+        logger.exception(f'{e}, subbed_user: {subbed_user}, sub-product: {sub_product} , subbed_profile: {subbed_profile}, user_sub: {user_sub} ', exc_info=True, stack_info=True)
         messages.error(request,
                        f'Error: {e}. Please contact customer service')
         return redirect(reverse('index'))
