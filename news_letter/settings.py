@@ -31,7 +31,7 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
 STRIPE_WH_SECRET = os.environ.get('STRIPE_WH_SECRET')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
@@ -119,12 +119,12 @@ LOGGING = {
             },
         'root': {
             'handlers': ['console'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             },
         'loggers': {
             'django': {
                 'handlers': ['console'],
-                'level': 'INFO',
+                'level': 'DEBUG',
                 'propagate': False
                 },
             },
