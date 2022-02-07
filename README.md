@@ -1,11 +1,12 @@
-# News-Letter [Title TBC]
+# Daily Legal News
 
 # Insert am-i-responsive link here
+![am-i-responsive](/readme_files/am-i-responsive-shot.png)
 ---
 
-# Insert link to deployed app here.
+[Link to Deployed App on Heroku](https://daily-legal-news.herokuapp.com/)
 
-News-Letter (name TBC) is a news-blog focussing on news and intelligence in the legal & compliance sector.
+Daily Legal News is a news-blog focussing on news and intelligence in the legal & compliance sector.
 The blog will offer subscription services with multiple tiers and will have a shop for certain legal products (books, software etc.).
 
 The project will be built with Django with BootStrap/Bulma on the front end.
@@ -63,7 +64,7 @@ As an owner of this product, I want:
 3. [x] To receive user feedback in the form of comments, likes or shares;
 4. [x] To have a means to collect user data;
 5. [x] To display articles in a way that enhances user engagement;
-7. [x] To offer subscriptions;
+6. [x] To offer subscriptions;
 7. [x] To offer a method of making payments online;
 
 ### Strategy
@@ -72,7 +73,7 @@ The strategy plane of UX design concerns itself with high-level decisions about 
 
 The LEAN model of software design will be adopted here with the identification of a minimum viable product (MVP) which can be released to the public. 'Lean startups' are very _en vogue_ at the present and business types are greater fashion-victims than teenagers. Yet, it makes sense to focus on developing a basic, working product and seek to add features to it. In this regard, we will plot out the different objectives on the basis of feasibility and importance. Importance here will be based on how we perceive each products appeal to the wider public.
 
-![FeasibilityGraph](/staticfiles/feasibility_graph.pdf)
+![FeasibilityGraph](/readme_files/feasibility_graph.pdf)
 
 #### _User Needs_
 
@@ -138,7 +139,7 @@ The structure plane involves the detailing of how each feature will work togethe
 
 All code should be open for extension and scalability. We should have the ability to add additional features as we progress. Many pain points arise not out of code that does not work but our of code that is not open for extension or which cannot be made to adapt. 
 
-A key aspect of this app will be the data model deployed. This app will use a relational database (PostgresSQL) and Django's built-in Object Relational Manager. The Relational Database can be traced back to[E.F. Codd's paper](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf) from 1970. Relational database are ACID compliant: that is, they exhibit the properties of Atomicity, Consistency, Isolation and Durability. PostgresSQL is a popular choice.
+A key aspect of this app will be the data model deployed. This app will use a relational database (PostgresSQL) and Django's built-in Object Relational Manager. The Relational Database can be traced back to [E.F. Codd's paper](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf) from 1970. Relational database are ACID compliant: that is, they exhibit the properties of Atomicity, Consistency, Isolation and Durability. PostgresSQL is a popular choice.
 
 Relational Databases (or SQL (structured query language) Databases) require a schema to operate and store data. Each piece of data is stored in a row or a tabular format. This allows for effective querying and a means to ensure data is consistent; however, this comes at the cost that it is often necessary to normalise the data in some way in order for it to be stored in a Relational Database.
 
@@ -146,7 +147,7 @@ Of particular use here is an ORM such as SQLAlchemy or Django ORM. The Object Re
 
 The primary relationships in this project are displayed below.
 
-![datamodel](/staticfiles/data_modelling_diagrams_dln.pdf)
+![datamodel](/readme_files/data_modelling_diagrams_dln.pdf)
 
 As can be seen, there are two models interacting here. The First if the User-Subscription-Profile model. Here the User is linked to a Profile, which is really an extension of the User object and designed to contain additional data. Also linked to th User by ForeignKey relationship is a Subscription. A subscription manages the User payments and their privileges. Connected to the subscription is are Groups. Groups are built-in to Django but they can be customised with permissions and can be used to grant access or refuse it to Users who are, or are not, members of a certain User Group. In this case, paying Users join the ranks of subscribers and gain access to locked content.
 
@@ -158,7 +159,7 @@ Here we begin to design the User Interface of the app and make decisions about h
 
 Below are the wireframes for the app:
 
-![wireframes](/staticfiles/draft_paper_blog_site_wireframes.pdf)
+![wireframes](/readme_files/draft_paper_blog_site_wireframes.pdf)
 
 Most news sites are structured around the main page displaying most of their content there and using it draw in the User and turn them into a subscriber or attract views for advertising content. Our app will follow a similar structure with a articles appearing on the main page followed. A sticky navbar at the top of the page permits users to browse without getting lost. It allows allows for quicker traversal of the webpage. In addition, the footer contains links to the various sections of the site, giving Users an additional opportunity to explore. Unsubscribed Users are encouraged to subscribe through the use of buttons and banners along with the locking of content behind a paywall. 
 
@@ -178,13 +179,11 @@ Security is an important part of any app.
 
 The trend now is to not store passwords or to write your own home-grown verification procedures but to use 2-factor authentication or authentication  via google, github or microsoft. While a future version of this app shall incorporate 2-factor, the app in its current form will use an email and password login system to manage users and prevent digital vandalism. Passwords, however, will not be stored in plain form. Instead they will be hashed using Django's built in authorisation, login and authentication functions. When a user registers, they will enter a password in a string form. This password is then hashed (converted to a string of symbols, letters and digits) and the hash is stored on the database. This mechanism means there is no point, save for intercepting the registration message, where a person could easily discover a password by accessing the database. At login, Django's built in function is able to check whether the password is correct by seeing if the passed string can be used to decode the hash to a message Django understands.
 
-
 ##### *Cross-Site Request Forgery Prevention
 
 Cross-Site Request Forgery or 'CSRF' is when a malicious party intercepts a message between a user and a server and can use that to execute an unwanted action. For example, you log in to your online banking app by clicking on a link sent to you by email. The link is actually sent by a malicious party. They, in turn, use your information to execute a request transferring funds to another bank account. It is a good security practice to prevent CSRF attacks by taking such measures in your Django app.
 
 Django prevents CSRF by attaching a hidden field to each form which contains a 'CSRF token'. This token is a cryptographic hash which is generated based on some hard to forge information. On the server side, running 'form.validate\_on\_submit' will run a check to see if a correct CSRF token is present. If it is not, the form is not validated and the command is not executed.
-
 
 ##### *Session Cookies
 
@@ -203,14 +202,15 @@ Session cookies are needed to allow for users to navigate through the app withou
 
 ### Testing
 
-Supporting documentation can be found in the [tests](tests) folder and the [tests.py](tests.py) file.
+Supporting documentation can be found in the [tests.py](tests.py) file located in each app.
 
 The nature of the project meant that the code was subjected to extensive unit tests on each individual part.
 
 Unit tests were conducted on the business logic of the application using Django's built-in testing suite. This suite is similar to python unittest library, although Django provides more helpful classes for querying databases or even setting up a client to test a view. These tests are documented and can be seen in tests.py at the top level of Github.
 
-As of _31/1/22__, running 'python manage.py test' returned:
+As of _31/1/22_, running 'python manage.py test' returned:
 
+```bash
 ---
 
 Creating test database for alias 'default'...
@@ -224,6 +224,7 @@ OK
 Destroying test database for alias 'default'...
 
 ---
+```
 
 A portion of the functionality of the app relies upon Stripe's API. As such, automated tests with such an API were not deployed lest they inadvertently cause access to be revoked. However, it is possible to simulate Stripe's webhook through the use of Stripe's CLI tool. This tool provides for a localhost to 'trigger' Stripe webhooks and to test receipt of said webhooks. However, not all webhooks are available in testing mode (in particular invoice.paid).
 
