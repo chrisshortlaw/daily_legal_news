@@ -103,7 +103,15 @@
             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
           </li>
           {% endif %}
-         
+          {% if request.user.profile.is_subscriber %}
+          <li>
+            <p>Subscribed</p>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a href="{% url 'subscriptions' %}" class="nav-link">Subscribe</a>
+          </li>
+          {% endif %}
           <li>
             <form class="d-flex" method="GET" action={% url 'articles' %}>
               <input class="form-control me-2" type="search" name="search" placeholder="Search" aria-label="Search">
@@ -111,9 +119,6 @@
             </form>
           </li>
           {% comment 'If block here' %}{% {% endcomment %}
-          <li class="nav-item">
-            <a href={% url 'subscriptions' %} class="nav-link">Subscribe</a>
-          </li>
           {% include './includes/nav_bar.htmldjango' %}
           </ul>
         <div>
