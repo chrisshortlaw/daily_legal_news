@@ -8,7 +8,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.models import User, Group
 
 from user_profiles.models import Profile
-from subscriptions.models import Subscription
+from subscriptions.models import Subscription, SubscriptionProduct
 
 
 class StripeWebHookHandler:
@@ -79,10 +79,12 @@ class StripeWebHookHandler:
 
         subscribed_user = process_user_profile(checkout_session)
 
+        product = SubscriptionProduct.objects.get(id=checkout_session['metadata']['product_id'])
+
         if subscribed_user:
             add_user_to_subscriber_group(subscribed_user)
             new_sub = Subscription.objects.create(user=subscribed_user.user,
-                                                  sub_product=checkout_session['metadata']['product_id'],
+                                                  sub_product=product,
                                                   sub_id=checkout_session['subscription'],
                                                   subscription_status='active',
                                                   )
@@ -100,20 +102,21 @@ class StripeWebHookHandler:
 
         subscription_session = event['data']["object"]
 
-        subscriber_profile = process_user_profile(subscription_session)
+        cancelled_sub = Subscription.objects.get(sub_id=subscription_session["id"])
+
+        subscriber_profile = process_user_profile(cancelled_sub.user)
 
         if subscriber_profile:
-            current_sub = subscriber_profile.subscription
             remove_user_from_subscriber_group(subscriber_profile)
-            current_sub.status = 'cancelled'
-            current_sub.save()
+            cancelled_sub.status = 'cancelled'
+            cancelled_sub.save()
             return HttpResponse(
                                 content=f'Profile located. Subscription Cancelled: { event["type"] }',
                                 status=200
                                 )
         else:
             return HttpResponse(
-                    content=f'{subscription_session["customer_name"]}: User Profile could not be located',
+                    content=f'{subscription_session["customer"]}: User Profile could not be located',
                                 status=500)
 
 
