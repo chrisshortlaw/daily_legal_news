@@ -13,7 +13,6 @@ import stripe
 # Create your views here.
 
 # Subscription Page Views
-logger = logging.getLogger(__name__)
 
 
 def subscriptions(request):
@@ -64,7 +63,6 @@ def subscription_success(request):
         # add user to subscriber group
         add_user_to_subscriber_group(subbed_profile)
 
-
         if not user_sub:
             sub_product = SubscriptionProduct.objects.get(id=session.metadata.product_id)
             new_sub = Subscription(sub_product=sub_product,
@@ -81,7 +79,6 @@ def subscription_success(request):
             messages.info(request, f'Subscription details updated for {subbed_profile.user.email}')
 
     except Exception as e:
-        logger.exception(f'{e}, subbed_user: {subbed_user}, sub-product: {sub_product} , subbed_profile: {subbed_profile}, user_sub: {user_sub} ', exc_info=True, stack_info=True)
         messages.error(request,
                        f'Error: {e}. Please contact customer service')
         return redirect(reverse('index'))
