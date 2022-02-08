@@ -79,16 +79,9 @@ class StripeWebHookHandler:
 
         subscribed_user = process_user_profile(checkout_session)
 
-        product = SubscriptionProduct.objects.get(id=checkout_session['metadata']['product_id'])
 
         if subscribed_user:
             add_user_to_subscriber_group(subscribed_user)
-            new_sub = Subscription.objects.create(user=subscribed_user.user,
-                                                  sub_product=product,
-                                                  sub_id=checkout_session['subscription'],
-                                                  subscription_status='active',
-                                                  )
-            new_sub.save()
             return HttpResponse(
                                 content=f'Profile located. Webhook received: { event["type"] }',
                                 status=200
@@ -97,29 +90,7 @@ class StripeWebHookHandler:
             return HttpResponse(
                                 content=f'{checkout_session["customer_name"]}User Profile could not be located',
                                 status=500)
-
-    def handle_cancel_subscription(self, event):
-
-        subscription_session = event['data']["object"]
-
-        cancelled_sub = Subscription.objects.get(sub_id=subscription_session["id"])
-
-        subscriber_profile = Profile.objects.get(user = cancelled_sub.user)
-
-        if subscriber_profile:
-            remove_user_from_subscriber_group(subscriber_profile)
-            cancelled_sub.status = 'cancelled'
-            cancelled_sub.save()
-            return HttpResponse(
-                                content=f'Profile located. Subscription Cancelled: { event["type"] }',
-                                status=200
-                                )
-        else:
-            return HttpResponse(
-                    content=f'{subscription_session["customer"]}: User Profile could not be located',
-                                status=500)
-
-
+    
 def process_user_profile(stripe_session):
     '''
     Takes a stripe_session object, extracts relevant data

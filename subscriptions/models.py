@@ -78,7 +78,10 @@ class Subscription(models.Model):
             return self._next_payment_date
 
     def set_next_payment_date(self, timestamp):
-        self._next_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
+        if timestamp is not None:
+            self._next_payment_date = datetime.datetime.fromtimestamp(timestamp).date()
+        else:
+            self._next_payment_date = None
 
     @property
     def last_payment_date(self):
