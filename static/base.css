@@ -17,6 +17,10 @@ h6,
   font-family: 'Raleway', sans-serif;
 }
 
+main {
+  min-height: 100vh;
+}
+
 .main-header {
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
@@ -145,6 +149,7 @@ label.news-letter-modal-body {
     "headline-image headline-image side-article"
     "headline-image headline-image side-article"
     "headline-text headline-text side-article";
+  grid-column-gap: 1rem;
 }
 
 .dln-front-section {
@@ -157,12 +162,12 @@ label.news-letter-modal-body {
 
 .headline-image-container{
   grid-area: headline-image;
-  padding-bottom: 1rem;
+  overflow: hidden;
 }
 
 .headline-image-container > img {
-  max-width: 90%;
-  height: auto;
+  width: 100%;
+  height: 100%;
 }
 
 .headline-content-container {
@@ -626,19 +631,22 @@ hr{
   }
 
   .article-block-item-image {
-    padding: 2rem 2rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-end;
   }
 
   .article-block-item-image > img {
-    max-width: 70%;
-    height: auto;
+    width: 100%;
+    height: 100%;
   }
 
   .article-block-item {
     padding: 1rem 0rem;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
   }
 
   .article-block-item-title a {
@@ -1081,7 +1089,7 @@ form.modify-cart input[type=number]{
 }
 
 .articles-heading {
-  font-size: 3rem;
+  font-size: 6rem;
   font-family: 'IBM Plex Sans', sans-serif;
   width: 30%;
   font-weight: 700;
@@ -1452,7 +1460,9 @@ form.modify-cart input[type=number]{
   }
   .links-to-sections {
     flex-direction: column;
+    justify-content: center;
   }
+    
   .link-block {
     width: 80%;
   }
@@ -1520,20 +1530,29 @@ form.modify-cart input[type=number]{
   }
     /* ------------------------- SUBSCRIPTION ----------- */
 
+
 }
 
 @media only screen and (min-width: 577px) and (max-width: 1199px) {
   .article-card-container .card {
     width: 25%;
   }
+
+  .links-to-sections {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+  }
+
+  .link-block {
+    width: 40%;
+    margin: 1rem 0rem;
+    padding: 1rem 1rem;
+  }
 } 
 
 @media only screen and (max-width: 1000px) {
-  .links-to-sections {
-    flex-direction: column;
-    
-    justify-content: center;
-  }
 
   .link-block{
       width: 80%;
@@ -1566,4 +1585,28 @@ form.modify-cart input[type=number]{
     top: 70%;
     left: 15%;
   }
+
+  .article-block-item-image {
+    padding: 0rem 0rem;
+  }
+}
+
+  @media only screen and (min-width: 1200px)  {
+
+    .headlines-container {
+      display: grid;
+      grid-template-areas:
+        " headline-image side-article side-article"
+        " headline-image side-article side-article"
+        " headline-text side-article side-article";
+
+    }
+    .headline-content-container {
+      width: 90%;
+    }
+
+    .dln-front-section {
+      padding-right: 8rem;
+      padding-left: 8rem;
+    }
 }
