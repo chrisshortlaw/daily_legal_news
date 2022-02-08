@@ -214,7 +214,8 @@ def process_user_profile(stripe_session):
     attempt = 1
     while attempt <= 5:
         try:
-            sub_user_profile = Profile.objects.get(**lookup_dict)
+            print(lookup_dict)
+            sub_user_profile = Profile.objects.get(user=lookup_dict.get('user_id'))
             user_exists = True
             break
         except Profile.DoesNotExist:
