@@ -97,8 +97,9 @@ class StripeWebHookHandler:
         subscriber_profile, found_profile = process_user_profile(invoice_update_session)
 
         if found_profile:
-            subscriber_profile.next_payment_date(invoice_update_session.period_end)
-            subscriber_profile.last_payment_date(invoice_update_session.period_start)
+            current_sub = subscriber_profile.subscription
+            current_sub.next_payment_date(invoice_update_session.period_end)
+            current_sub.last_payment_date(invoice_update_session.period_start)
             return HttpResponse(
                                 content=f'Profile located. Webhook received: { event["type"] }',
                                 status=200
