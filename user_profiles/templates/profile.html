@@ -3,10 +3,14 @@
 <section class="user-profile">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-12 col-md-8 my-profile">
-        <div>
+      <div class="col-12 my-profile">
+        <div class="text-center">
           <h3>{{ profile.user  }}'s Profile</h3>
         </div>
+      </div>{% comment "End of column" %}{% endcomment %}
+    </div> {% comment "End of Row" %}{% endcomment %}
+    <div class="row">
+      <div class="col-12 col-md-4">
         <div>
           <h3>Subscription Information </h3>
         {% if subscription %}        
@@ -52,9 +56,36 @@
           <a href={% url 'subscriptions' %} class="btn grey-bg">Subscribe Now</a>
         </div>
         {% endif %}
+      </div>{% comment "End of column" %}{% endcomment %}
+      <div class="col-12 col-md-8">
+        <div>
+          <h3>Recent Comments</h3>
+          {% if comments %}        
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>Date</th>
+                <th>Article</th>
+                <th>Comment</th>
+              </tr>
+              {% for comment in comments %}
+              <tr>
+                <td>{{ comment.date|timesince }}</td>
+                <td><a href="{% url 'article_page' comment.article.id %}" class='profile-comments'>{{ comment.article }}</a></td>
+                <td>{{ comment.body|truncatewords:20 }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div> 
+          <h2>You have no comments.</h2>
+        </div>
+        {% endif %}
       </div>
-    </div>
-  </div>
+    </div>{% comment "End of Row" %}{% endcomment %}
+  </div>{% comment "End of container" %}{% endcomment %}
 </section>
 {% endblock content %}
 

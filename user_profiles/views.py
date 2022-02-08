@@ -1,8 +1,11 @@
 from django.shortcuts import get_object_or_404, render
+import datetime
+
 from .models import Profile
 from .forms import ProfileForm
 from django.contrib.auth.decorators import login_required
 from subscriptions.models import Subscription
+from article_page.models import Comment
 # Create your views here.
 
 
@@ -30,10 +33,15 @@ def profile(request):
         except Subscription.DoesNotExist:
             pass
 
+    comments = Comment.objects.filter(user=request.user)
+    today = datetime.datetime.now()
+
     context = {
                "form": form,
                "profile": profile,
-               "subscription": subscription
+               "subscription": subscription,
+               "comments": comments,
+               "today": today
                 }
 
     return render(request, 'profile.html', context=context)
