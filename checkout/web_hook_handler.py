@@ -105,7 +105,7 @@ class StripeWebHookHandler:
                                 )
         else:
             return HttpResponse(
-                    content=f'{invoice_update_session.customer_name}: User Profile could not be located',
+                    content=f'{invoice_update_session["customer_name"]}: User Profile could not be located',
                                 status=500)
 
     def handle_invoice_paid(self, event):
