@@ -12,8 +12,9 @@
     <div class="row">
       <div class="col-12 col-md-4">
         <div>
-          <h3>Subscription Information </h3>
+          <h4>Subscription Information </h4>
         </div>
+        <br>
         {% if subscription %}        
           <table class="table table-striped">
             <tbody>
@@ -40,14 +41,14 @@
         </div>
         {% else %}
         <div> 
-          <h2>You are currently not subscribed. Why not consider joining today?</h2>
+          <p>You are currently not subscribed. Why not consider joining today?</p>
           <a href={% url 'subscriptions' %} class="btn grey-bg">Subscribe Now</a>
         </div>
         {% endif %}
       </div>{% comment "End of column" %}{% endcomment %}
       <div class="col-12 col-md-8">
-        <div>
-          <h3>Recent Comments</h3>
+        <div class="text-center">
+          <h4>Recent Comments</h4>
         </div>
           {% if comments %}        
         <div>
@@ -69,8 +70,8 @@
           </table>
         </div>
         {% else %}
-        <div class="col-12 col-md-8"> 
-          <h2>You have no comments.</h2>
+        <div class="py-4"> 
+          <p class="px-4">You have no comments.</p>
         </div>
         {% endif %}
       </div> {% comment 'END of Column' %}{% endcomment %}

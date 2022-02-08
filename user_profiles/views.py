@@ -25,7 +25,7 @@ def profile(request):
             subscription['sub_start'] = subscription_obj.payment_start_date
             subscription['sub_prev'] = subscription_obj.last_payment_date
             subscription['sub_next'] = subscription_obj.next_payment_date
-            subscription['sub_status'] = subscription_obj.subscription_status
+            subscription['sub_status'] = subscription_obj.get_subscription_status_display()
             subscription['sub_id'] = subscription_obj.sub_id
             subscription['sub_amount'] = int(subscription_obj.sub_product.price.price)/100
 
