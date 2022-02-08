@@ -196,17 +196,16 @@ def process_user_profile(stripe_session):
                     lookup_dict['customer_id'] = stripe_session.get('customer')
                 if stripe_session.get('subscription'):
                     lookup_dict['sub_id'] = stripe_session.get('subscription')
-                if stripe_session.get('client_reference_id'):
-                    lookup_dict['current_period_start'] = stripe_session.get('current_period_start')
                 if stripe_session.get('customer_email'):
                     lookup_dict['stripe_email'] = stripe_session.get('customer_email')
     else:
-        if getattr(stripe_session, 'customer', None) is not None:
-            lookup_dict['customer_id'] = stripe_session.customer
-        if getattr(stripe_session, 'client_reference_id', None) is not None:
-            lookup_dict['user_id'] = stripe_session.client_reference_id
-        if getattr(stripe_session, 'customer_email', None) is not None:
-            lookup_dict['stripe_email'] = stripe_session.customer_email
+        print('')
+        if stripe_session.get('customer'):
+            lookup_dict['customer_id'] = stripe_session.get('customer')
+        if stripe_session.get('subscription'):
+            lookup_dict['sub_id'] = stripe_session.get('subscription')
+        if stripe_session.get('customer_email'):
+            lookup_dict['stripe_email'] = stripe_session.get('customer_email')
 
     sub_user_profile = None
 
@@ -215,7 +214,7 @@ def process_user_profile(stripe_session):
     while attempt <= 5:
         try:
             print(lookup_dict)
-            sub_user = User.objects.get(email=lookup_dict.get('customer_email'))
+            sub_user = User.objects.get(email=lookup_dict.get('stripe_email'))
             sub_user_profile = Profile.objects.get(user=sub_user)
             user_exists = True
             break
