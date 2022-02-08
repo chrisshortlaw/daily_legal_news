@@ -87,7 +87,7 @@ class StripeWebHookHandler:
                                 )
         else:
             return HttpResponse(
-                                content=f'{checkout_session.customer_name}User Profile could not be located',
+                                content=f'{checkout_session["customer_name"]}User Profile could not be located',
                                 status=500)
 
     def handle_invoice_updated(self, event):
@@ -215,7 +215,7 @@ def process_user_profile(stripe_session):
     while attempt <= 5:
         try:
             print(lookup_dict)
-            sub_user_profile = Profile.objects.get(user=lookup_dict.get('user_id'))
+            sub_user_profile = Profile.objects.get(user__email=lookup_dict.get('customer_email'))
             user_exists = True
             break
         except Profile.DoesNotExist:
