@@ -77,10 +77,16 @@ class StripeWebHookHandler:
 
         checkout_session = event['data']['object']
 
-        subscribed_user, confirmation = process_user_profile(checkout_session)
+        subscribed_user = process_user_profile(checkout_session)
 
-        if confirmation:
+        if subscribed_user:
             add_user_to_subscriber_group(subscribed_user)
+            new_sub = Subscription.objects.create(user=subscribed_user.user,
+                                                  sub_product=checkout_session['metadata']['product_id'],
+                                                  sub_id=checkout_session['subscription'],
+                                                  subscription_status='active',
+                                                  )
+            new_sub.save()
             return HttpResponse(
                                 content=f'Profile located. Webhook received: { event["type"] }',
                                 status=200
@@ -90,90 +96,25 @@ class StripeWebHookHandler:
                                 content=f'{checkout_session["customer_name"]}User Profile could not be located',
                                 status=500)
 
-    def handle_invoice_updated(self, event):
+    def handle_cancel_subscription(self, event):
 
-        invoice_update_session = event['data']["object"]
+        subscription_session = event['data']["object"]
 
-        subscriber_profile, found_profile = process_user_profile(invoice_update_session)
+        subscriber_profile = process_user_profile(subscription_session)
 
-        if found_profile:
+        if subscriber_profile:
             current_sub = subscriber_profile.subscription
-            current_sub.next_payment_date(invoice_update_session.period_end)
-            current_sub.last_payment_date(invoice_update_session.period_start)
+            remove_user_from_subscriber_group(subscriber_profile)
+            current_sub.status = 'cancelled'
+            current_sub.save()
             return HttpResponse(
-                                content=f'Profile located. Webhook received: { event["type"] }',
+                                content=f'Profile located. Subscription Cancelled: { event["type"] }',
                                 status=200
                                 )
         else:
             return HttpResponse(
-                    content=f'{invoice_update_session["customer_name"]}: User Profile could not be located',
+                    content=f'{subscription_session["customer_name"]}: User Profile could not be located',
                                 status=500)
-
-    def handle_invoice_paid(self, event):
-        invoice_object = event['data']["object"]
-        status = invoice_object['status']
-
-        subscriber_profile, found_profile = process_user_profile(invoice_object)
-        if not found_profile:
-            return HttpResponse(
-                    content=f'{invoice_object["customer"]}: User Profile could not be located',
-                                status=500)
-        else:
-            return HttpResponse(
-                            content=f'Invoice Paid. Webhook Received: { event["type"] }',
-                            status=200
-                            ), add_user_to_subscriber_group(subscriber_profile)
-
-    def handle_invoice_payment_failed(self, event):
-        invoice_object = event['data']['object']
-
-        subscriber_profile, found_profile = process_user_profile(invoice_object)
-        if not found_profile:
-            return HttpResponse(
-                                content=f'{invoice_object["customer"]}: User Profile could not be located',
-                                status=500
-                                )
-        else:
-            send_mail(
-                        "Daily Legal News - Payment Failure",
-                        f'''
-                        Dear {invoice_object["customer_name"]},
-                        Your payment in respect of invoice: {invoice_object["id"]} has failed.
-                        It may be there has been an error with your card.
-                        Please update your billing details at your earliest convenience.
-                        Many thanks for your custom.
-
-                        Regards,
-
-                        The Daily Legal News Team
-
-                        ''',
-                        'donotreply@dailylegalnews.com',
-                        [f'{subscriber_profile.user.email}'],
-                        fail_silently=False,
-                        )
-            remove_user_from_subscriber_group(subscriber_profile)
-        return HttpResponse(
-                            content=f'Invoice Payment Failed. Webhook Received:{event["type"]}',
-                            status=200
-                            ), update_subscription_from_webhook(subscriber_profile,
-                                                                invoice_object)
-
-    def handle_subscription(self, event):
-
-        subscription_dict = event['data']['object']
-
-        subscriber_profile, found_profile = process_user_profile(subscription_dict)
-        if not found_profile:
-            return HttpResponse(
-                    content=f'{subscription_dict["customer"]}: User Profile could not be located',
-                                status=500)
-        else:
-            return HttpResponse(
-                            content=f'Profile located. Webhook received: { event["type"] }',
-                            status=200
-                            ), update_subscription_from_webhook(subscriber_profile,
-                                                                subscription_dict)
 
 
 def process_user_profile(stripe_session):
@@ -200,7 +141,6 @@ def process_user_profile(stripe_session):
                 if stripe_session.get('customer_email'):
                     lookup_dict['stripe_email'] = stripe_session.get('customer_email')
     else:
-        print('')
         if stripe_session.get('customer'):
             lookup_dict['customer_id'] = stripe_session.get('customer')
         if stripe_session.get('subscription'):
@@ -214,18 +154,18 @@ def process_user_profile(stripe_session):
     attempt = 1
     while attempt <= 5:
         try:
-            print(lookup_dict)
-            sub_user = User.objects.get(email=lookup_dict.get('stripe_email'))
-            sub_user_profile = Profile.objects.get(user=sub_user)
+            if lookup_dict.get('stripe_email') is not None:
+                sub_user = User.objects.get(email=lookup_dict.get('stripe_email'))
+                sub_user_profile = Profile.objects.get(user=sub_user)
             user_exists = True
             break
         except Profile.DoesNotExist:
             attempt += 1
             sleep(1)
     if user_exists:
-        return sub_user_profile, True
+        return sub_user_profile
     else:
-        return None, False
+        return None
 
 
 def add_user_to_subscriber_group(subscribing_user_profile):
@@ -243,14 +183,14 @@ def add_user_to_subscriber_group(subscribing_user_profile):
 
     SubscriberGroup = Group.objects.get(name='Subscriber')
     if subscriber in SubscriberGroup.user_set.all():
-        return subscriber, True
+        return subscriber
     else:
         SubscriberGroup.user_set.add(subscriber)
         print(f'Successfully Added {subscriber} to Subscriber Group')
-        return subscriber, True
+        return subscriber
 
 
-def remove_user_from_subscriber_group(subscribing_user_profile): 
+def remove_user_from_subscriber_group(subscribing_user_profile):
     if isinstance(subscribing_user_profile, User):
         subscriber = subscribing_user_profile
     elif isinstance(subscribing_user_profile, Profile):
@@ -263,7 +203,7 @@ def remove_user_from_subscriber_group(subscribing_user_profile):
     SubscriberGroup.save()
     subscriber.save()
     print(f'Successfully Removed {subscriber} to Subscriber Group')
-    return subscriber.groups.all(), True
+    return subscriber.groups.all()
 
 
 def update_subscription_from_webhook(webhook_user, event_dict):

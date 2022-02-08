@@ -49,12 +49,9 @@ def webhook(request):
                  'payment_intent.payment_failed': handler.handle_payment_intent_failed,
                  'payment_intent.succeeded': handler.handle_webhook,
                  'checkout.session.completed': handler.handle_checkout_session_completed,
-                 'invoice.paid': handler.handle_invoice_paid,
-                 'invoice.payment_failed': handler.handle_invoice_payment_failed,
-                 'invoice.updated': handler.handle_invoice_updated,
-                 'customer.subscription.created': handler.handle_subscription,
-                 'customer.subscription.canceled': handler.handle_subscription, 
-                 'customer.subscription.deleted': handler.handle_subscription
+                 'customer.subscription.created': handler.handle_webhook,
+                 'customer.subscription.canceled': handler.handle_webhook, 
+                 'customer.subscription.deleted': handler.handle_cancel_subscription
                 }
 
     event_type = event['type']
