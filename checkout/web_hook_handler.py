@@ -29,7 +29,7 @@ class StripeWebHookHandler:
         '''
         Handle the payment.intent webhook from stripe
         '''
-        intent = event.data.object
+        intent = event['data']['object']
         pay_id = intent.id
         # save_info = intent.metadata.save_info
 
@@ -75,7 +75,7 @@ class StripeWebHookHandler:
         Locates user and adds them to the subscribers group
         '''
 
-        checkout_session = event.object.data
+        checkout_session = event['data']['object']
 
         subscribed_user, confirmation = process_user_profile(checkout_session)
 
@@ -92,7 +92,7 @@ class StripeWebHookHandler:
 
     def handle_invoice_updated(self, event):
 
-        invoice_update_session = event.object.data
+        invoice_update_session = event['data']["object"]
 
         subscriber_profile, found_profile = process_user_profile(invoice_update_session)
 
@@ -109,7 +109,7 @@ class StripeWebHookHandler:
                                 status=500)
 
     def handle_invoice_paid(self, event):
-        invoice_object = event.object.data
+        invoice_object = event['data']["object"]
         status = invoice_object.status
 
         subscriber_profile, found_profile = process_user_profile(invoice_object)
@@ -185,7 +185,8 @@ def process_user_profile(stripe_session):
                       'plan', 'subscription', 'payment_intent']
     lookup_dict = {}
 
-    if stripe_session.object not in stripe_objects:
+    if stripe_session.get('object') not in stripe_objects:
+        # Check returned json (converted to dict) for value of 'object'
         if not isinstance(stripe_session, Dict):
             raise TypeError(f'Expected: Stripe object or Dict. Received: {stripe_session}')
         else:
