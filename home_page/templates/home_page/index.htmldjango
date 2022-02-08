@@ -50,7 +50,7 @@
           {% endfor %}
         </div>
         <div class="article-block-item-teaser">
-          {{ block_article.teaser }}
+          <em>{{ block_article.teaser }}</em>
         </div>
         <div class="article-block-item-image">
           <img src="{{ block_article.image_url }}">

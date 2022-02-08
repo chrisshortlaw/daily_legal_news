@@ -8,10 +8,10 @@
   <div class="headlines-container">
     <div class="headline-image-container">
       {% if head_liner_article.head_liner_image_url %}
-        <img class="img-fluid" src="{{ head_liner_article.head_liner_image_url }}" alt="vector image of scales of justice">
+     <img class="img-fluid" src="{{ head_liner_article.head_liner_image_url }}" alt="vector image of scales of justice">
       {% else %}
         <img class="img-fluid" src="https://storage.googleapis.com/ci_project_image_bucket/scales-of-justice-vector.png" alt="vetor image of scales of justice">
-        {% endif %}
+      {% endif %}
     </div>
         <div class="headline-content-container">
           <div class="headline-text-block">
