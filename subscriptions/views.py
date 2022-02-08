@@ -27,7 +27,6 @@ def subscriptions(request):
         prod_dict['details'] = details
         products.append(prod_dict)
 
-
     context = {
             'subscription_products': products
 
@@ -116,11 +115,9 @@ def create_checkout_session(request):
             user_profile = Profile.objects.get(user=request.user)
             cust_id = user_profile.customer_id
             # NOTE: success_url and cancel_url must be hard-coded strings - passing variable will cause session to fail
-            # Change this for production
 
             checkout_session = stripe.checkout.Session.create(
                     success_url='https://daily-legal-news.herokuapp.com/subscriptions/subscribe/success?session_id={CHECKOUT_SESSION_ID}',
-                    #TODO Fix in deployment -,
                     cancel_url='https://daily-legal-news.herokuapp.com/subscriptions/subscribe/fail',
                     mode='subscription',
                     line_items=[{
