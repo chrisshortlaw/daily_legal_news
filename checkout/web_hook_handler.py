@@ -104,7 +104,7 @@ class StripeWebHookHandler:
 
         cancelled_sub = Subscription.objects.get(sub_id=subscription_session["id"])
 
-        subscriber_profile = process_user_profile(cancelled_sub.user)
+        subscriber_profile = Profile.objects.get(user = cancelled_sub.user)
 
         if subscriber_profile:
             remove_user_from_subscriber_group(subscriber_profile)
@@ -124,7 +124,7 @@ def process_user_profile(stripe_session):
     '''
     Takes a stripe_session object, extracts relevant data
     Uses data to retrieve user_profile from db
-    Returns a tuple of: user_profile, Boolean
+    Returns user_profile
     '''
     stripe_objects = ['checkout.session', 'invoice', 'intent',
                       'plan', 'subscription', 'payment_intent']
