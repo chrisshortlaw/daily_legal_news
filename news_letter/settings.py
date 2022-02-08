@@ -35,7 +35,7 @@ DEBUG = False
 
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
-ALLOWED_HOSTS = ['https://daily-legal-news.herokuapp.com/', 'localhost', '127.0.0.1', '[::1]', '.localhost', 'localhost:8000', '*']
+ALLOWED_HOSTS = ['https://daily-legal-news.herokuapp.com/', 'localhost', '127.0.0.1', '[::1]', '.localhost', 'localhost:8000']
 
 
 # Application definition
