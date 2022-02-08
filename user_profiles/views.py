@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, render
-import datetime
 
 from .models import Profile
 from .forms import ProfileForm
