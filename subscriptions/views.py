@@ -159,7 +159,6 @@ def cancel_subscription(request):
 
         sub = Subscription.objects.get(sub_id=subscription)
         sub.subscription_status = 'canceled'
-        sub.sub_product = ""
         sub.save()
         messages.info(request, 'You have cancelled your subscription')
         return redirect(reverse('index'))
