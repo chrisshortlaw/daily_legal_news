@@ -110,12 +110,12 @@ class StripeWebHookHandler:
 
     def handle_invoice_paid(self, event):
         invoice_object = event['data']["object"]
-        status = invoice_object.status
+        status = invoice_object['status']
 
         subscriber_profile, found_profile = process_user_profile(invoice_object)
         if not found_profile:
             return HttpResponse(
-                    content=f'{invoice_object.customer}: User Profile could not be located',
+                    content=f'{invoice_object["customer"]}: User Profile could not be located',
                                 status=500)
         else:
             return HttpResponse(
@@ -129,15 +129,15 @@ class StripeWebHookHandler:
         subscriber_profile, found_profile = process_user_profile(invoice_object)
         if not found_profile:
             return HttpResponse(
-                                content=f'{invoice_object.customer}: User Profile could not be located',
+                                content=f'{invoice_object["customer"]}: User Profile could not be located',
                                 status=500
                                 )
         else:
             send_mail(
                         "Daily Legal News - Payment Failure",
                         f'''
-                        Dear {invoice_object.customer_name},
-                        Your payment in respect of invoice: {invoice_object.id} has failed.
+                        Dear {invoice_object["customer_name"]},
+                        Your payment in respect of invoice: {invoice_object["id"]} has failed.
                         It may be there has been an error with your card.
                         Please update your billing details at your earliest convenience.
                         Many thanks for your custom.
