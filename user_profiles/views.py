@@ -34,14 +34,12 @@ def profile(request):
             pass
 
     comments = Comment.objects.filter(user=request.user)
-    today = datetime.datetime.now()
 
     context = {
                "form": form,
                "profile": profile,
                "subscription": subscription,
                "comments": comments,
-               "today": today
                 }
 
     return render(request, 'profile.html', context=context)
