@@ -51,7 +51,7 @@ def webhook(request):
                  'checkout.session.completed': handler.handle_checkout_session_completed,
                  'customer.subscription.created': handler.handle_webhook,
                  'customer.subscription.canceled': handler.handle_webhook,
-                 'customer.subscription.deleted': handler.handle_cancel_subscription
+                 'customer.subscription.deleted': handler.handle_webhook
                 }
 
     event_type = event['type']
