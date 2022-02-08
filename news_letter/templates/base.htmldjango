@@ -84,7 +84,7 @@
               <li>
                 <a class="dropdown-item" href="{% url 'section' 'uk-law' %}">UK Law</a>
               <li>
-                <a class="dropdown-item" href="{% url 'section' 'torts' %}">Torts & Delict</a>
+                <a class="dropdown-item" href="{% url 'section' 'torts' %}">Torts</a>
               </li>
             </ul>
           {% if request.user.is_authenticated %}
@@ -94,22 +94,15 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_logout' %}">Sign Out</a>
           </li>
-
+          <li class="nav-item">
+            <a href="{% url 'subscriptions' %}" class="nav-link">Subscribe</a>
+          </li>
           {% else %}
           <li class="nav-item">
             <a class="nav-link"href={% url 'account_login' %}>Sign In</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'account_signup' %}">Register</a>
-          </li>
-          {% endif %}
-          {% if request.user.profile.is_subscriber %}
-          <li>
-            <p>Subscribed</p>
-          </li>
-          {% else %}
-          <li class="nav-item">
-            <a href="{% url 'subscriptions' %}" class="nav-link">Subscribe</a>
           </li>
           {% endif %}
           <li>
